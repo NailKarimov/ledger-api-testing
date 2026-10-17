@@ -38,5 +38,9 @@ export default defineConfig({
     // Cross-cutting HTTP security checks; every request uses an absolute URL, so there is no baseURL.
     { name: 'security', testDir: './tests/security' },
     { name: 'unit', testDir: './tests/unit' },
+    // Pact (docs/pact.md): the consumer tests write pacts/*.json, then the provider is verified against
+    // the private Petstore container (infra/petstore, port 8090) using that file.
+    { name: 'contract-consumer', testDir: './tests/contract-consumer' },
+    { name: 'contract-provider', testDir: './tests/contract-provider', dependencies: ['contract-consumer'] },
   ],
 });

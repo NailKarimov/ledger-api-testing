@@ -44,6 +44,9 @@ jobs:
       - name: Start the Sock Shop microservices (Docker)
         run: npm run stack:up
 
+      - name: Start a private Petstore for the Pact provider verification (Docker)
+        run: docker compose -f infra/petstore/docker-compose.yml up -d --wait
+
       - name: Lint and type check
         run: |
           npm run lint
@@ -84,6 +87,7 @@ jobs:
         run: |
           for d in fuzz contract; do if [ -d gh-pages-old/$d ]; then cp -r gh-pages-old/$d allure-report/$d; fi; done
           cp docs/schemathesis.html docs/toolbox.html docs/contract-drift.html allure-report/
+          if ls pacts/*.json >/dev/null 2>&1; then mkdir -p allure-report/pact && cp pacts/*.json allure-report/pact/; fi
 
       - name: Publish Allure report to GitHub Pages
         if: always() && github.ref == 'refs/heads/main'
@@ -105,9 +109,11 @@ jobs:
         if: steps.tests.outcome == 'failure'
         run: docker compose -f infra/sock-shop/docker-compose.yml logs --no-color --tail 150
 
-      - name: Stop the Sock Shop
+      - name: Stop the Sock Shop and the Petstore
         if: always()
-        run: npm run stack:down
+        run: |
+          npm run stack:down
+          docker compose -f infra/petstore/docker-compose.yml down -v
 
       - name: Fail the job if tests failed
         if: steps.tests.outcome == 'failure'

@@ -13,3 +13,4 @@ Thumbs.db
 schemathesis-report/
 .schemathesis/
 .hypothesis/
+pacts/

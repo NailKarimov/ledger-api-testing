@@ -10,6 +10,7 @@
     "test:openweather": "playwright test --project=openweather",
     "test:petstore": "playwright test --project=petstore",
     "test:security": "playwright test --project=security",
+    "test:contract": "playwright test --project=contract-consumer --project=contract-provider",
     "test:sockshop": "playwright test --project=sockshop --project=sockshop-chaos --project=sockshop-events",
     "loadtest:smoke": "node scripts/run-k6.mjs catalogue-browse smoke",
     "loadtest:load": "node scripts/run-k6.mjs catalogue-browse load",
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@pact-foundation/pact": "^17.1.4",
     "@playwright/test": "^1.64.0",
     "@types/amqplib": "^0.10.8",
     "@types/node": "^26.6.5",

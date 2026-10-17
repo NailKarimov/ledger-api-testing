@@ -34,6 +34,8 @@ const EPICS: Record<string, string> = {
   'sockshop-chaos': 'Sock Shop',
   'sockshop-events': 'Sock Shop',
   security: 'Security',
+  'contract-consumer': 'Contract tests (Pact)',
+  'contract-provider': 'Contract tests (Pact)',
 };
 
 /** @smoke → critical, @security → critical, everything else → normal. */
