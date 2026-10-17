@@ -5,7 +5,7 @@
 [![Fuzz](https://github.com/NailKarimov/api-test-automation/actions/workflows/fuzz.yml/badge.svg)](https://github.com/NailKarimov/api-test-automation/actions/workflows/fuzz.yml)
 [![Contract](https://github.com/NailKarimov/api-test-automation/actions/workflows/contract.yml/badge.svg)](https://github.com/NailKarimov/api-test-automation/actions/workflows/contract.yml)
 
-API test automation for public REST APIs. One framework, three systems under test:
+API test automation for public REST and GraphQL APIs. One framework, three systems under test:
 
 - **[OpenWeather API](https://openweathermap.org/api)** — read-only API with live data: contract validation,
   boundary values, unit conversions, authentication, geocoding, forecast and air quality.
@@ -92,6 +92,17 @@ proves that a contract the provider cannot satisfy is rejected. The pact file is
 [`/pact/`](https://nailkarimov.github.io/api-test-automation/pact/PetAdoptionWeb-Petstore.json).
 Read more: [`docs/pact.md`](docs/pact.md) · visual guide
 [`docs/pact.html`](https://nailkarimov.github.io/api-test-automation/pact.html). Run: `npm run fuzz:up && npm run test:contract`.
+
+### GraphQL (`tests/graphql/`)
+
+34 tests against the public [Rick and Morty API](https://rickandmortyapi.com/documentation): field selection,
+variables, aliases, fragments, pagination boundaries, filters, the `errors` array (validation, syntax, variables),
+security (depth limit 4/5 boundary, introspection, batching, a 200-alias query, field-name suggestions), a REST-twin
+oracle (GraphQL and `/api/...` must agree), and schema drift with GraphQL Inspector against
+`contracts/rickandmorty/schema.graphql`. Findings: **GQL-2** no query cost limit, **GQL-3** field-name suggestions,
+**GQL-5** syntax errors answered by the Stellate edge cache without a location. The client is polite to the
+rate-limited service (spacing, waits out a 429). Read more: [`docs/graphql.md`](docs/graphql.md) · visual guide
+[`docs/graphql.html`](https://nailkarimov.github.io/api-test-automation/graphql.html). Run: `npm run test:graphql`.
 
 ### Security headers (`tests/security/`)
 
