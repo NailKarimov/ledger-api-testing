@@ -13,3 +13,4 @@ contracts/petstore/openapi.yaml
 contracts/petstore/fixtures/
 docs/contract-drift.html
 docs/pact.html
+contracts/rickandmorty/schema.graphql

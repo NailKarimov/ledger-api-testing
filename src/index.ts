@@ -11,6 +11,11 @@ export type { Units, Coords } from './openweather/WeatherClient';
 export * from './petstore/schemas';
 export { newPet, uniqueId } from './petstore/data';
 
+// GraphQL (Rick and Morty)
+export * from './graphql/schemas';
+export { nestedQuery } from './graphql/GraphQLClient';
+export type { GraphQLResponse, GraphQLError } from './graphql/GraphQLClient';
+
 // Sock Shop microservices
 export * from './sockshop/schemas';
 export type { Checkout } from './sockshop/SockShopClient';

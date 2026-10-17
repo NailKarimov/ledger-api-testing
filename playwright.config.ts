@@ -38,6 +38,8 @@ export default defineConfig({
     // Cross-cutting HTTP security checks; every request uses an absolute URL, so there is no baseURL.
     { name: 'security', testDir: './tests/security' },
     { name: 'unit', testDir: './tests/unit' },
+    // GraphQL: public Rick and Morty API (docs/graphql.md).
+    { name: 'graphql', testDir: './tests/graphql', use: { baseURL: env.rickAndMortyBaseUrl } },
     // Pact (docs/pact.md): the consumer tests write pacts/*.json, then the provider is verified against
     // the private Petstore container (infra/petstore, port 8090) using that file.
     { name: 'contract-consumer', testDir: './tests/contract-consumer' },

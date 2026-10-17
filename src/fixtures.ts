@@ -5,6 +5,7 @@ import { WeatherClient } from './openweather/WeatherClient';
 import { PetstoreClient } from './petstore/PetstoreClient';
 import { SockShopClient } from './sockshop/SockShopClient';
 import { ShippingQueue } from './sockshop/queue';
+import { GraphQLClient } from './graphql/GraphQLClient';
 import { env } from '../config/env';
 
 let stack: Promise<boolean> | undefined;
@@ -19,6 +20,8 @@ function stackIsUp(): Promise<boolean> {
 type Fixtures = {
   weather: WeatherClient;
   petstore: PetstoreClient;
+  /** Rick and Morty GraphQL endpoint; `graph.api` also reaches the REST twin under /api. */
+  graph: GraphQLClient;
   shop: SockShopClient;
   /** A connection to the `shipping-task` queue, purged before each test for isolation. */
   queue: ShippingQueue;
@@ -34,6 +37,7 @@ const EPICS: Record<string, string> = {
   'sockshop-chaos': 'Sock Shop',
   'sockshop-events': 'Sock Shop',
   security: 'Security',
+  graphql: 'GraphQL (Rick and Morty)',
   'contract-consumer': 'Contract tests (Pact)',
   'contract-provider': 'Contract tests (Pact)',
 };
@@ -79,6 +83,9 @@ export const test = base.extend<Fixtures>({
   // The Petstore sandbox needs no key.
   petstore: async ({ request }, use) => {
     await use(new PetstoreClient(new ApiClient(request)));
+  },
+  graph: async ({ request }, use) => {
+    await use(new GraphQLClient(new ApiClient(request)));
   },
   // eslint-disable-next-line no-empty-pattern
   queue: async ({}, use) => {
