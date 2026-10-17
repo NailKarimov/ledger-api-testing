@@ -83,6 +83,16 @@ have no `200` response (accepted in `known-drift.txt`; Schemathesis found the sa
 Read more: [`docs/contract-drift.md`](docs/contract-drift.md) · visual guide
 [`docs/contract-drift.html`](https://nailkarimov.github.io/api-test-automation/contract-drift.html).
 
+### Consumer-driven contracts with Pact (`tests/contract-consumer/`, `tests/contract-provider/`)
+
+A small consumer, **Pet Adoption Web** (`src/consumers/AdoptionClient.ts`), records the five Petstore interactions
+it relies on with [Pact](https://docs.pact.io); the resulting `pacts/PetAdoptionWeb-Petstore.json` is then replayed
+against the private Petstore container with provider states ("a pet exists"). Verification: **5/5**. A self-test
+proves that a contract the provider cannot satisfy is rejected. The pact file is published to
+[`/pact/`](https://nailkarimov.github.io/api-test-automation/pact/PetAdoptionWeb-Petstore.json).
+Read more: [`docs/pact.md`](docs/pact.md) · visual guide
+[`docs/pact.html`](https://nailkarimov.github.io/api-test-automation/pact.html). Run: `npm run fuzz:up && npm run test:contract`.
+
 ### Security headers (`tests/security/`)
 
 One spec runs the same checks against all three systems: HSTS, `X-Content-Type-Options`, `X-Powered-By`,

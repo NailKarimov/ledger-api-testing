@@ -86,7 +86,7 @@ jobs:
         if: always()
         run: |
           for d in fuzz contract; do if [ -d gh-pages-old/$d ]; then cp -r gh-pages-old/$d allure-report/$d; fi; done
-          cp docs/schemathesis.html docs/toolbox.html docs/contract-drift.html allure-report/
+          cp docs/schemathesis.html docs/toolbox.html docs/contract-drift.html docs/pact.html allure-report/
           if ls pacts/*.json >/dev/null 2>&1; then mkdir -p allure-report/pact && cp pacts/*.json allure-report/pact/; fi
 
       - name: Publish Allure report to GitHub Pages
