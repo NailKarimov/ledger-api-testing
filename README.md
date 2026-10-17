@@ -3,6 +3,7 @@
 [![Tests](https://github.com/NailKarimov/api-test-automation/actions/workflows/tests.yml/badge.svg)](https://github.com/NailKarimov/api-test-automation/actions/workflows/tests.yml)
 [![Allure report](https://img.shields.io/badge/report-Allure-orange)](https://nailkarimov.github.io/api-test-automation/)
 [![Fuzz](https://github.com/NailKarimov/api-test-automation/actions/workflows/fuzz.yml/badge.svg)](https://github.com/NailKarimov/api-test-automation/actions/workflows/fuzz.yml)
+[![Contract](https://github.com/NailKarimov/api-test-automation/actions/workflows/contract.yml/badge.svg)](https://github.com/NailKarimov/api-test-automation/actions/workflows/contract.yml)
 
 API test automation for public REST APIs. One framework, three systems under test:
 
@@ -70,6 +71,17 @@ Read more: [`docs/schemathesis.md`](docs/schemathesis.md) · visual guide
 [`docs/schemathesis.html`](https://nailkarimov.github.io/api-test-automation/schemathesis.html) · latest
 [HTML report](https://nailkarimov.github.io/api-test-automation/fuzz/). Run locally:
 `pip install -r fuzz/requirements.txt && npm run fuzz:up && npm run fuzz`.
+
+### Contract drift with oasdiff (`contracts/`)
+
+[oasdiff](https://www.oasdiff.com) compares OpenAPI documents and fails on changes that break existing clients.
+The approved Petstore contract (`contracts/petstore/openapi.yaml`) is checked nightly against the spec the private
+container serves and, report only, against the public sandbox; a pull request that edits the contract is compared
+with the base branch. A self-test proves oasdiff rejects a breaking fixture and accepts a compatible one.
+First run found **CD-1**: the `swaggerapi/petstore3:unstable` image serves the old 1.0.17 spec, where 7 operations
+have no `200` response (accepted in `known-drift.txt`; Schemathesis found the same as FZ-2).
+Read more: [`docs/contract-drift.md`](docs/contract-drift.md) · visual guide
+[`docs/contract-drift.html`](https://nailkarimov.github.io/api-test-automation/contract-drift.html).
 
 ### Security headers (`tests/security/`)
 

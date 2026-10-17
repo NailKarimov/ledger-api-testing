@@ -79,11 +79,11 @@ jobs:
         if: always()
         run: npm run allure:generate
 
-      - name: Keep the Schemathesis report (/fuzz) and guide on GitHub Pages
+      - name: Keep the /fuzz and /contract reports and the guides on GitHub Pages
         if: always()
         run: |
-          if [ -d gh-pages-old/fuzz ]; then cp -r gh-pages-old/fuzz allure-report/fuzz; fi
-          cp docs/schemathesis.html docs/toolbox.html allure-report/
+          for d in fuzz contract; do if [ -d gh-pages-old/$d ]; then cp -r gh-pages-old/$d allure-report/$d; fi; done
+          cp docs/schemathesis.html docs/toolbox.html docs/contract-drift.html allure-report/
 
       - name: Publish Allure report to GitHub Pages
         if: always() && github.ref == 'refs/heads/main'
