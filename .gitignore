@@ -10,3 +10,6 @@ loadtests-results/
 .DS_Store
 Thumbs.db
 .claude/
+schemathesis-report/
+.schemathesis/
+.hypothesis/

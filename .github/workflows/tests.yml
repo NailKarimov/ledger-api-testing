@@ -79,6 +79,10 @@ jobs:
         if: always()
         run: npm run allure:generate
 
+      - name: Keep the Schemathesis report (/fuzz) on GitHub Pages
+        if: always()
+        run: if [ -d gh-pages-old/fuzz ]; then cp -r gh-pages-old/fuzz allure-report/fuzz; fi
+
       - name: Publish Allure report to GitHub Pages
         if: always() && github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v4
