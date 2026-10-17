@@ -2,6 +2,7 @@
 
 [![Tests](https://github.com/NailKarimov/api-test-automation/actions/workflows/tests.yml/badge.svg)](https://github.com/NailKarimov/api-test-automation/actions/workflows/tests.yml)
 [![Allure report](https://img.shields.io/badge/report-Allure-orange)](https://nailkarimov.github.io/api-test-automation/)
+[![Fuzz](https://github.com/NailKarimov/api-test-automation/actions/workflows/fuzz.yml/badge.svg)](https://github.com/NailKarimov/api-test-automation/actions/workflows/fuzz.yml)
 
 API test automation for public REST APIs. One framework, three systems under test:
 
@@ -45,6 +46,24 @@ API test automation for public REST APIs. One framework, three systems under tes
 public sandbox are marked with `test.fail()` and a `DEF-n` id. They stay green while the defect exists and
 turn red the moment the server is fixed, so the marker can be removed. See
 [`docs/test-report.md`](docs/test-report.md).
+
+### Property-based fuzzing with Schemathesis (`fuzz/`)
+
+[Schemathesis](https://schemathesis.io) generates the tests from Petstore's OpenAPI document: examples,
+boundary values, random and deliberately invalid data, undeclared HTTP methods and stateful chains
+(`POST /pet` → `GET /pet/{id}` → `DELETE`). Every response is checked against the spec: no 5xx, documented
+status codes, schema, headers, auth. It runs against a **private Petstore container**
+([`infra/petstore`](infra/petstore/docker-compose.yml)), never the public sandbox.
+
+First run: 19/19 operations, 3 628 generated cases in 42 s, **83 spec violations grouped into 8 defects
+(FZ-1 … FZ-8)**, mostly contract drift. They are accepted in [`fuzz/baseline.json`](fuzz/baseline.json); only a
+_new_ failure fails the nightly [`fuzz.yml`](.github/workflows/fuzz.yml) job. Generation is deterministic, so a
+red run means the API changed.
+
+Read more: [`docs/schemathesis.md`](docs/schemathesis.md) · visual guide
+[`docs/schemathesis.html`](https://nailkarimov.github.io/api-test-automation/schemathesis.html) · latest
+[HTML report](https://nailkarimov.github.io/api-test-automation/fuzz/). Run locally:
+`pip install -r fuzz/requirements.txt && npm run fuzz:up && npm run fuzz`.
 
 ### Security headers (`tests/security/`)
 
