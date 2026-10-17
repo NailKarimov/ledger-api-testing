@@ -18,6 +18,12 @@ API test automation for public REST APIs. One framework, three systems under tes
 
 **Playwright (API testing) + TypeScript + zod + Allure + Docker**, run daily in **GitHub Actions**.
 
+## Toolbox
+
+All tools used across the portfolio, by stage of work, with why each one is here and where it lives:
+[`docs/toolbox.md`](docs/toolbox.md) · interactive map
+[`docs/toolbox.html`](https://nailkarimov.github.io/api-test-automation/toolbox.html).
+
 ## What is tested
 
 ### OpenWeather (`tests/openweather/`)
