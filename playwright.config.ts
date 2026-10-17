@@ -39,7 +39,13 @@ export default defineConfig({
     { name: 'security', testDir: './tests/security' },
     { name: 'unit', testDir: './tests/unit' },
     // GraphQL: public Rick and Morty API (docs/graphql.md).
-    { name: 'graphql', testDir: './tests/graphql', use: { baseURL: env.rickAndMortyBaseUrl } },
+    {
+      name: 'graphql',
+      testDir: './tests/graphql',
+      // Polite to a rate-limited public API: requests are spaced out and a 429 is waited out.
+      timeout: 120_000,
+      use: { baseURL: env.rickAndMortyBaseUrl },
+    },
     // Pact (docs/pact.md): the consumer tests write pacts/*.json, then the provider is verified against
     // the private Petstore container (infra/petstore, port 8090) using that file.
     { name: 'contract-consumer', testDir: './tests/contract-consumer' },
