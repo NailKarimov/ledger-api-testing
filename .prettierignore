@@ -9,3 +9,5 @@ docs/overview.html
 docs/microservices.html
 docs/schemathesis.html
 docs/toolbox.html
+contracts/petstore/openapi.yaml
+contracts/petstore/fixtures/
