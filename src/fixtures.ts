@@ -46,6 +46,7 @@ const EPICS: Record<string, string> = {
   'sockshop-events': 'Sock Shop',
   security: 'Security',
   graphql: 'GraphQL (Rick and Morty)',
+  ledger: 'Ledger API + PostgreSQL (Testcontainers)',
   'contract-consumer': 'Contract tests (Pact)',
   'contract-provider': 'Contract tests (Pact)',
 };

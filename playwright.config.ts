@@ -38,6 +38,8 @@ export default defineConfig({
     // Cross-cutting HTTP security checks; every request uses an absolute URL, so there is no baseURL.
     { name: 'security', testDir: './tests/security' },
     { name: 'unit', testDir: './tests/unit' },
+    // Ledger API (services/ledger-api) on PostgreSQL started by Testcontainers per worker (docs/ledger-api.md).
+    { name: 'ledger', testDir: './tests/ledger', timeout: 60_000 },
     // GraphQL: public Rick and Morty API (docs/graphql.md).
     {
       name: 'graphql',
