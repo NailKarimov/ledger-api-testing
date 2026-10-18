@@ -57,8 +57,13 @@ test.describe('Database invariants', () => {
     ],
     [
       'a lower-case currency',
-      "INSERT INTO accounts (owner, currency) VALUES ('x', 'eur')",
+      "INSERT INTO accounts (owner, currency, owner_sub) VALUES ('x', 'eur', 'alice')",
       /accounts_currency_check/,
+    ],
+    [
+      'an account without an owner (OAuth subject)',
+      "INSERT INTO accounts (owner, currency) VALUES ('x', 'EUR')",
+      /owner_sub/,
     ],
     [
       'an entry for a missing transfer',
@@ -78,6 +83,6 @@ test.describe('Database invariants', () => {
 
   test("migrations ran from scratch in this worker's fresh database", async ({ db }) => {
     const applied = await db.rows<{ name: string }>('SELECT name FROM schema_migrations ORDER BY name');
-    expect(applied.map((m) => m.name)).toEqual(['001_init.sql']);
+    expect(applied.map((m) => m.name)).toEqual(['001_init.sql', '002_owners.sql']);
   });
 });

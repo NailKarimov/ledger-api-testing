@@ -1,5 +1,5 @@
 import { APIRequestContext, APIResponse, test } from '@playwright/test';
-import { redact } from './redact';
+import { redact, redactHeaders, redactTokens } from './redact';
 
 export type Query = Record<string, string | number | undefined>;
 
@@ -23,7 +23,11 @@ export type RequestOptions = {
   body?: unknown;
   /** Raw body with an explicit content type, for negative tests (malformed JSON, wrong media type). */
   raw?: { data: string; contentType: string };
+  /** application/x-www-form-urlencoded body (OAuth token requests). */
+  form?: Record<string, string>;
   headers?: Record<string, string>;
+  /** 0 → do not follow redirects (to read an OAuth redirect's Location). */
+  maxRedirects?: number;
 };
 
 /**
@@ -73,6 +77,9 @@ export class ApiClient {
     if (opts.raw) {
       data = opts.raw.data;
       headers['Content-Type'] = opts.raw.contentType;
+    } else if (opts.form) {
+      data = new URLSearchParams(opts.form).toString();
+      headers['Content-Type'] = 'application/x-www-form-urlencoded';
     } else if (opts.body !== undefined) {
       data = JSON.stringify(opts.body);
       headers['Content-Type'] = 'application/json';
@@ -81,7 +88,13 @@ export class ApiClient {
     const started = Date.now();
     let response: APIResponse;
     try {
-      response = await this.request.fetch(path, { method, params, headers, data });
+      response = await this.request.fetch(path, {
+        method,
+        params,
+        headers,
+        data,
+        ...(opts.maxRedirects !== undefined ? { maxRedirects: opts.maxRedirects } : {}),
+      });
     } catch (error) {
       // Network errors include the full URL — rethrow without the key. The original error is
       // deliberately not attached as `cause`: it would print the key into the public report.
@@ -108,15 +121,21 @@ export class ApiClient {
     }
 
     const shownQuery = { ...params, ...(key ? { appid: '***' } : {}) };
+    const hide = (t: string) => redactTokens(redact(t, this.apiKey));
+    const location = response.headers()['location'];
+    const challenge = response.headers()['www-authenticate'];
     await test.info().attach(`${method} ${path}`, {
       contentType: 'text/plain',
       body: [
-        `${method} ${redact(response.url(), this.apiKey)}`,
-        `Query: ${JSON.stringify(shownQuery)}`,
-        ...(data !== undefined ? [`Request body: ${redact(data, this.apiKey).slice(0, 2_000)}`] : []),
+        `${method} ${hide(response.url())}`,
+        `Query: ${hide(JSON.stringify(shownQuery))}`,
+        ...(Object.keys(headers).length ? [`Headers: ${JSON.stringify(redactHeaders(headers))}`] : []),
+        ...(data !== undefined ? [`Request body: ${hide(data).slice(0, 2_000)}`] : []),
         `Status: ${response.status()} (${durationMs} ms)`,
         `Content-Type: ${contentType}`,
-        `Body:\n${redact(text, this.apiKey).slice(0, 5_000)}`,
+        ...(location ? [`Location: ${hide(location)}`] : []),
+        ...(challenge ? [`WWW-Authenticate: ${challenge}`] : []),
+        `Body:\n${hide(text).slice(0, 5_000)}`,
       ].join('\n'),
     });
 

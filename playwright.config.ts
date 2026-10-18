@@ -15,5 +15,7 @@ export default defineConfig({
     { name: 'unit', testDir: './tests/unit' },
     // Ledger API (services/ledger-api) on PostgreSQL started by Testcontainers per worker (docs/ledger-api.md).
     { name: 'ledger', testDir: './tests/ledger' },
+    // OAuth 2.0 / JWT: the authorization server and the Ledger API as a resource server (docs/oauth-jwt.md).
+    { name: 'auth', testDir: './tests/auth' },
   ],
 });
