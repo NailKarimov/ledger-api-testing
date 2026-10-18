@@ -16,3 +16,4 @@ docs/pact.html
 contracts/rickandmorty/schema.graphql
 docs/graphql.html
 docs/test-environments.html
+docs/ledger-api.html

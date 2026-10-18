@@ -95,6 +95,19 @@ proves that a contract the provider cannot satisfy is rejected. The pact file is
 Read more: [`docs/pact.md`](docs/pact.md) · visual guide
 [`docs/pact.html`](https://nailkarimov.github.io/api-test-automation/pact.html). Run: `npm run fuzz:up && npm run test:contract`.
 
+### Ledger API on PostgreSQL with Testcontainers (`services/ledger-api/`, `tests/ledger/`)
+
+Our own small money service (Fastify + PostgreSQL): accounts, deposits, idempotent transfers, a double-entry ledger
+and schema constraints. **Testcontainers** starts a fresh `postgres:16-alpine` for every Playwright worker, runs the
+migrations and the API in-process, so 47 tests can check every answer **against the database**: boundaries of the
+amount rule, atomicity (one cent too much → 422 and nothing changed), idempotency (10 simultaneous retries → one
+charge), concurrency (25 parallel transfers of 10 from 100 → exactly 10 succeed; crossing transfers never
+deadlock), ledger invariants, and constraints that refuse bad data even without the API. Five bugs planted by
+hand (no row lock, `<=` instead of `<`, lost credit entry, …) were all caught. Read more:
+[`docs/ledger-api.md`](docs/ledger-api.md) · visual guide
+[`docs/ledger-api.html`](https://nailkarimov.github.io/api-test-automation/ledger-api.html). Run: `npm run test:ledger`
+(needs Docker).
+
 ### GraphQL (`tests/graphql/`)
 
 34 tests against the public [Rick and Morty API](https://rickandmortyapi.com/documentation): field selection,

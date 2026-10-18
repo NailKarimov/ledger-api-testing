@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en" data-default-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ledger API и Testcontainers</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an accountant's desk. Container lifecycle strip up top, then a transfer you drive with a
+   slider while the three tables update, the 25-request race, planted bugs, constraints. */
+:root {
+  --bg: #eef1f5; --surface: #ffffff; --sunken: #e3e8ef; --ink: #121823; --muted: #586274; --line: #cfd6e1;
+  --pg: #336791; --pg-soft: #dde7f1; --ok: #1f7a4d; --ok-soft: #dcf1e5; --bad: #b42318; --bad-soft: #fbe2df; --warn: #a15c00; --warn-soft: #fbecd2;
+  --font-display: 'Familjen Grotesk', 'IBM Plex Sans', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d121a; --surface: #151c27; --sunken: #1b2431; --ink: #e7ecf3; --muted: #9aa6b8; --line: #2a3546;
+    --pg: #8ab4dd; --pg-soft: #17283a; --ok: #5fd394; --ok-soft: #12321f; --bad: #ff8a7d; --bad-soft: #3d1714; --warn: #f3b562; --warn-soft: #3a2a10;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d121a; --surface: #151c27; --sunken: #1b2431; --ink: #e7ecf3; --muted: #9aa6b8; --line: #2a3546;
+  --pg: #8ab4dd; --pg-soft: #17283a; --ok: #5fd394; --ok-soft: #12321f; --bad: #ff8a7d; --bad-soft: #3d1714; --warn: #f3b562; --warn-soft: #3a2a10;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--font-body); margin: 0; }
+body[data-lang="ru"] [lang="en"], body[data-lang="en"] [lang="ru"] { display: none !important; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 64px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(32px, 5vw, 50px); font-weight: 700; }
+h2 { font-size: clamp(23px, 3vw, 31px); font-weight: 700; }
+h3 { font-size: 18px; font-weight: 700; }
+p { margin: 0; max-width: 70ch; }
+code, .mono { font-family: var(--font-mono); font-size: 0.88em; }
+a { color: var(--pg); }
+:focus-visible { outline: 2px solid var(--pg); outline-offset: 2px; border-radius: 4px; }
+.eyebrow { font: 500 12px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.muted { color: var(--muted); }
+header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 20px; flex-wrap: wrap; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.seg button { font: 500 13px var(--font-mono); background: transparent; color: var(--muted); border: 0; padding: 6px 14px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.hero { display: grid; gap: 14px; padding-block: 8px 20px; }
+.hero .lead { font-size: 18px; color: var(--muted); }
+section.station { display: grid; gap: 16px; padding-block: 44px 0; }
+section.station > header { display: grid; gap: 8px; }
+.btn { font: 500 14px var(--font-body); background: var(--ink); color: var(--bg); border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+
+/* lifecycle */
+.life { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 760px) { .life { grid-template-columns: minmax(0, 1fr); } }
+.life div { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px; display: grid; gap: 4px; align-content: start; transition: border-color .3s, background .3s; }
+.life div.on { border-color: var(--pg); background: var(--pg-soft); }
+.life b { font: 600 12px var(--font-mono); color: var(--pg); }
+.life span { font-size: 14px; }
+.life code { font-size: 11.5px; color: var(--muted); overflow-wrap: anywhere; }
+.workers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.wk { background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 10px 12px; font-size: 14px; display: flex; gap: 10px; align-items: center; }
+.wk i { width: 12px; height: 12px; border-radius: 3px; background: var(--pg); flex: none; }
+
+/* simulator */
+.sim { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr); gap: 14px; }
+@media (max-width: 860px) { .sim { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.amount { font: 700 34px var(--font-display); font-variant-numeric: tabular-nums; }
+input[type=range] { width: 100%; accent-color: var(--pg); }
+.resp { font: 500 13px var(--font-mono); padding: 10px 12px; border-radius: 8px; overflow-wrap: anywhere; }
+.resp.ok { background: var(--ok-soft); color: var(--ok); } .resp.bad { background: var(--bad-soft); color: var(--bad); }
+.tables { display: grid; gap: 10px; }
+.tbl { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow-x: auto; }
+.tbl h4 { margin: 0; padding: 8px 12px; font: 600 12px var(--font-mono); color: var(--pg); background: var(--pg-soft); }
+.tbl table { width: 100%; border-collapse: collapse; font: 400 12.5px var(--font-mono); min-width: 420px; }
+.tbl th, .tbl td { padding: 6px 12px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+.tbl th { color: var(--muted); font-weight: 500; }
+.tbl tr.new td { background: var(--ok-soft); animation: flash 1.2s ease-out; }
+.tbl tr.chg td.v { background: var(--warn-soft); }
+@keyframes flash { from { background: var(--ok); } }
+.num { text-align: right !important; font-variant-numeric: tabular-nums; }
+.check { font-size: 13.5px; padding: 8px 12px; border-radius: 8px; background: var(--sunken); }
+
+/* race */
+.race { display: grid; grid-template-columns: repeat(25, minmax(0, 1fr)); gap: 4px; }
+.race span { aspect-ratio: 1; border-radius: 4px; background: var(--sunken); display: grid; place-items: center; font: 600 9px var(--font-mono); color: var(--surface); transition: background .25s; }
+.race span.ok { background: var(--ok); } .race span.no { background: var(--bad); }
+.meter { height: 14px; border-radius: 7px; background: var(--sunken); overflow: hidden; }
+.meter i { display: block; height: 100%; background: var(--pg); transition: width .25s; }
+.racestat { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; }
+.racestat b { font: 700 24px var(--font-display); font-variant-numeric: tabular-nums; margin-right: 4px; }
+
+.mut { display: grid; gap: 8px; }
+.mrow { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) 92px; gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+@media (max-width: 760px) { .mrow { grid-template-columns: minmax(0, 1fr); } }
+.mrow code { font-size: 12px; }
+.kill { font: 600 12px var(--font-mono); padding: 4px 10px; border-radius: 999px; background: var(--ok-soft); color: var(--ok); text-align: center; }
+.cons { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+.con { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px; display: grid; gap: 6px; }
+.con code { font-size: 11.5px; color: var(--bad); overflow-wrap: anywhere; }
+.cmd { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; background: var(--sunken); border-radius: 8px; padding: 6px 6px 6px 12px; }
+.cmd code { overflow-x: auto; white-space: nowrap; }
+.cmd button { font: 500 12px var(--font-body); border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+dl.terms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; }
+@media (max-width: 760px) { dl.terms { grid-template-columns: minmax(0, 1fr); } }
+dl.terms div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+dl.terms dt { font: 700 15px var(--font-display); }
+dl.terms dd { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+footer { padding-top: 40px; color: var(--muted); font-size: 13px; display: flex; gap: 16px; flex-wrap: wrap; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body data-lang="en">
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">api-test-automation · services/ledger-api</span>
+    <div class="seg" role="group" aria-label="Language">
+      <button type="button" id="lang-ru" data-l="ru" aria-pressed="true">RU</button>
+      <button type="button" id="lang-en" data-l="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1 lang="ru">Ledger API: проверяем не только ответ, но и базу</h1>
+    <h1 lang="en">Ledger API: checking the database, not just the answer</h1>
+    <p class="lead" lang="ru">Публичное API не пускает внутрь базы, поэтому я написал своё — сервис кошельков и переводов на PostgreSQL. 47 тестов сверяют каждый ответ с тем, что реально лежит в таблицах. Каждый прогон получает новую базу от Testcontainers.</p>
+    <p class="lead" lang="en">A public API never lets you into its database, so this is our own: a wallets-and-transfers service on PostgreSQL. 47 tests compare every answer with what is actually in the tables, and every run gets a brand-new database from Testcontainers.</p>
+  </section>
+
+  <section class="station" style="padding-top:4px">
+    <header>
+      <span class="eyebrow">Testcontainers</span>
+      <h2 lang="ru">У каждого воркера своя база, от старта до удаления</h2><h2 lang="en">Each worker gets its own database, from start to removal</h2>
+    </header>
+    <div class="ctl" style="display:flex;gap:8px"><button type="button" class="btn" id="life-play"><span lang="ru">Показать жизненный цикл</span><span lang="en">Show the lifecycle</span></button></div>
+    <div class="life" id="life"></div>
+    <div class="workers"><div class="wk"><i></i><span>worker 0 → postgres:16-alpine · :<span class="mono" id="p0">randomport</span> · ledger API :<span class="mono" id="a0">random</span></span></div><div class="wk"><i></i><span>worker 1 → postgres:16-alpine · :<span class="mono" id="p1">randomport</span> · ledger API :<span class="mono" id="a1">random</span></span></div></div>
+    <p class="muted" lang="ru">Базы не пересекаются, поэтому тест может проверять точное число строк. Без Docker тесты локально пропускаются, а в CI падают.</p>
+    <p class="muted" lang="en">The databases never overlap, so a test can assert exact row counts. Without Docker the tests are skipped locally and fail in CI.</p>
+  </section>
+
+  <section class="station">
+    <header>
+      <span class="eyebrow" lang="ru">Попробуйте</span><span class="eyebrow" lang="en">Try it</span>
+      <h2 lang="ru">Перевод от Алисы Бобу — и что меняется в таблицах</h2><h2 lang="en">A transfer from Alice to Bob, and what changes in the tables</h2>
+      <p class="muted" lang="ru">Это модель логики сервиса на странице, а не запрос к серверу. Правила и проверки те же, что в тестах.</p>
+      <p class="muted" lang="en">A model of the service logic on this page, not a call to the server. The rules and checks are the same as in the tests.</p>
+    </header>
+    <div class="sim">
+      <div class="panel">
+        <span class="eyebrow">POST /transfers</span>
+        <label for="amt" class="muted" style="font-size:13px"><span lang="ru">Сумма (у Алисы есть баланс)</span><span lang="en">Amount (Alice has a balance)</span></label>
+        <div class="amount" id="amt-v">30.50</div>
+        <input type="range" id="amt" min="1" max="12000" value="3050">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button type="button" class="btn" id="send"><span lang="ru">Отправить</span><span lang="en">Send</span></button>
+          <button type="button" class="btn ghost" id="retry"><span lang="ru">Повторить с тем же ключом</span><span lang="en">Retry with the same key</span></button>
+          <button type="button" class="btn ghost" id="reset"><span lang="ru">Сбросить</span><span lang="en">Reset</span></button>
+        </div>
+        <div class="resp" id="resp"></div>
+        <div class="check" id="checks"></div>
+      </div>
+      <div class="tables" id="tables"></div>
+    </div>
+  </section>
+
+  <section class="station">
+    <header>
+      <span class="eyebrow" lang="ru">Гонка</span><span class="eyebrow" lang="en">The race</span>
+      <h2 lang="ru">25 параллельных переводов по 10 со счёта, где 100</h2><h2 lang="en">25 parallel transfers of 10 from an account holding 100</h2>
+      <p class="muted" lang="ru">Все запросы приходят одновременно. Блокировка строки <code>SELECT … FOR UPDATE</code> выстраивает их в очередь: ровно 10 проходят, 15 получают 422, баланс ровно 0.00. Без блокировки этот тест падает.</p>
+      <p class="muted" lang="en">All requests arrive at once. The row lock <code>SELECT … FOR UPDATE</code> queues them: exactly 10 succeed, 15 get 422, the balance is exactly 0.00. Without the lock this test fails.</p>
+    </header>
+    <div><button type="button" class="btn" id="race-go"><span lang="ru">Запустить гонку</span><span lang="en">Run the race</span></button></div>
+    <div class="race" id="race"></div>
+    <div class="meter"><i id="meter" style="width:100%"></i></div>
+    <div class="racestat" id="racestat"></div>
+  </section>
+
+  <section class="station">
+    <header>
+      <span class="eyebrow" lang="ru">Ловят ли тесты баги?</span><span class="eyebrow" lang="en">Do the tests catch bugs?</span>
+      <h2 lang="ru">Пять багов, внесённых руками, — пять пойманных</h2><h2 lang="en">Five planted bugs, five caught</h2>
+      <p class="muted" lang="ru">Каждый баг вносился в сервис, затем гонялись тесты против настоящего PostgreSQL, и изменение откатывалось. Это ручная форма мутационного тестирования.</p>
+      <p class="muted" lang="en">Each bug went into the service, the suite ran against a real PostgreSQL, and the change was reverted: a manual form of mutation testing.</p>
+    </header>
+    <div class="mut" id="mut"></div>
+  </section>
+
+  <section class="station">
+    <header>
+      <span class="eyebrow" lang="ru">Защита в глубину</span><span class="eyebrow" lang="en">Defence in depth</span>
+      <h2 lang="ru">Схема сама не даст сохранить плохие данные</h2><h2 lang="en">The schema itself refuses bad data</h2>
+      <p class="muted" lang="ru">Тесты пишут в базу напрямую, в обход API, и ждут отказа ограничения. Даже если в коде появится баг, деньги не уйдут в минус.</p>
+      <p class="muted" lang="en">The tests write to the database directly, bypassing the API, and expect a constraint to refuse. Even with a code bug, money cannot go negative.</p>
+    </header>
+    <div class="cons" id="cons"></div>
+  </section>
+
+  <section class="station">
+    <header><span class="eyebrow" lang="ru">Запуск</span><span class="eyebrow" lang="en">Run it</span><h2 lang="ru">Команды</h2><h2 lang="en">Commands</h2></header>
+    <div class="panel" id="cmds"></div>
+  </section>
+
+  <section class="station">
+    <header><span class="eyebrow" lang="ru">Словарь</span><span class="eyebrow" lang="en">Glossary</span><h2 lang="ru">Термины</h2><h2 lang="en">Terms</h2></header>
+    <dl class="terms" id="glossary"></dl>
+  </section>
+
+  <footer>
+    <a href="https://github.com/NailKarimov/api-test-automation/blob/main/docs/ledger-api.md">docs/ledger-api.md</a>
+    <a href="https://github.com/NailKarimov/api-test-automation/tree/main/services/ledger-api">services/ledger-api</a>
+    <a href="https://testcontainers.com">testcontainers.com</a>
+    <span>47 tests · 18.10.2026</span>
+  </footer>
+</div>
+
+<script>
+const S = { lang: 'ru' };
+const L = (ru, en) => (S.lang === 'ru' ? ru : en);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* lifecycle */
+const LIFE = [
+  ['1', ['Старт контейнера', 'Start a container'], "new PostgreSqlContainer('postgres:16-alpine').start()"],
+  ['2', ['Миграции с нуля', 'Migrations from scratch'], 'migrate(pool) → 001_init.sql'],
+  ['3', ['API в том же процессе', 'API in the same process'], 'buildApp(pool).listen({ port: 0 })'],
+  ['4', ['Тесты воркера', "The worker's tests"], 'API → assert → SELECT … → assert'],
+  ['5', ['Всё удаляется', 'Everything is removed'], 'app.close() · pool.end() · container.stop()'],
+];
+let lifeStep = -1, lifeTimer = null;
+function renderLife() {
+  document.getElementById('life').innerHTML = LIFE.map((l, i) => `<div class="${i === lifeStep ? 'on' : ''}"><b>${l[0]}</b><span>${L(...l[1])}</span><code>${l[2]}</code></div>`).join('');
+}
+document.getElementById('life-play').addEventListener('click', () => {
+  clearInterval(lifeTimer); lifeStep = 0; renderLife();
+  const ports = () => 32768 + Math.floor(Math.random() * 28000);
+  ['p0', 'p1'].forEach((id) => (document.getElementById(id).textContent = ports()));
+  ['a0', 'a1'].forEach((id) => (document.getElementById(id).textContent = ports()));
+  lifeTimer = setInterval(() => { lifeStep++; if (lifeStep >= LIFE.length) { clearInterval(lifeTimer); lifeStep = -1; } renderLife(); }, reduce ? 300 : 1100);
+});
+
+/* transfer simulator: a model of services/ledger-api/src/app.ts */
+const ALICE = 'a1c3…', BOB = 'b0b2…';
+let st;
+function resetSim() {
+  st = { acc: { [ALICE]: 100, [BOB]: 0 }, transfers: [{ id: 'd01…', kind: 'deposit', from: null, to: ALICE, amount: 100 }], entries: [{ t: 'd01…', acc: ALICE, amt: 100 }, { t: 'd01…', acc: null, amt: -100 }], lastKey: null, lastBody: null, fresh: new Set(), changed: new Set(), resp: null };
+}
+resetSim();
+const fmt = (n) => n.toFixed(2);
+function transfer(amount, key) {
+  st.fresh = new Set(); st.changed = new Set();
+  if (key && key === st.lastKey) {
+    const prev = st.transfers.find((t) => t.key === key);
+    if (prev && prev.amount === amount) return (st.resp = { ok: true, code: 200, text: `200 OK · Idempotent-Replayed: true · id ${prev.id}`, note: L('повтор: тот же перевод, деньги не двигались', 'retry: same transfer, no money moved') });
+    return (st.resp = { ok: false, code: 422, text: '422 idempotency_key_reused', note: L('тот же ключ, другая сумма: отказ', 'same key, other amount: rejected') });
+  }
+  if (st.acc[ALICE] < amount) return (st.resp = { ok: false, code: 422, text: '422 insufficient_funds', note: L('ROLLBACK: ни одна строка не изменилась', 'ROLLBACK: not a single row changed') });
+  const id = `t${String(st.transfers.length).padStart(2, '0')}…`;
+  const k = key || `qa-${Math.random().toString(16).slice(2, 8)}`;
+  st.transfers.push({ id, kind: 'transfer', from: ALICE, to: BOB, amount, key: k });
+  st.entries.push({ t: id, acc: ALICE, amt: -amount }, { t: id, acc: BOB, amt: amount });
+  st.acc[ALICE] = Math.round((st.acc[ALICE] - amount) * 100) / 100; st.acc[BOB] = Math.round((st.acc[BOB] + amount) * 100) / 100;
+  st.fresh = new Set(['tr' + id, 'en' + id]); st.changed = new Set([ALICE, BOB]);
+  st.lastKey = k;
+  return (st.resp = { ok: true, code: 201, text: `201 Created · id ${id}`, note: L('COMMIT: 1 строка в transfers, 2 в ledger_entries, 2 баланса', 'COMMIT: 1 row in transfers, 2 in ledger_entries, 2 balances') });
+}
+function renderSim() {
+  const amt = Number(document.getElementById('amt').value) / 100;
+  document.getElementById('amt-v').textContent = fmt(amt);
+  const r = st.resp;
+  const resp = document.getElementById('resp');
+  resp.className = 'resp ' + (r ? (r.ok ? 'ok' : 'bad') : '');
+  resp.textContent = r ? `${r.text} — ${r.note}` : L('Выберите сумму и нажмите «Отправить».', 'Pick an amount and press "Send".');
+  const ledgerOf = (a) => st.entries.filter((e) => e.acc === a).reduce((s, e) => s + e.amt, 0);
+  const sumAll = st.entries.reduce((s, e) => s + e.amt, 0);
+  const okBal = [ALICE, BOB].every((a) => Math.abs(ledgerOf(a) - st.acc[a]) < 1e-9);
+  document.getElementById('checks').innerHTML = [
+    [okBal, L('баланс = сумма записей счёта', 'balance = sum of the account\'s entries')],
+    [Math.abs(sumAll) < 1e-9, L('все записи в сумме дают 0', 'all entries sum to 0')],
+    [st.acc[ALICE] >= 0, L('баланс не отрицательный', 'balance is not negative')],
+  ].map(([ok, t]) => `${ok ? '✓' : '✗'} ${t}`).join('<br>');
+  const acc = `<div class="tbl"><h4>accounts</h4><table><thead><tr><th>id</th><th>owner</th><th class="num">balance</th></tr></thead><tbody>${[[ALICE, 'Alice'], [BOB, 'Bob']].map(([id, o]) => `<tr class="${st.changed.has(id) ? 'chg' : ''}"><td>${id}</td><td>${o}</td><td class="num v">${fmt(st.acc[id])}</td></tr>`).join('')}</tbody></table></div>`;
+  const tr = `<div class="tbl"><h4>transfers</h4><table><thead><tr><th>id</th><th>kind</th><th>from</th><th>to</th><th class="num">amount</th></tr></thead><tbody>${st.transfers.map((t) => `<tr class="${st.fresh.has('tr' + t.id) ? 'new' : ''}"><td>${t.id}</td><td>${t.kind}</td><td>${t.from ?? 'NULL'}</td><td>${t.to}</td><td class="num">${fmt(t.amount)}</td></tr>`).join('')}</tbody></table></div>`;
+  const en = `<div class="tbl"><h4>ledger_entries</h4><table><thead><tr><th>transfer_id</th><th>account_id</th><th class="num">amount</th></tr></thead><tbody>${st.entries.map((e) => `<tr class="${st.fresh.has('en' + e.t) ? 'new' : ''}"><td>${e.t}</td><td>${e.acc ?? 'NULL'}</td><td class="num">${e.amt > 0 ? '+' : ''}${fmt(e.amt)}</td></tr>`).join('')}</tbody></table></div>`;
+  document.getElementById('tables').innerHTML = acc + tr + en;
+}
+document.getElementById('amt').addEventListener('input', () => { st.resp = null; st.fresh = new Set(); st.changed = new Set(); renderSim(); });
+document.getElementById('send').addEventListener('click', () => { transfer(Number(document.getElementById('amt').value) / 100, null); renderSim(); });
+document.getElementById('retry').addEventListener('click', () => { transfer(Number(document.getElementById('amt').value) / 100, st.lastKey); renderSim(); });
+document.getElementById('reset').addEventListener('click', () => { resetSim(); renderSim(); });
+
+/* race */
+function renderRace(done = 25) {
+  const cells = Array.from({ length: 25 }, (_, i) => (i < done ? (i < 10 ? 'ok' : 'no') : ''));
+  document.getElementById('race').innerHTML = cells.map((c, i) => `<span class="${c}">${c === 'ok' ? '201' : c === 'no' ? '422' : ''}</span>`).join('');
+  const ok = Math.min(done, 10), no = Math.max(0, done - 10), bal = 100 - ok * 10;
+  document.getElementById('meter').style.width = bal + '%';
+  document.getElementById('racestat').innerHTML = `<span><b>${ok}</b>201</span><span><b>${no}</b>422</span><span><b>${fmt(bal)}</b>${L('баланс Алисы', "Alice's balance")}</span>`;
+}
+document.getElementById('race-go').addEventListener('click', () => {
+  let i = 0; renderRace(0);
+  const t = setInterval(() => { i++; renderRace(i); if (i >= 25) clearInterval(t); }, reduce ? 10 : 120);
+});
+
+const MUT = [
+  ['FOR UPDATE', ['блокировка строки удалена', 'row lock removed'], ['обе проверки конкурентности', 'both concurrency tests']],
+  ['balance <= amount', ['«меньше или равно» вместо «меньше»', '"less or equal" instead of "less"'], ['«можно отправить весь баланс», 25 параллельных переводов', '"the whole balance can be sent", 25 parallel transfers']],
+  ['replay()', ['поиск по ключу идемпотентности убран', 'idempotency lookup removed'], ['«тот же ключ, другая сумма»; двойного списания всё равно не было — помешал уникальный индекс', '"same key, other amount"; no double charge anyway: the unique index stopped it']],
+  ['ledger_entries', ['записана только списывающая проводка', 'only the debit entry written'], ['8 тестов: переводы, идемпотентность, конкурентность', '8 tests: transfers, idempotency, concurrency']],
+  ['lock order', ['счета блокируются в порядке запроса, а не по id', 'accounts locked in request order, not by id'], ['«A→B и B→A без deadlock»; PostgreSQL записал deadlock detected', '"A→B and B→A, no deadlock"; PostgreSQL logged deadlock detected']],
+];
+function renderMut() {
+  document.getElementById('mut').innerHTML = MUT.map((m) => `<div class="mrow"><span><code>${m[0]}</code> · ${L(...m[1])}</span><span class="muted" style="font-size:14px">${L(...m[2])}</span><span class="kill">${L('пойман', 'caught')}</span></div>`).join('');
+}
+const CONS = [
+  ['UPDATE accounts SET balance = -1', 'accounts_balance_check', ['отрицательный баланс', 'negative balance']],
+  ['INSERT transfers … amount 0', 'transfers_amount_check', ['перевод на ноль', 'zero transfer']],
+  ['INSERT transfers … from = to', 'transfers_check', ['перевод самому себе', 'self-transfer']],
+  ["INSERT accounts … currency 'eur'", 'accounts_currency_check', ['валюта строчными', 'lower-case currency']],
+  ['INSERT ledger_entries … missing transfer', 'ledger_entries_transfer_id_fkey', ['проводка без перевода', 'entry without a transfer']],
+];
+function renderCons() {
+  document.getElementById('cons').innerHTML = CONS.map((c) => `<div class="con"><strong style="font-size:14.5px">${L(...c[2])}</strong><span class="mono" style="font-size:12px">${c[0]}</span><code>✗ ${c[1]}</code></div>`).join('');
+}
+const CMDS = [
+  ['npm run test:ledger', 'нужен Docker, остальное сделает Testcontainers', 'needs Docker; Testcontainers does the rest'],
+  ['LEDGER_DATABASE_URL=postgres://postgres@localhost:5432/postgres npm run test:ledger', 'с уже запущенным PostgreSQL', 'with a PostgreSQL that is already running'],
+  ['DATABASE_URL=postgres://postgres@localhost:5432/ledger npm run ledger:dev', 'запустить API вручную на :3100', 'run the API by hand on :3100'],
+];
+function renderCmds() {
+  document.getElementById('cmds').innerHTML = CMDS.map((c, i) => `<div style="display:grid;gap:4px"><span class="eyebrow">${L(c[1], c[2])}</span><div class="cmd"><code>${c[0]}</code><button type="button" id="cp-${i}" data-c="${c[0]}">${L('Копировать', 'Copy')}</button></div></div>`).join('');
+  document.querySelectorAll('.cmd button').forEach((b) => b.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(b.dataset.c); b.textContent = L('Скопировано', 'Copied'); }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(b.previousElementSibling); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  }));
+}
+const TERMS = [
+  ['Testcontainers', 'Библиотека, которая из кода теста поднимает настоящие зависимости — базы, брокеры — в одноразовых Docker-контейнерах.', 'A library that starts real dependencies (databases, brokers) in throw-away Docker containers from test code.'],
+  ['Migration', 'Версионированный скрипт изменения схемы. Применяется по порядку и записывается в schema_migrations.', 'A versioned schema change, applied in order and recorded in schema_migrations.'],
+  ['Transaction / atomicity', 'Группа изменений, которые происходят все вместе или не происходят вовсе.', 'Changes that either all happen or none do.'],
+  ['SELECT … FOR UPDATE', 'Блокировка строк до конца транзакции: параллельный запрос ждёт.', 'Locks rows until the transaction ends; a parallel request waits.'],
+  ['Race condition', 'Результат зависит от того, в каком порядке пришли параллельные запросы.', 'The result depends on the order in which parallel requests arrive.'],
+  ['Deadlock', 'Две транзакции ждут блокировку друг друга; PostgreSQL прерывает одну из них.', 'Two transactions wait for each other\'s lock; PostgreSQL aborts one.'],
+  ['Idempotency key', 'Ключ, который генерирует клиент, чтобы повтор запроса был безопасным.', 'A client-generated id that makes a retry safe.'],
+  ['Double-entry ledger', 'Каждое движение денег записывается дважды — списание и зачисление, в сумме ноль.', 'Every movement is written twice, debit and credit, summing to zero.'],
+  ['Invariant', 'Свойство, которое должно выполняться для всех данных всегда.', 'A property that must hold for all data at all times.'],
+  ['Mutation testing', 'Внесение маленьких багов, чтобы проверить, что тесты их замечают.', 'Planting small bugs to check that the tests notice them.'],
+];
+function renderTerms() { document.getElementById('glossary').innerHTML = TERMS.map((x) => `<div><dt>${x[0]}</dt><dd>${L(x[1], x[2])}</dd></div>`).join(''); }
+
+function renderAll() { renderLife(); renderSim(); renderRace(); renderMut(); renderCons(); renderCmds(); renderTerms(); }
+function setLang(l) {
+  S.lang = l; document.body.dataset.lang = l; document.documentElement.lang = l;
+  document.querySelectorAll('.seg button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.l === l)));
+  try { localStorage.setItem('ledger-lang', l); } catch (e) {}
+  renderAll();
+}
+document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.l)));
+let start = 'ru';
+try { start = localStorage.getItem('ledger-lang') || document.documentElement.dataset.defaultLang || 'ru'; } catch (e) {}
+setLang(start);
+</script>
+
+</body>
+</html>
