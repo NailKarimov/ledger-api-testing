@@ -18,7 +18,7 @@ test.describe('Idempotency', () => {
     expect(retry.status).toBe(200);
     expect(retry.response.headers()['idempotent-replayed']).toBe('true');
     expect(retry.body.id).toBe(first.body.id);
-    await expect(db).toHaveCount(1);
+    expect(await db.countRows('SELECT 1 FROM transfers WHERE idempotency_key = $1', [key])).toBe(1);
     expect(await db.balance(alice.id)).toBe('60.00');
   });
 

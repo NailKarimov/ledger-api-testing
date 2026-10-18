@@ -37,12 +37,12 @@ test.describe('Accounts', () => {
   ];
   for (const [name, body, error] of invalid) {
     test(`rejected: ${name} → 400 ${error}, nothing stored`, async ({ ledger, db }) => {
-      const before = await db.count('SELECT 1 FROM accounts');
+      const before = await db.countRows('SELECT 1 FROM accounts');
       const res = await ledger.createAccount(body);
 
       expect(res.status).toBe(400);
       expect(res.body.error).toBe(error);
-      await expect(db).toHaveCount(before);
+      expect(await db.countRows('SELECT 1 FROM accounts')).toBe(before);
     });
   }
 

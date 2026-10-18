@@ -55,13 +55,13 @@ test.describe('Deposits', () => {
       expect(res.status).toBe(400);
       expect(res.body.error).toBe('invalid_amount');
       expect(await db.balance(acc.id)).toBe('0.00');
-      await expect(db).toHaveCount(0);
+      expect(await db.countRows('SELECT 1 FROM ledger_entries WHERE account_id = $1', [acc.id])).toBe(0);
     });
   }
 
   test('deposit to an unknown account → 404 and no orphan rows', async ({ ledger, db }) => {
-    const before = await db.count('SELECT 1 FROM transfers');
+    const before = await db.countRows('SELECT 1 FROM transfers');
     expect((await ledger.deposit(crypto.randomUUID(), '10')).status).toBe(404);
-    await expect(db).toHaveCount(before);
+    expect(await db.countRows('SELECT 1 FROM transfers')).toBe(before);
   });
 });

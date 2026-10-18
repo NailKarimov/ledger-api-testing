@@ -40,7 +40,7 @@ test.describe('Transfers', () => {
   }) => {
     const alice = await ledger.funded('Alice', '25.00');
     const bob = await ledger.funded('Bob', '0');
-    const transfersBefore = await db.count('SELECT 1 FROM transfers');
+    const transfersBefore = await db.countRows('SELECT 1 FROM transfers');
 
     const res = await ledger.transfer({ from: alice.id, to: bob.id, amount: '25.01' }, newKey());
 
@@ -48,19 +48,19 @@ test.describe('Transfers', () => {
     expect(res.body.error).toBe('insufficient_funds');
     expect(await db.balance(alice.id)).toBe('25.00');
     expect(await db.balance(bob.id)).toBe('0.00');
-    await expect(db).toHaveCount(transfersBefore);
+    expect(await db.countRows('SELECT 1 FROM transfers')).toBe(transfersBefore);
   });
 
   test('same account → 400; unknown account → 404; nothing stored', async ({ ledger, db }) => {
     const alice = await ledger.funded('Alice', '10');
-    const before = await db.count('SELECT 1 FROM transfers');
+    const before = await db.countRows('SELECT 1 FROM transfers');
 
     const same = await ledger.transfer({ from: alice.id, to: alice.id, amount: '1' }, newKey());
     const unknown = await ledger.transfer({ from: alice.id, to: crypto.randomUUID(), amount: '1' }, newKey());
 
     expect([same.status, same.body.error]).toEqual([400, 'same_account']);
     expect([unknown.status, unknown.body.error]).toEqual([404, 'not_found']);
-    await expect(db).toHaveCount(before);
+    expect(await db.countRows('SELECT 1 FROM transfers')).toBe(before);
     expect(await db.balance(alice.id)).toBe('10.00');
   });
 

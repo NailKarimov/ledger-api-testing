@@ -12,7 +12,8 @@ export class Db {
     return (await this.rows<T>(sql, params))[0];
   }
 
-  async count(sql: string, params: unknown[] = []): Promise<number> {
+  /** Number of rows a query returns (named so that eslint-plugin-playwright does not mistake it for Locator.count). */
+  async countRows(sql: string, params: unknown[] = []): Promise<number> {
     const row = await this.one<{ n: string }>(`SELECT count(*)::text AS n FROM (${sql}) q`, params);
     return Number(row?.n ?? 0);
   }
