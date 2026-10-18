@@ -1,7 +1,7 @@
 # Ledger API: database testing with PostgreSQL and Testcontainers
 
 Visual version (one database per worker, transfer simulator with live tables, race of 25 requests, bugs the
-tests catch, RU/EN): [`docs/ledger-api.html`](https://nailkarimov.github.io/api-test-automation/ledger-api.html).
+tests catch, RU/EN): [`docs/ledger-api.html`](https://nailkarimov.github.io/ledger-api-testing/ledger-api.html).
 
 ## What it is
 

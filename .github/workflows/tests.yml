@@ -7,12 +7,6 @@ on:
   schedule:
     - cron: '0 3 * * *' # nightly, 03:00 UTC
   workflow_dispatch:
-    inputs:
-      project:
-        description: 'Which tests to run'
-        type: choice
-        options: [all, smoke]
-        default: all
 
 permissions:
   contents: write # publish the Allure report to the gh-pages branch
@@ -41,12 +35,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Start the Sock Shop microservices (Docker)
-        run: npm run stack:up
-
-      - name: Start a private Petstore for the Pact provider verification (Docker)
-        run: docker compose -f infra/petstore/docker-compose.yml up -d --wait
-
       - name: Lint and type check
         run: |
           npm run lint
@@ -57,16 +45,9 @@ jobs:
         id: tests
         continue-on-error: true
         env:
-          PROJECT: ${{ github.event.inputs.project || 'all' }}
-          # A missing Sock Shop stack must fail the run, not skip its tests.
+          # Without Docker the Testcontainers database cannot start: fail, do not skip.
           REQUIRE_STACK: '1'
-          # Stored in Settings → Secrets and variables → Actions; GitHub masks it in logs.
-          OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
-        run: |
-          case "$PROJECT" in
-            smoke) npm run test:smoke ;;
-            *)     npm test ;;
-          esac
+        run: npm test
 
       - name: Restore Allure history
         if: always()
@@ -82,12 +63,11 @@ jobs:
         if: always()
         run: npm run allure:generate
 
-      - name: Keep the /fuzz and /contract reports and the guides on GitHub Pages
+      - name: Keep other reports and add the visual guides to GitHub Pages
         if: always()
         run: |
-          for d in fuzz contract; do if [ -d gh-pages-old/$d ]; then cp -r gh-pages-old/$d allure-report/$d; fi; done
-          cp docs/schemathesis.html docs/toolbox.html docs/contract-drift.html docs/pact.html docs/graphql.html docs/test-environments.html docs/ledger-api.html allure-report/
-          if ls pacts/*.json >/dev/null 2>&1; then mkdir -p allure-report/pact && cp pacts/*.json allure-report/pact/; fi
+          cp docs/ledger-api.html allure-report/
+          true
 
       - name: Publish Allure report to GitHub Pages
         if: always() && github.ref == 'refs/heads/main'
@@ -104,16 +84,6 @@ jobs:
           name: playwright-report
           path: playwright-report
           retention-days: 14
-
-      - name: Sock Shop logs (only when something failed)
-        if: steps.tests.outcome == 'failure'
-        run: docker compose -f infra/sock-shop/docker-compose.yml logs --no-color --tail 150
-
-      - name: Stop the Sock Shop and the Petstore
-        if: always()
-        run: |
-          npm run stack:down
-          docker compose -f infra/petstore/docker-compose.yml down -v
 
       - name: Fail the job if tests failed
         if: steps.tests.outcome == 'failure'
