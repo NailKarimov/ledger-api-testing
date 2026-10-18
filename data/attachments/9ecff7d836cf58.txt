@@ -1,7 +1,0 @@
-POST http://127.0.0.1:42143/accounts/2d5db69b-e68d-499d-b888-cac377d86035/deposits
-Query: {}
-Request body: {"amount":"0"}
-Status: 400 (2 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":400,"error":"invalid_amount","message":"amount must be between 0.01 and 1000000"}

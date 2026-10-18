@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46317/accounts/dcf1def6-4216-4408-bea1-3bc64cae0d2f/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"30"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"3b87a64f-d933-4dbc-9160-841f3e55d8c6","kind":"deposit","from":null,"to":"dcf1def6-4216-4408-bea1-3bc64cae0d2f","amount":"30.00","currency":"EUR","createdAt":"2026-10-18T20:37:20.021Z"}

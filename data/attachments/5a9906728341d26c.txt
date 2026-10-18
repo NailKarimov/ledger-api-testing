@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46317/accounts/6942465f-2476-4f44-96f0-ba96909e9a6f/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"1000000"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"9c4eae1e-2bb2-4183-aee7-0f370a2657c5","kind":"deposit","from":null,"to":"6942465f-2476-4f44-96f0-ba96909e9a6f","amount":"1000000.00","currency":"EUR","createdAt":"2026-10-18T20:37:20.379Z"}

@@ -1,6 +1,0 @@
-GET http://127.0.0.1:42143/accounts/73855213-f12d-4777-8723-7f927a0f1853
-Query: {}
-Status: 404 (3 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":404,"error":"not_found","message":"account not found"}

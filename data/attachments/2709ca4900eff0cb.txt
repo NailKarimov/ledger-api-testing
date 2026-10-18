@@ -1,0 +1,6 @@
+GET http://127.0.0.1:38815/authorize?response_type=code&client_id=ledger-web&redirect_uri=http%3A%2F%2F127.0.0.1%3A5173%2Fcallback&scope=accounts%3Aread+accounts%3Awrite+transfers%3Awrite&state=c56bb55180ff83ba&code_challenge=xXSw04l0gEAE8hMT95tT_h_uQS9QRmlXkgdVySg59Ek&code_challenge_method=S256&login_hint=alice
+Query: {"response_type":"code","client_id":"ledger-web","redirect_uri":"http://127.0.0.1:5173/callback","scope":"accounts:read accounts:write transfers:write","state":"c56bb55180ff83ba","code_challenge":"xXSw04l0gEAE8hMT95tT_h_uQS9QRmlXkgdVySg59Ek","code_challenge_method":"S256","login_hint":"alice"}
+Status: 302 (2 ms)
+Content-Type: 
+Location: http://127.0.0.1:5173/callback?code=***&state=c56bb55180ff83ba&iss=http%3A%2F%2F127.0.0.1%3A38815
+Body:

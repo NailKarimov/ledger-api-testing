@@ -1,0 +1,7 @@
+GET http://127.0.0.1:39387/accounts/d2d616ed-342a-466f-8e02-a70cd663b077
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"d2d616ed-342a-466f-8e02-a70cd663b077","owner":"Alice","currency":"EUR","balance":"10.00","createdAt":"2026-10-18T20:37:25.799Z"}

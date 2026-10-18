@@ -1,0 +1,8 @@
+POST http://127.0.0.1:39387/accounts/baaf5ccc-e8bc-4f79-a084-8b4e4b064e8c/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"dfafe259-1355-4f7b-99e0-cf95616a01ed","kind":"deposit","from":null,"to":"baaf5ccc-e8bc-4f79-a084-8b4e4b064e8c","amount":"10.00","currency":"EUR","createdAt":"2026-10-18T20:37:25.999Z"}

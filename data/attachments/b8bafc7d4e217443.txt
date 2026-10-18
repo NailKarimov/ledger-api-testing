@@ -1,0 +1,8 @@
+POST http://127.0.0.1:38429/accounts/24a15606-31cc-4929-a949-81b57d3645de/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"100"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"2f4d6f8d-fbcf-4072-aca8-4e6b80e492b1","kind":"deposit","from":null,"to":"24a15606-31cc-4929-a949-81b57d3645de","amount":"100.00","currency":"EUR","createdAt":"2026-10-18T20:37:20.684Z"}

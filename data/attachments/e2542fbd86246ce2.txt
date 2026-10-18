@@ -1,6 +1,0 @@
-GET http://127.0.0.1:34413/accounts/5f9c677e-d24f-4e5d-b0f0-9f17c37db5f3/transactions
-Query: {}
-Status: 200 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-[{"id":"e67b4b19-316f-48bc-bfae-9c7a2b369a5a","kind":"deposit","from":null,"to":"5f9c677e-d24f-4e5d-b0f0-9f17c37db5f3","amount":"50.00","currency":"EUR","createdAt":"2026-10-18T20:17:13.039Z","entry":"50.00"},{"id":"f84fb848-fc70-4e44-b84c-8f92bf428d55","kind":"transfer","from":"5f9c677e-d24f-4e5d-b0f0-9f17c37db5f3","to":"fc69e805-2f27-4322-95f5-38f7c790417a","amount":"20.00","currency":"EUR","createdAt":"2026-10-18T20:17:13.052Z","entry":"-20.00"}]

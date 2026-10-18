@@ -1,7 +1,0 @@
-POST http://127.0.0.1:42143/transfers
-Query: {}
-Request body: {"from":"bfddbbbc-2dd7-4299-8c4c-13eefb9402dc","to":"c38548d5-6ec2-4b6c-9523-fecfc3551364","amount":"99"}
-Status: 422 (2 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":422,"error":"idempotency_key_reused","message":"Idempotency-Key was already used with a different request"}

@@ -1,0 +1,8 @@
+POST http://127.0.0.1:39387/accounts/ea957a21-cb09-4819-a1d4-0524eefe9053/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (8 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"e26ce926-3fa8-40cb-9f0d-497ae2b938de","kind":"deposit","from":null,"to":"ea957a21-cb09-4819-a1d4-0524eefe9053","amount":"10.00","currency":"EUR","createdAt":"2026-10-18T20:37:26.106Z"}

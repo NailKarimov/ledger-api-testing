@@ -1,7 +1,0 @@
-POST http://127.0.0.1:42143/transfers
-Query: {}
-Request body: {"from":"87bd90fe-cfb7-46eb-a59f-ba7202f080e2","to":"c6d2613c-f0b0-4360-bf3a-af7f5c25132b","amount":"10"}
-Status: 422 (143 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":422,"error":"insufficient_funds","message":"not enough money on the source account"}
