@@ -14,7 +14,7 @@ const lines = {
   Branch: env.GITHUB_REF_NAME ?? 'local',
   Commit: (env.GITHUB_SHA ?? 'local').slice(0, 7),
   OpenWeather: env.API_BASE_URL ?? 'https://api.openweathermap.org',
-  Petstore: env.PETSTORE_BASE_URL ?? 'https://petstore3.swagger.io/api/v3/',
+  Petstore: `${env.PETSTORE_BASE_URL ?? 'http://localhost:8090/api/v3/'} (Docker)`,
   'Sock Shop': `${env.SOCKSHOP_HOST ?? 'http://localhost'} (Docker)`,
 };
 writeFileSync(

@@ -14,8 +14,13 @@ export const env = {
   /** OpenWeather */
   apiBaseUrl: read('API_BASE_URL', 'https://api.openweathermap.org'),
   apiKey: read('OPENWEATHER_API_KEY'),
-  /** Swagger Petstore v3 (public sandbox, no key). The trailing slash matters for relative paths. */
-  petstoreBaseUrl: read('PETSTORE_BASE_URL', 'https://petstore3.swagger.io/api/v3/'),
+  /**
+   * Swagger Petstore v3: the private container from infra/petstore (npm run fuzz:up), so results never
+   * depend on other people's data in the shared sandbox. The trailing slash matters for relative paths.
+   */
+  petstoreBaseUrl: read('PETSTORE_BASE_URL', 'http://localhost:8090/api/v3/'),
+  /** The public deployment; only the security-header checks use it (TLS and headers are what they test). */
+  petstorePublicUrl: read('PETSTORE_PUBLIC_URL', 'https://petstore3.swagger.io/api/v3/'),
   /** Rick and Morty API: GraphQL at /graphql and the same data over REST at /api (public, no key). */
   rickAndMortyBaseUrl: read('RICKANDMORTY_BASE_URL', 'https://rickandmortyapi.com/'),
   /** Sock Shop microservices started by infra/sock-shop/docker-compose.yml (one port per service). */

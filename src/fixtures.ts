@@ -17,6 +17,14 @@ function stackIsUp(): Promise<boolean> {
   return stack;
 }
 
+let petstore: Promise<boolean> | undefined;
+function petstoreIsUp(): Promise<boolean> {
+  petstore ??= fetch(`${env.petstoreBaseUrl}openapi.json`, { signal: AbortSignal.timeout(3_000) })
+    .then((r) => r.ok)
+    .catch(() => false);
+  return petstore;
+}
+
 type Fixtures = {
   weather: WeatherClient;
   petstore: PetstoreClient;
@@ -80,8 +88,13 @@ export const test = base.extend<Fixtures>({
     }
     await use(new SockShopClient(new ApiClient(request)));
   },
-  // The Petstore sandbox needs no key.
+  // Private Petstore container (infra/petstore). Skipped locally when it is not running; CI fails instead.
   petstore: async ({ request }, use) => {
+    if (!(await petstoreIsUp())) {
+      const reason = `Petstore container is not running at ${env.petstoreBaseUrl}: start it with \`npm run fuzz:up\`.`;
+      if (env.requireStack) throw new Error(reason);
+      test.skip(true, reason);
+    }
     await use(new PetstoreClient(new ApiClient(request)));
   },
   graph: async ({ request }, use) => {
