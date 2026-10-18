@@ -10,7 +10,9 @@ API test automation for public REST and GraphQL APIs. One framework, three syste
 - **[OpenWeather API](https://openweathermap.org/api)** — read-only API with live data: contract validation,
   boundary values, unit conversions, authentication, geocoding, forecast and air quality.
 - **[Swagger Petstore v3](https://petstore3.swagger.io)** — CRUD API with an OpenAPI document: full resource
-  lifecycle, search, input validation, negative tests, and checks of the server against its own contract.
+  lifecycle, search, input validation, negative tests, and checks of the server against its own contract. Runs
+  against a **private Petstore container** (`infra/petstore`), not the shared public sandbox — see
+  [`docs/test-environments.md`](docs/test-environments.md).
 
 - **[Sock Shop](https://github.com/microservices-demo/microservices-demo)** — a payment-centred microservices demo
   (catalogue, carts, user, orders, payment, shipping behind a gateway) that runs in **Docker**: service-level
@@ -50,7 +52,7 @@ All tools used across the portfolio, by stage of work, with why each one is here
 | API contract     | `openapi-contract.spec` | Contract testing against the spec | `openapi.json` is served; every operation the suite uses is declared; `Pet` required fields and status enum      |
 
 **Known defects.** Tests that describe behaviour required by the OpenAPI document but not delivered by the
-public sandbox are marked with `test.fail()` and a `DEF-n` id. They stay green while the defect exists and
+server are marked with `test.fail()` and a `DEF-n` id. They stay green while the defect exists and
 turn red the moment the server is fixed, so the marker can be removed. See
 [`docs/test-report.md`](docs/test-report.md).
 
@@ -190,8 +192,10 @@ Test design, scope, risks and exit criteria: [`docs/test-plan.md`](docs/test-pla
   and `PetstoreClient` expose one method per endpoint. Playwright projects give each API its own `baseURL`.
 - **Live data, stable tests.** Weather changes every few minutes, so cross-request comparisons
   (units, translations) run only when the responses share the same measurement time `dt`.
-- **Shared sandbox, isolated tests.** The Petstore is public: every test creates its own pet with a unique id
-  and removes it afterwards, and never touches records it did not create.
+- **Own environment, isolated tests.** The Petstore suite runs against a private container that starts clean in
+  every CI run; every test still creates its own pet with a unique id and removes it afterwards. On the shared
+  public sandbox three "defects" (DEF-3…5) turned out to be environment problems
+  ([`docs/test-environments.md`](docs/test-environments.md)).
 - **Microservices as they run in production.** The Sock Shop is started with Docker Compose and every service
   is published on its own port, so a test can talk to one service, to the gateway, or follow a request through
   several services. Fault-injection tests stop real containers and always put them back.
