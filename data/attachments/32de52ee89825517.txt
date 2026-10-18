@@ -1,0 +1,8 @@
+POST http://127.0.0.1:39343/accounts/f4921bdf-cf7e-40fa-8896-d6db48e305f0/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"70"}
+Status: 201 (7 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"f4022ef2-cce9-42bb-924e-6c31770c080d","kind":"deposit","from":null,"to":"f4921bdf-cf7e-40fa-8896-d6db48e305f0","amount":"70.00","currency":"EUR","createdAt":"2026-10-18T20:43:00.666Z"}

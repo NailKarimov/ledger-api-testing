@@ -1,6 +1,0 @@
-GET http://127.0.0.1:39387/health
-Query: {}
-Status: 200 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":"ok"}

@@ -1,0 +1,8 @@
+POST http://127.0.0.1:41261/accounts/dcbb5177-20c1-4a28-885f-728df8d7933f/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"50"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"dc4d0c67-9857-4631-8d06-a826dc816260","kind":"deposit","from":null,"to":"dcbb5177-20c1-4a28-885f-728df8d7933f","amount":"50.00","currency":"EUR","createdAt":"2026-10-18T20:43:05.718Z"}

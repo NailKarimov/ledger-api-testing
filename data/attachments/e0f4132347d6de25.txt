@@ -1,8 +1,0 @@
-POST http://127.0.0.1:46317/accounts/25a2dd8a-fbf9-4321-b934-2f89db47be59/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 404 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":404,"error":"not_found","message":"account not found"}

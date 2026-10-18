@@ -1,8 +1,0 @@
-POST http://127.0.0.1:46317/accounts/e638cae8-644b-4762-98ae-1c982901c1a2/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"70"}
-Status: 201 (6 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"2afa0ac6-00dd-4b7e-bbd9-6c064b7c28db","kind":"deposit","from":null,"to":"e638cae8-644b-4762-98ae-1c982901c1a2","amount":"70.00","currency":"EUR","createdAt":"2026-10-18T20:37:20.197Z"}
