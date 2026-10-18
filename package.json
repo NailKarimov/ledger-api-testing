@@ -2,7 +2,7 @@
   "name": "ledger-api-testing",
   "version": "1.0.0",
   "private": true,
-  "description": "Database testing on our own money service: a Fastify + PostgreSQL Ledger API, a fresh Testcontainers database per worker, atomicity, idempotency, concurrency and ledger invariants. TypeScript + Playwright Test + Allure, GitHub Actions.",
+  "description": "Database and OAuth 2.0 / JWT testing on our own money service: a Fastify + PostgreSQL Ledger API, a fresh Testcontainers database per worker, atomicity, idempotency, concurrency and ledger invariants. TypeScript + Playwright Test + Allure, GitHub Actions.",
   "license": "MIT",
   "scripts": {
     "test": "playwright test",
@@ -16,7 +16,8 @@
     "typecheck": "tsc --noEmit",
     "allure:generate": "node scripts/allure-prepare.mjs && allure generate allure-results -o allure-report --clean",
     "allure:open": "allure open allure-report",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:auth": "playwright test --project=auth"
   },
   "lint-staged": {
     "*.{ts,mjs,js}": [

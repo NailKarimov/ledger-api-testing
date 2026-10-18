@@ -66,7 +66,7 @@ jobs:
       - name: Keep other reports and add the visual guides to GitHub Pages
         if: always()
         run: |
-          cp docs/ledger-api.html allure-report/
+          cp docs/ledger-api.html docs/oauth-jwt.html allure-report/
           true
 
       - name: Publish Allure report to GitHub Pages

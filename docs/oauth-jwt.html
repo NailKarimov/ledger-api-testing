@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en" data-default-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OAuth и JWT в Ledger API</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+/* Layout: a security checkpoint. A token is a pass in three colours (the jwt.io convention: header, claims,
+   signature); the API is a row of gates it must clear. Flow stepper, token workbench, access matrix,
+   refresh theft, key rotation, planted bugs. */
+:root {
+  --bg: #f2f3f7; --surface: #ffffff; --sunken: #e6e8f0; --ink: #151827; --muted: #5a6075; --line: #d3d7e3;
+  --accent: #3a3fd6; --accent-soft: #e3e4fb;
+  --hdr: #d1104f; --pay: #8a2bd1; --sig: #0084b8;
+  --ok: #18794e; --ok-soft: #d9f2e5; --bad: #b42318; --bad-soft: #fbe2df; --warn: #9a5b00; --warn-soft: #fbecd2;
+  --font-display: 'Bricolage Grotesque', 'Instrument Sans', system-ui, sans-serif;
+  --font-body: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1018; --surface: #171a26; --sunken: #1e2232; --ink: #e8eaf3; --muted: #a0a6bb; --line: #2c3146;
+    --accent: #9da1ff; --accent-soft: #23264a;
+    --hdr: #ff6b96; --pay: #c98bff; --sig: #4cc8f5;
+    --ok: #5fd394; --ok-soft: #12321f; --bad: #ff8a7d; --bad-soft: #3d1714; --warn: #f3b562; --warn-soft: #3a2a10;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1018; --surface: #171a26; --sunken: #1e2232; --ink: #e8eaf3; --muted: #a0a6bb; --line: #2c3146;
+  --accent: #9da1ff; --accent-soft: #23264a;
+  --hdr: #ff6b96; --pay: #c98bff; --sig: #4cc8f5;
+  --ok: #5fd394; --ok-soft: #12321f; --bad: #ff8a7d; --bad-soft: #3d1714; --warn: #f3b562; --warn-soft: #3a2a10;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--font-body); margin: 0; }
+body[data-lang="ru"] [lang="en"], body[data-lang="en"] [lang="ru"] { display: none !important; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 64px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 1.12; margin: 0; }
+h1 { font-size: clamp(32px, 5.2vw, 54px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: clamp(23px, 3vw, 31px); font-weight: 800; }
+h3 { font-size: 17px; font-weight: 600; }
+p { margin: 0; max-width: 70ch; }
+code, .mono { font-family: var(--font-mono); font-size: 0.86em; }
+a { color: var(--accent); }
+button { font-family: var(--font-body); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.eyebrow { font: 500 12px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.muted { color: var(--muted); }
+header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 20px; flex-wrap: wrap; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.seg button { font: 500 13px var(--font-mono); background: transparent; color: var(--muted); border: 0; padding: 6px 14px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.hero { display: grid; gap: 16px; padding-block: 8px 12px; }
+.hero .lead { font-size: 18px; color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 14px; color: var(--muted); }
+.facts b { font: 800 22px var(--font-display); color: var(--ink); margin-right: 6px; font-variant-numeric: tabular-nums; }
+section.station { display: grid; gap: 16px; padding-block: 48px 0; }
+section.station > header { display: grid; gap: 8px; }
+.btn { font: 500 14px var(--font-body); background: var(--ink); color: var(--bg); border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn.danger { background: var(--bad); color: var(--surface); }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+/* participants */
+.cast { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 820px) { .cast { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 460px) { .cast { grid-template-columns: minmax(0, 1fr); } }
+.actor { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 6px; align-content: start; }
+.actor .who { font: 600 12px var(--font-mono); color: var(--accent); }
+.actor p { font-size: 14px; color: var(--muted); }
+.actor code { font-size: 11.5px; overflow-wrap: anywhere; }
+
+/* flow */
+.flow { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.5fr); gap: 14px; }
+@media (max-width: 860px) { .flow { grid-template-columns: minmax(0, 1fr); } }
+.steps { display: grid; gap: 6px; align-content: start; }
+.step { text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; cursor: pointer; display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px; color: var(--ink); font-size: 14.5px; }
+.step b { font: 700 13px var(--font-mono); color: var(--muted); }
+.step[aria-current="step"] { border-color: var(--accent); background: var(--accent-soft); }
+.step[aria-current="step"] b { color: var(--accent); }
+.step.evil { border-style: dashed; }
+.wire { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.wire pre { margin: 0; background: var(--sunken); border-radius: 8px; padding: 10px 12px; font: 400 12.5px/1.55 var(--font-mono); overflow-x: auto; white-space: pre; }
+.wire .dir { font: 600 11px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.why { font-size: 14.5px; padding: 10px 12px; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; }
+.why.bad { border-left-color: var(--bad); background: var(--bad-soft); }
+.hl-ok { color: var(--ok); font-weight: 700; } .hl-bad { color: var(--bad); font-weight: 700; }
+
+/* token workbench */
+.bench { display: grid; gap: 14px; }
+.forges { display: flex; gap: 6px; flex-wrap: wrap; }
+.forges button { font: 500 13px var(--font-body); border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+.forges button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.jwt { font: 500 13px/1.6 var(--font-mono); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; overflow-wrap: anywhere; word-break: break-all; }
+.jwt .h { color: var(--hdr); } .jwt .p { color: var(--pay); } .jwt .s { color: var(--sig); } .jwt .dot { color: var(--muted); }
+.decoded { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 10px; }
+@media (max-width: 860px) { .decoded { grid-template-columns: minmax(0, 1fr); } }
+.part { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px; min-width: 0; display: grid; gap: 6px; align-content: start; }
+.part h4 { margin: 0; font: 600 11.5px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; }
+.part.h h4 { color: var(--hdr); } .part.p h4 { color: var(--pay); } .part.s h4 { color: var(--sig); }
+.part pre { margin: 0; font: 400 12.5px/1.55 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.part pre mark { background: var(--warn-soft); color: var(--warn); border-radius: 3px; padding: 0 2px; }
+.gates { display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 4px; }
+@media (max-width: 860px) { .gates { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.gate { background: var(--sunken); border-radius: 8px; padding: 8px 6px; text-align: center; font: 500 11.5px/1.3 var(--font-mono); color: var(--muted); transition: background .25s, color .25s; min-width: 0; overflow-wrap: anywhere; }
+.gate.pass { background: var(--ok-soft); color: var(--ok); }
+.gate.fail { background: var(--bad); color: var(--surface); font-weight: 700; }
+.verdict { font: 500 13px/1.55 var(--font-mono); padding: 12px 14px; border-radius: 10px; overflow-wrap: anywhere; display: grid; gap: 4px; }
+.verdict.ok { background: var(--ok-soft); color: var(--ok); } .verdict.bad { background: var(--bad-soft); color: var(--bad); }
+.verdict span { color: var(--ink); font-family: var(--font-body); font-size: 14.5px; }
+
+/* matrix */
+.mx { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.mx table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 14px; }
+.mx th, .mx td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+.mx thead th { font: 500 12px var(--font-mono); color: var(--muted); }
+.mx tbody th { font-weight: 600; white-space: nowrap; }
+.mx tbody th small { display: block; font: 400 11.5px var(--font-mono); color: var(--muted); }
+.cell { font: 700 13px var(--font-mono); border: 0; border-radius: 6px; padding: 6px 10px; cursor: pointer; min-width: 54px; }
+.cell.s2 { background: var(--ok-soft); color: var(--ok); } .cell.s4 { background: var(--bad-soft); color: var(--bad); } .cell.s404 { background: var(--warn-soft); color: var(--warn); }
+.cell[aria-pressed="true"] { outline: 2px solid var(--ink); }
+.mx-note { font-size: 14.5px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: grid; gap: 4px; }
+.mx-note code { overflow-wrap: anywhere; }
+
+/* refresh */
+.chain { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; min-height: 64px; }
+.rt { font: 600 12.5px var(--font-mono); padding: 10px 12px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); display: grid; gap: 2px; }
+.rt small { font: 400 11px var(--font-mono); color: var(--muted); }
+.rt.used { opacity: .55; text-decoration: line-through; }
+.rt.live { border-color: var(--ok); background: var(--ok-soft); color: var(--ok); }
+.rt.dead { border-color: var(--bad); background: var(--bad-soft); color: var(--bad); opacity: 1; text-decoration: line-through; }
+.arrow { color: var(--muted); font-family: var(--font-mono); }
+.log { font: 400 13px/1.6 var(--font-mono); background: var(--sunken); border-radius: 10px; padding: 10px 12px; min-height: 52px; overflow-wrap: anywhere; }
+.log .ok { color: var(--ok); } .log .bad { color: var(--bad); }
+
+/* keys */
+.keys { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+@media (max-width: 760px) { .keys { grid-template-columns: minmax(0, 1fr); } }
+.kbox { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.kid { font: 600 12.5px var(--font-mono); padding: 6px 10px; border-radius: 6px; background: var(--sunken); display: inline-flex; gap: 8px; align-items: center; }
+.kid.retired { text-decoration: line-through; color: var(--muted); }
+.kid i { width: 9px; height: 9px; border-radius: 50%; background: var(--sig); }
+.tok { display: flex; justify-content: space-between; gap: 10px; font: 500 13px var(--font-mono); padding: 8px 10px; border-radius: 8px; background: var(--sunken); }
+.tok b.ok { color: var(--ok); } .tok b.bad { color: var(--bad); }
+
+/* mutations */
+.mut { display: grid; gap: 6px; }
+.mrow { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr) 84px; gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font-size: 14.5px; }
+@media (max-width: 760px) { .mrow { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+.mrow code { font-size: 12px; color: var(--muted); }
+.kill { font: 600 12px var(--font-mono); padding: 4px 10px; border-radius: 999px; background: var(--ok-soft); color: var(--ok); text-align: center; justify-self: start; }
+dl.terms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0; }
+@media (max-width: 760px) { dl.terms { grid-template-columns: minmax(0, 1fr); } }
+dl.terms div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+dl.terms dt { font: 600 15px var(--font-display); }
+dl.terms dd { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+.cmd { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; background: var(--sunken); border-radius: 8px; padding: 6px 6px 6px 12px; }
+.cmd code { overflow-x: auto; white-space: nowrap; }
+.cmd button { font: 500 12px var(--font-body); border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+footer { padding-top: 40px; color: var(--muted); font-size: 13px; display: flex; gap: 16px; flex-wrap: wrap; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body data-lang="en">
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">ledger-api-testing · services/auth-server</span>
+    <div class="seg" role="group" aria-label="Language">
+      <button type="button" id="lang-ru" data-l="ru" aria-pressed="true">RU</button>
+      <button type="button" id="lang-en" data-l="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1 lang="ru">Кто может тратить деньги Алисы</h1>
+    <h1 lang="en">Who may spend Alice’s money</h1>
+    <p class="lead" lang="ru">Ledger API теперь за OAuth 2.0. Свой сервер авторизации выдаёт JWT, а API проверяет каждый токен и пускает пользователя только к его счетам. Тесты атакуют обе стороны: поддельные токены, кражу кода и refresh-токена, чужие счета.</p>
+    <p class="lead" lang="en">The Ledger API now sits behind OAuth 2.0. Our own authorization server issues JWTs; the API checks every token and lets a user touch only their own accounts. The tests attack both sides: forged tokens, a stolen code and refresh token, other people’s accounts.</p>
+    <div class="facts">
+      <span><b>66</b><span lang="ru">тестов OAuth</span><span lang="en">OAuth tests</span></span>
+      <span><b>11</b><span lang="ru">поддельных токенов</span><span lang="en">forged tokens</span></span>
+      <span><b>13/13</b><span lang="ru">внесённых багов пойманы</span><span lang="en">planted bugs caught</span></span>
+      <span><b>8</b><span lang="ru">RFC в основе</span><span lang="en">RFCs behind it</span></span>
+    </div>
+  </section>
+
+  <section class="station">
+    <header>
+      <span class="eyebrow" lang="ru">Участники</span><span class="eyebrow" lang="en">The cast</span>
+      <h2 lang="ru">Четыре стороны одного перевода</h2><h2 lang="en">Four parties to one transfer</h2>
+    </header>
+    <div class="cast" id="cast"></div>
+  </section>
+
+  <section class="station">
+    <header>
+      <span class="eyebrow">Authorization Code + PKCE · RFC 6749, RFC 7636</span>
+      <h2 lang="ru">Вход Алисы, шаг за шагом</h2><h2 lang="en">Alice signs in, step by step</h2>
+      <p class="muted" lang="ru">Нажмите на шаг: справа реальный запрос и ответ (токены сокращены). Последний шаг показывает, что будет, если код перехватят.</p>
+      <p class="muted" lang="en">Pick a step to see the real request and response (tokens shortened). The last step shows what happens if the code is intercepted.</p>
+    </header>
+    <div class="flow">
+      <div class="steps" id="steps" role="list"></div>
+      <div class="wire" id="wire" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="station">
+    <header>
+      <span class="eyebrow">JWT · RFC 7519, RFC 9068</span>
+      <h2 lang="ru">Подделайте токен и пройдите проверки</h2><h2 lang="en">Forge a token and run it through the gates</h2>
+      <p class="muted" lang="ru">Каждая кнопка ниже — тест из <code>jwt-validation.spec.ts</code> или <code>access-control.spec.ts</code>. API проверяет токен по порядку и останавливается на первом провале.</p>
+      <p class="muted" lang="en">Each button is a test from <code>jwt-validation.spec.ts</code> or <code>access-control.spec.ts</code>. The API checks in order and stops at the first failure.</p>
+    </header>
+    <div class="bench">
+      <div class="forges" id="forges" role="group" aria-label="Token"></div>
+      <div class="jwt" id="jwt"></div>
+      <div class="decoded">
+        <div class="part h"><h4>header</h4><pre id="dec-h"></pre></div>
+        <div class="part p"><h4>payload</h4><pre id="dec-p"></pre></div>
+        <div class="part s"><h4>signature</h4><pre id="dec-s"></pre></div>
+      </div>
+      <div class="gates" id="gates"></div>
+      <div class="verdict" id="verdict" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="station">
+    <header>
+      <span class="eyebrow">OWASP API1 BOLA · API5 BFLA</span>
+      <h2 lang="ru">Кто что может с валидным токеном</h2><h2 lang="en">Who may do what with a valid token</h2>
+      <p class="muted" lang="ru">Scope решает, какая операция разрешена. Поле <code>sub</code> решает, чьи данные. Нажмите на ячейку.</p>
+      <p class="muted" lang="en">The scope decides the operation; the <code>sub</code> claim decides whose data. Pick a cell.</p>
+    </header>
+    <div class="mx"><table id="mx"></table></div>
+    <div class="mx-note" id="mx-note" aria-live="polite"></div>
+  </section>
+
+  <section class="station">
+    <header>
+      <span class="eyebrow">Refresh rotation · RFC 9700 §4.14</span>
+      <h2 lang="ru">Украденный refresh-токен убивает всю сессию</h2><h2 lang="en">A stolen refresh token kills the whole session</h2>
+      <p class="muted" lang="ru">Каждое обновление выдаёт новый refresh-токен, старый гаснет. Если старый приходит снова, значит его копия у кого-то ещё. Сервер не знает, у кого именно, поэтому отзывает всю цепочку.</p>
+      <p class="muted" lang="en">Every refresh issues a new refresh token and burns the old one. If an old one comes back, someone else has a copy; the server cannot tell who, so it revokes the whole chain.</p>
+    </header>
+    <div class="row">
+      <button type="button" class="btn" id="rt-app"><span lang="ru">Приложение обновляет токен</span><span lang="en">The app refreshes</span></button>
+      <button type="button" class="btn danger" id="rt-evil"><span lang="ru">Атакующий предъявляет старый</span><span lang="en">The attacker replays an old one</span></button>
+      <button type="button" class="btn ghost" id="rt-reset"><span lang="ru">Заново</span><span lang="en">Reset</span></button>
+    </div>
+    <div class="chain" id="chain"></div>
+    <div class="log" id="rt-log" aria-live="polite"></div>
+  </section>
+
+  <section class="station">
+    <header>
+      <span class="eyebrow">JWKS · RFC 7517</span>
+      <h2 lang="ru">Смена ключа подписи без простоя</h2><h2 lang="en">Changing the signing key without downtime</h2>
+      <p class="muted" lang="ru">API скачивает публичные ключи один раз и кэширует их. Отозванный ключ работает, пока кэш не устареет. Тест измеряет это с кэшем в 1 секунду.</p>
+      <p class="muted" lang="en">The API downloads the public keys once and caches them. A retired key keeps working until the cache goes stale; the test measures it with a 1-second cache.</p>
+    </header>
+    <div class="row">
+      <button type="button" class="btn" id="k-rotate"><span lang="ru">Новый ключ</span><span lang="en">Rotate key</span></button>
+      <button type="button" class="btn ghost" id="k-retire"><span lang="ru">Отозвать старый</span><span lang="en">Retire the old one</span></button>
+      <button type="button" class="btn ghost" id="k-wait"><span lang="ru">Подождать, пока кэш устареет</span><span lang="en">Wait for the cache to go stale</span></button>
+      <button type="button" class="btn ghost" id="k-reset"><span lang="ru">Заново</span><span lang="en">Reset</span></button>
+    </div>
+    <div class="keys">
+      <div class="kbox"><h3 lang="ru">Сервер авторизации: JWKS</h3><h3 lang="en">Authorization server: JWKS</h3><div class="row" id="k-jwks"></div></div>
+      <div class="kbox"><h3 lang="ru">Ledger API: кэш и вердикт</h3><h3 lang="en">Ledger API: cache and verdict</h3><div class="row" id="k-cache"></div><div id="k-toks" style="display:grid;gap:6px"></div></div>
+    </div>
+    <div class="log" id="k-log" aria-live="polite"></div>
+  </section>
+
+  <section class="station">
+    <header>
+      <span class="eyebrow" lang="ru">Мутационная проверка</span><span class="eyebrow" lang="en">Mutation check</span>
+      <h2 lang="ru">13 багов, внесённых нарочно</h2><h2 lang="en">13 bugs planted on purpose</h2>
+      <p class="muted" lang="ru">Каждый баг вносился в код, затем прогонялся весь набор, и правка откатывалась. Все 13 пойманы.</p>
+      <p class="muted" lang="en">Each bug went into the code, the whole suite ran, and the change was reverted. All 13 were caught.</p>
+    </header>
+    <div class="mut" id="mut"></div>
+  </section>
+
+  <section class="station">
+    <header>
+      <span class="eyebrow" lang="ru">Словарь</span><span class="eyebrow" lang="en">Glossary</span>
+      <h2 lang="ru">Термины, без которых не обойтись</h2><h2 lang="en">The terms you will hear</h2>
+    </header>
+    <dl class="terms" id="terms"></dl>
+  </section>
+
+  <section class="station">
+    <header>
+      <span class="eyebrow" lang="ru">Запуск</span><span class="eyebrow" lang="en">Run it</span>
+      <h2 lang="ru">Команды</h2><h2 lang="en">Commands</h2>
+    </header>
+    <div style="display:grid;gap:8px" id="cmds"></div>
+  </section>
+
+  <footer>
+    <a href="https://github.com/NailKarimov/ledger-api-testing">github.com/NailKarimov/ledger-api-testing</a>
+    <a href="https://github.com/NailKarimov/ledger-api-testing/blob/main/docs/oauth-jwt.md">docs/oauth-jwt.md</a>
+    <a href="https://nailkarimov.github.io/ledger-api-testing/">Allure report</a>
+  </footer>
+</div>
+
+<script>
+const S = { lang: 'ru' };
+const L = (ru, en) => (S.lang === 'ru' ? ru : en);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+/* cast */
+const CAST = [
+  ['alice · ledger-web', ['Алиса в браузере', 'Alice in the browser'], ['Публичный клиент: секрет в браузере не спрятать, поэтому вход идёт через PKCE.', 'A public client: a browser cannot keep a secret, so it signs in with PKCE.'], 'accounts:read accounts:write transfers:write'],
+  ['auth-server', ['Сервер авторизации', 'Authorization server'], ['Выдаёт коды и токены, подписывает JWT ключом ES256, публикует открытые ключи.', 'Issues codes and tokens, signs JWTs with an ES256 key, publishes the public keys.'], '/authorize · /token · /.well-known/jwks.json'],
+  ['ledger-api', ['Ledger API', 'Ledger API'], ['Сервер ресурсов: проверяет подпись и claims, потом scope, потом владельца в SQL.', 'Resource server: checks the signature and claims, then the scope, then the owner in SQL.'], 'Authorization: Bearer <JWT>'],
+  ['cashier · reporting', ['Сервисы бэк-офиса', 'Back-office services'], ['Конфиденциальные клиенты с секретом, Client Credentials. Касса зачисляет деньги, отчёты только читают.', 'Confidential clients with a secret, Client Credentials. The cashier puts cash in; reporting only reads.'], 'deposits:write · accounts:read:all'],
+];
+function renderCast() {
+  document.getElementById('cast').innerHTML = CAST.map((c) => `<div class="actor"><span class="who">${c[0]}</span><h3>${L(...c[1])}</h3><p>${L(...c[2])}</p><code>${c[3]}</code></div>`).join('');
+}
+
+/* flow */
+const VER = 'dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk';
+const CH = 'E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM';
+const FLOW = [
+  { t: ['Приложение придумывает секрет', 'The app makes up a secret'],
+    dir: ['в браузере', 'in the browser'],
+    pre: `code_verifier  = random 32 bytes → base64url\n               = ${VER}\ncode_challenge = BASE64URL(SHA-256(code_verifier))\n               = ${CH}`,
+    why: ['Verifier остаётся у приложения. На сервер уходит только его хэш, и по хэшу verifier не восстановить.', 'The verifier stays in the app; only its hash goes out, and the hash cannot be turned back.'] },
+  { t: ['Переход на /authorize', 'Redirect to /authorize'],
+    dir: ['браузер → auth-server', 'browser → auth-server'],
+    pre: `GET /authorize?response_type=code\n  &client_id=ledger-web\n  &redirect_uri=http://127.0.0.1:5173/callback\n  &scope=accounts:read transfers:write\n  &state=st-42\n  &code_challenge=${CH}\n  &code_challenge_method=S256\n  &login_hint=alice`,
+    why: ['Сервер сверяет redirect_uri с зарегистрированным посимвольно. Префикс, лишний query или другой порт дают 400 прямо на странице, без редиректа, иначе сервер станет открытым редиректором.', 'redirect_uri must equal the registered one character for character. A prefix, an extra query or another port is a 400 on the page, never a redirect, or the server becomes an open redirector.'] },
+  { t: ['Сервер возвращает код', 'The server sends back a code'],
+    dir: ['auth-server → браузер', 'auth-server → browser'],
+    pre: `HTTP/1.1 302 Found\nLocation: http://127.0.0.1:5173/callback\n  ?code=Qm3v…Zk (one-time, 60 s)\n  &state=st-42\n  &iss=http://127.0.0.1:41733\nCache-Control: no-store`,
+    why: ['Приложение сверяет state (защита от CSRF) и iss (RFC 9207, защита от подмены сервера). Код одноразовый и живёт 60 секунд.', 'The app checks state (against CSRF) and iss (RFC 9207, against mix-up attacks). The code works once and lives 60 seconds.'] },
+  { t: ['Обмен кода на токены', 'Exchange the code for tokens'],
+    dir: ['приложение → auth-server', 'app → auth-server'],
+    pre: `POST /token\nContent-Type: application/x-www-form-urlencoded\n\ngrant_type=authorization_code&client_id=ledger-web\n&code=Qm3v…Zk&redirect_uri=http://127.0.0.1:5173/callback\n&code_verifier=${VER}\n\nHTTP/1.1 200 OK\nCache-Control: no-store\n{ "access_token": "eyJhbGciOiJFUzI1NiIs….eyJpc3Mi….***",\n  "token_type": "Bearer", "expires_in": 900,\n  "refresh_token": "***", "scope": "accounts:read transfers:write" }`,
+    why: ['Сервер считает SHA-256 от verifier и сравнивает с challenge из шага 2. Совпало — выдаёт access token (JWT на 15 минут) и refresh-токен.', 'The server hashes the verifier and compares it with the challenge from step 2. A match gets an access token (a 15-minute JWT) and a refresh token.'] },
+  { t: ['Запрос в Ledger API', 'Call the Ledger API'],
+    dir: ['приложение → ledger-api', 'app → ledger-api'],
+    pre: `POST /transfers\nAuthorization: Bearer eyJhbGciOiJFUzI1NiIs….***\nIdempotency-Key: qa-4f1c…\n{ "from": "a1c3…", "to": "b0b2…", "amount": "30.50" }\n\nHTTP/1.1 201 Created\n-- transfers.initiated_by = 'alice'`,
+    why: ['API проверяет токен (раздел ниже), scope transfers:write и то, что счёт-источник принадлежит sub=alice.', 'The API checks the token (next section), the transfers:write scope, and that the source account belongs to sub=alice.'] },
+  { evil: true, t: ['Код перехватили', 'The code is intercepted'],
+    dir: ['атакующий → auth-server', 'attacker → auth-server'],
+    pre: `POST /token\ngrant_type=authorization_code&client_id=ledger-web\n&code=Qm3v…Zk&redirect_uri=http://127.0.0.1:5173/callback\n&code_verifier=<a guess>\n\nHTTP/1.1 400 Bad Request\n{ "error": "invalid_grant", "error_description": "PKCE verification failed" }`,
+    why: ['Без verifier украденный код бесполезен. Если же код предъявят второй раз после приложения, сервер отзовёт и выданную по нему сессию. Это два теста в authorization-code.spec.ts.', 'Without the verifier a stolen code is useless. If the code comes back a second time after the app used it, the session it produced is revoked too. Both are tests in authorization-code.spec.ts.'] },
+];
+let flowStep = 0;
+function renderFlow() {
+  document.getElementById('steps').innerHTML = FLOW.map((f, i) => `<button type="button" role="listitem" class="step${f.evil ? ' evil' : ''}" data-i="${i}" ${i === flowStep ? 'aria-current="step"' : ''}><b>${f.evil ? '!' : i + 1}</b><span>${L(...f.t)}</span></button>`).join('');
+  const f = FLOW[flowStep];
+  document.getElementById('wire').innerHTML = `<span class="dir">${L(...f.dir)}</span><pre>${esc(f.pre)}</pre><p class="why${f.evil ? ' bad' : ''}">${L(...f.why)}</p>`;
+}
+document.getElementById('steps').addEventListener('click', (e) => { const b = e.target.closest('[data-i]'); if (b) { flowStep = +b.dataset.i; renderFlow(); } });
+
+/* token workbench */
+const b64 = (o) => btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+const NOW = 1792354800;
+const ISS = 'http://127.0.0.1:41733';
+const baseH = { alg: 'ES256', kid: 'k-287c8722', typ: 'at+jwt' };
+const baseP = { iss: ISS, sub: 'alice', aud: 'ledger-api', client_id: 'ledger-web', scope: 'accounts:read accounts:write transfers:write', iat: NOW, exp: NOW + 900, jti: '6f0d…' };
+const SIG = 'mX3o1bQ9vK2rPq7TfA0cZ8yWnE4uH6sJdLg5iRkVtBw-NjOaYeC1xUhD2pFzG3lMq4sT9vB7nK0wR5yE8uI6oP';
+const GATES = [['hdr', 'Bearer'], ['alg', 'alg ES256'], ['kid', 'kid ∈ JWKS'], ['sig', 'signature'], ['typ', 'typ at+jwt'], ['iss', 'iss'], ['aud', 'aud'], ['exp', 'exp ±30 s'], ['claims', 'sub, client_id'], ['scope', 'scope'], ['owner', 'owner (SQL)']];
+const FORGES = [
+  { id: 'valid', n: ['Настоящий токен Алисы', 'Alice’s real token'], fail: null, mark: [], res: '201 Created', why: ['Все 11 проверок пройдены, перевод создан.', 'All 11 checks pass; the transfer is created.'] },
+  { id: 'exp', n: ['Истёк 2 минуты назад', 'Expired 2 minutes ago'], p: { iat: NOW - 1000, exp: NOW - 120 }, mark: ['exp'], fail: 'exp', why: ['Подпись настоящая, но exp в прошлом дальше, чем на 30 секунд допуска. Истечение на 10 секунд ещё принимается — это отдельный граничный тест.', 'The signature is real but exp is past the 30-second tolerance. Expiry 10 seconds ago is still accepted: a separate boundary test.'] },
+  { id: 'iss', n: ['Чужой издатель', 'Another issuer'], p: { iss: 'https://evil.example' }, mark: ['iss'], fail: 'iss', why: ['Токен от другого сервера авторизации. Ловит баг «iss не проверяется».', 'A token from another authorization server. Catches the bug “iss not checked”.'] },
+  { id: 'aud', n: ['Токен для другого API', 'Token for another API'], p: { aud: 'reporting-api' }, mark: ['aud'], fail: 'aud', why: ['Токен выдан честно, но для другого сервиса. Без проверки aud любой токен компании открыл бы деньги.', 'Honestly issued, but for another service. Without the aud check any company token would open the money.'] },
+  { id: 'typ', n: ['ID-токен вместо access', 'ID token instead of access'], h: { typ: 'JWT' }, mark: ['typ'], fail: 'typ', why: ['ID-токен говорит, кто вошёл, но не даёт прав. RFC 9068 требует typ at+jwt, чтобы их не путали.', 'An ID token says who signed in; it grants nothing. RFC 9068 requires typ at+jwt so they cannot be confused.'] },
+  { id: 'tamper', n: ['sub исправлен после подписи', 'sub edited after signing'], p: { sub: 'bob' }, mark: ['sub'], fail: 'sig', why: ['Поменяли alice на bob, подпись оставили старую. Подпись покрывает header и payload, поэтому проверка не проходит.', 'alice became bob, the old signature stayed. It covers header and payload, so it no longer verifies.'] },
+  { id: 'evilkey', n: ['Свой ключ атакующего', 'The attacker’s own key'], fail: 'sig', mark: [], sigEvil: true, why: ['Атакующий подписал своим ES256-ключом и поставил настоящий kid. Открытый ключ из JWKS эту подпись не принимает.', 'Signed with the attacker’s own ES256 key under the real kid. The public key from the JWKS rejects it.'] },
+  { id: 'none', n: ['alg: none', 'alg: none'], h: { alg: 'none', kid: undefined }, mark: ['alg'], fail: 'alg', noSig: true, why: ['Классическая атака: токен без подписи. Список разрешённых алгоритмов содержит только ES256.', 'The classic: a token with no signature. The algorithm allow-list holds only ES256.'] },
+  { id: 'hs', n: ['HS256 с открытым ключом', 'HS256 with the public key'], h: { alg: 'HS256' }, mark: ['alg'], fail: 'alg', why: ['Путаница ключей: HMAC с открытым ключом в роли секрета. Уязвимые библиотеки такое принимали.', 'Key confusion: HMAC with the public key as the secret. Vulnerable libraries used to accept it.'] },
+  { id: 'kid', n: ['Неизвестный kid', 'Unknown kid'], h: { kid: 'k-unknown' }, mark: ['kid'], fail: 'kid', why: ['API перекачивает JWKS, ключа там нет — «unknown signing key».', 'The API refetches the JWKS; the key is not there: “unknown signing key”.'] },
+  { id: 'bob', n: ['Токен Боба, счёт Алисы', 'Bob’s token, Alice’s account'], p: { sub: 'bob' }, mark: ['sub'], fail: 'owner', sig2: true, why: ['Токен полностью валиден, но счёт принадлежит alice. Ответ 404, как у несуществующего счёта, — чужие id не прощупать (BOLA).', 'A fully valid token, but the account belongs to alice. The answer is 404, the same as a missing account, so ids cannot be probed (BOLA).'] },
+  { id: 'scope', n: ['Отчёты пытаются перевести', 'Reporting tries to transfer'], p: { sub: 'reporting', client_id: 'reporting', scope: 'accounts:read:all' }, mark: ['scope'], fail: 'scope', sig2: true, why: ['Токен сервиса отчётов валиден, но без transfers:write. 403 и WWW-Authenticate с нужным scope.', 'The reporting token is valid but has no transfers:write: 403 with the missing scope in WWW-Authenticate.'] },
+];
+let forge = 'valid';
+function hlJson(o, mark) {
+  return esc(JSON.stringify(o, null, 2)).replace(/^(\s*)&quot;(\w+)&quot;(.*)$/gm, (m, sp, k, rest) => (mark.includes(k) ? `${sp}<mark>&quot;${k}&quot;${rest}</mark>` : m));
+}
+function renderBench() {
+  document.getElementById('forges').innerHTML = FORGES.map((f) => `<button type="button" data-f="${f.id}" aria-pressed="${f.id === forge}">${L(...f.n)}</button>`).join('');
+  const f = FORGES.find((x) => x.id === forge);
+  const h = JSON.parse(JSON.stringify({ ...baseH, ...(f.h || {}) }));
+  const p = JSON.parse(JSON.stringify({ ...baseP, ...(f.p || {}) }));
+  const sig = f.noSig ? '' : f.sigEvil ? 'Zr8kW2nQ1aL0vYxE7pC4uT6sB9oJ3mHdFgN5iKeVwRtA-qSzXbU1yOcMlP8jG2hD4fI7nE0wK3sL6vB9rT5yQ1uZ' : f.sig2 ? 'Hq2Lw8zN5tB1oXe7Kc4R0aM9yJfU3vG6sDpE-iTgWnZbQ1lYkC8xO2hS4mP7rF0uA5jV9dI3eL6nB1wK8tR2yQ4u' : SIG;
+  const hb = b64(h), pb = b64(p);
+  document.getElementById('jwt').innerHTML = `<span class="h">${hb}</span><span class="dot">.</span><span class="p">${pb}</span><span class="dot">.</span><span class="s">${sig || '<span class="muted">(' + L('пусто', 'empty') + ')</span>'}</span>`;
+  document.getElementById('dec-h').innerHTML = hlJson(h, f.mark);
+  document.getElementById('dec-p').innerHTML = hlJson(p, f.mark);
+  document.getElementById('dec-s').textContent = f.noSig ? L('нет подписи', 'no signature') : f.id === 'hs' ? 'HMAC-SHA256(header.payload, JWKS public key)' : f.sigEvil ? 'ECDSA P-256 (attacker key)' : f.id === 'tamper' ? L('подпись от исходного payload (sub: alice)', 'signature of the original payload (sub: alice)') : 'ECDSA P-256 (auth-server key)';
+  const failAt = f.fail ? GATES.findIndex((g) => g[0] === f.fail) : GATES.length;
+  document.getElementById('gates').innerHTML = GATES.map((g, i) => `<div class="gate ${i < failAt ? 'pass' : i === failAt ? 'fail' : ''}">${g[1]}</div>`).join('');
+  let code, body, hdr = '';
+  if (!f.fail) { code = '201 Created'; body = '{ "kind": "transfer", "amount": "30.50", … }'; }
+  else if (f.fail === 'owner') { code = '404 Not Found'; body = '{ "error": "not_found", "message": "account not found" }'; }
+  else if (f.fail === 'scope') { code = '403 Forbidden'; body = '{ "error": "insufficient_scope" }'; hdr = 'WWW-Authenticate: Bearer realm="ledger-api", error="insufficient_scope", scope="transfers:write"'; }
+  else { const d = { exp: 'token expired', kid: 'unknown signing key', iss: 'claim iss is invalid', aud: 'claim aud is invalid', typ: 'claim typ is invalid' }[f.fail] || 'token is invalid'; code = '401 Unauthorized'; body = '{ "error": "invalid_token" }'; hdr = `WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="${d}"`; }
+  document.getElementById('verdict').className = `verdict ${f.fail ? 'bad' : 'ok'}`;
+  document.getElementById('verdict').innerHTML = `<b>${code}</b>${hdr ? `<div>${esc(hdr)}</div>` : ''}<div>${esc(body)}</div><span>${L(...f.why)}</span>`;
+}
+document.getElementById('forges').addEventListener('click', (e) => { const b = e.target.closest('[data-f]'); if (b) { forge = b.dataset.f; renderBench(); } });
+
+/* matrix */
+const OPS = [['read', ['Читать счёт Алисы', 'Read Alice’s account'], 'GET /accounts/{alice}'], ['spend', ['Перевод со счёта Алисы', 'Transfer from Alice’s account'], 'POST /transfers'], ['pay', ['Перевод Алисе', 'Pay Alice'], 'POST /transfers'], ['open', ['Открыть счёт', 'Open an account'], 'POST /accounts'], ['cash', ['Зачислить деньги', 'Deposit cash'], 'POST /deposits']];
+const WHO = [
+  ['alice', 'ledger-web · PKCE', { read: [200, ['Свой счёт.', 'Her own account.']], spend: [201, ['Свой счёт, scope transfers:write.', 'Her account, scope transfers:write.']], pay: ['—', ['Самой себе нельзя: 400 same_account.', 'Not to herself: 400 same_account.']], open: [201, ['owner_sub = alice записывается в базу.', 'owner_sub = alice is stored.']], cash: [403, ['BFLA: зачисление только у кассы. Без этой проверки пользователь «напечатал» бы себе деньги.', 'BFLA: deposits are back-office only. Without the check a user could print money.']] }],
+  ['bob', 'ledger-web · PKCE', { read: [404, ['BOLA: ответ такой же, как для несуществующего id. Тест сравнивает статус и тело.', 'BOLA: the same answer as for a missing id. The test compares status and body.']], spend: [404, ['Счёт-источник не его. Деньги не двигаются, тест сверяет балансы в базе.', 'Not his source account. Nothing moves; the test checks the balances in the database.']], pay: [201, ['Платить можно кому угодно, тратить — только своё.', 'Anyone may be paid; only your own may be spent.']], open: [201, ['Свой счёт, owner_sub = bob.', 'His own, owner_sub = bob.']], cash: [403, ['Нет scope deposits:write.', 'No deposits:write scope.']] }],
+  ['reporting', 'client_credentials', { read: [200, ['accounts:read:all читает любые счета.', 'accounts:read:all reads any account.']], spend: [403, ['scope="transfers:write" в WWW-Authenticate.', 'scope="transfers:write" in WWW-Authenticate.']], pay: [403, ['Нет transfers:write.', 'No transfers:write.']], open: [403, ['Нет accounts:write.', 'No accounts:write.']], cash: [403, ['Нет deposits:write.', 'No deposits:write.']] }],
+  ['cashier-service', 'client_credentials', { read: [200, ['accounts:read:all.', 'accounts:read:all.']], spend: [403, ['Касса не переводит, только зачисляет.', 'The cashier deposits; it never transfers.']], pay: [403, ['Нет transfers:write.', 'No transfers:write.']], open: [403, ['Нет accounts:write.', 'No accounts:write.']], cash: [201, ['deposits:write. transfers.initiated_by = cashier-service.', 'deposits:write. transfers.initiated_by = cashier-service.']] }],
+];
+let mxSel = ['bob', 'read'];
+function cls(c) { return c === '—' ? '' : c === 404 ? 's404' : c >= 400 ? 's4' : 's2'; }
+function renderMx() {
+  const t = document.getElementById('mx');
+  t.innerHTML = `<thead><tr><th>sub · client</th>${OPS.map((o) => `<th>${L(...o[1])}<br><span class="muted">${o[2]}</span></th>`).join('')}</tr></thead><tbody>${WHO.map((w) => `<tr><th>${w[0]}<small>${w[1]}</small></th>${OPS.map((o) => { const [c] = w[2][o[0]]; return `<td><button type="button" class="cell ${cls(c)}" data-w="${w[0]}" data-o="${o[0]}" aria-pressed="${mxSel[0] === w[0] && mxSel[1] === o[0]}">${c}</button></td>`; }).join('')}</tr>`).join('')}</tbody>`;
+  const w = WHO.find((x) => x[0] === mxSel[0]), o = OPS.find((x) => x[0] === mxSel[1]);
+  const [c, why] = w[2][o[0]];
+  document.getElementById('mx-note').innerHTML = `<b>${w[0]} → ${L(...o[1])}: <code>${c}</code></b><span>${L(...why)}</span>`;
+}
+document.getElementById('mx').addEventListener('click', (e) => { const b = e.target.closest('[data-w]'); if (b) { mxSel = [b.dataset.w, b.dataset.o]; renderMx(); } });
+
+/* refresh */
+let rt;
+function rtReset() { rt = { chain: [{ n: 1, st: 'live' }], dead: false, log: [] }; renderRt(); }
+function renderRt() {
+  document.getElementById('chain').innerHTML = rt.chain.map((r, i) => `${i ? '<span class="arrow">→</span>' : ''}<div class="rt ${rt.dead ? 'dead' : r.st}">RT${r.n}<small>${rt.dead ? L('отозван', 'revoked') : r.st === 'live' ? L('действует', 'valid') : L('использован', 'used')}</small></div>`).join('');
+  document.getElementById('rt-log').innerHTML = rt.log.length ? rt.log.join('<br>') : L('Сессия Алисы: один действующий refresh-токен.', 'Alice’s session: one valid refresh token.');
+}
+document.getElementById('rt-app').addEventListener('click', () => {
+  if (rt.dead) { rt.log.push(`<span class="bad">POST /token grant_type=refresh_token → 400 invalid_grant · ${L('сессия отозвана, Алисе нужно войти заново', 'session revoked; Alice has to sign in again')}</span>`); }
+  else { const last = rt.chain[rt.chain.length - 1]; last.st = 'used'; rt.chain.push({ n: last.n + 1, st: 'live' }); rt.log.push(`<span class="ok">RT${last.n} → 200 · ${L('новый access token и', 'new access token and')} RT${last.n + 1}</span>`); }
+  renderRt();
+});
+document.getElementById('rt-evil').addEventListener('click', () => {
+  if (rt.chain.length < 2 && !rt.dead) { rt.log.push(L('Сначала обновите токен хотя бы раз: атакующему нужна старая копия.', 'Refresh at least once first: the attacker needs an old copy.')); renderRt(); return; }
+  rt.dead = true; rt.log.push(`<span class="bad">RT1 ${L('повторно', 'again')} → 400 invalid_grant · ${L('повторное использование обнаружено, вся цепочка отозвана', 'reuse detected, the whole chain revoked')}</span>`);
+  renderRt();
+});
+document.getElementById('rt-reset').addEventListener('click', rtReset);
+
+/* keys */
+let ks;
+function kReset() { ks = { keys: [{ kid: 'k1', pub: true }], cache: ['k1'], stale: false, log: [L('Токен А подписан ключом k1.', 'Token A is signed with k1.')] }; renderK(); }
+function verdict(kid) {
+  if (ks.cache.includes(kid)) return [true, L('ключ в кэше', 'key in cache')];
+  const pub = ks.keys.filter((k) => k.pub).map((k) => k.kid);
+  if (pub.includes(kid)) return [true, L('неизвестный kid → JWKS перекачан', 'unknown kid → JWKS refetched')];
+  return [false, '401 unknown signing key'];
+}
+function renderK() {
+  document.getElementById('k-jwks').innerHTML = ks.keys.map((k) => `<span class="kid ${k.pub ? '' : 'retired'}"><i></i>${k.kid}${k.kid === ks.keys[ks.keys.length - 1].kid ? ' · ' + L('активный', 'active') : ''}</span>`).join('');
+  document.getElementById('k-cache').innerHTML = ks.cache.map((k) => `<span class="kid"><i></i>${k}</span>`).join('') || `<span class="muted">${L('кэш пуст', 'cache empty')}</span>`;
+  const toks = [['A', 'k1']].concat(ks.keys.length > 1 ? [['B', 'k2']] : []);
+  document.getElementById('k-toks').innerHTML = toks.map(([n, kid]) => { const [ok, why] = verdict(kid); return `<div class="tok"><span>${L('токен', 'token')} ${n} (${kid})</span><b class="${ok ? 'ok' : 'bad'}">${ok ? '200' : '401'} · ${why}</b></div>`; }).join('');
+  document.getElementById('k-log').innerHTML = ks.log.join('<br>');
+}
+document.getElementById('k-rotate').addEventListener('click', () => { if (ks.keys.length > 1) return; ks.keys.push({ kid: 'k2', pub: true }); ks.log.push(L('Новый ключ k2. Токен B подписан им. API видит неизвестный kid и сразу перекачивает JWKS.', 'New key k2; token B is signed with it. The API sees an unknown kid and refetches the JWKS at once.')); ks.cache = ks.keys.filter((k) => k.pub).map((k) => k.kid); renderK(); });
+document.getElementById('k-retire').addEventListener('click', () => { if (ks.keys.length < 2) { ks.log.push(L('Сначала выпустите новый ключ, иначе подписывать будет нечем.', 'Rotate first, or nothing would sign new tokens.')); renderK(); return; } ks.keys[0].pub = false; ks.log.push(L('k1 убран из JWKS. Но в кэше API он ещё есть, поэтому токен А пока проходит. Это задержка отзыва.', 'k1 is out of the JWKS, but still in the API’s cache, so token A still passes. That is revocation latency.')); renderK(); });
+document.getElementById('k-wait').addEventListener('click', () => { ks.cache = ks.keys.filter((k) => k.pub).map((k) => k.kid); ks.log.push(L('Кэш устарел (в тесте через 1,2 с, по умолчанию через 10 минут), API перекачал JWKS.', 'The cache went stale (1.2 s in the test, 10 minutes by default); the API refetched the JWKS.')); renderK(); });
+document.getElementById('k-reset').addEventListener('click', kReset);
+
+/* mutations */
+const MUT = [
+  [['aud не проверяется', 'audience not checked'], 'a token for another API (aud)'],
+  [['iss не проверяется', 'issuer not checked'], 'another issuer'],
+  [['typ не проверяется', 'typ not checked'], 'an ID token instead of an access token'],
+  [['допуск часов 10 дней', '10 days of clock tolerance'], 'expired 2 minutes ago'],
+  [['GET /accounts не смотрит на владельца', 'GET /accounts ignores the owner'], 'BOLA: Bob cannot see Alice’s account'],
+  [['перевод не смотрит, чей счёт-источник', 'a transfer ignores who owns the source'], 'BOLA: Bob cannot spend from Alice’s account'],
+  [['вызывающий не входит в отпечаток Idempotency-Key', 'caller left out of the idempotency fingerprint'], 'Bob reusing Alice’s Idempotency-Key'],
+  [['accounts:write разрешает зачисление', 'accounts:write also allows deposits'], 'BFLA: a user cannot put cash … (+1)'],
+  [['PKCE verifier не сравнивается', 'PKCE verifier not compared'], 'a wrong code_verifier'],
+  [['код можно использовать дважды', 'a code can be used twice'], 'a code works once…'],
+  [['повторный refresh не обнаруживается', 'refresh reuse not detected'], 'reusing an old refresh token…'],
+  [['redirect_uri сверяется по префиксу', 'redirect_uri checked by prefix'], 'prefix, traversal, extra query (3)'],
+  [['подпись JWT остаётся в отчёте', 'JWT signature left in the report'], 'unit: a JWT keeps its claims but loses the signature'],
+];
+function renderMut() { document.getElementById('mut').innerHTML = MUT.map((m) => `<div class="mrow"><span>${L(...m[0])}</span><code>${esc(m[1])}</code><span class="kill">${L('пойман', 'caught')}</span></div>`).join(''); }
+
+/* terms */
+const TERMS = [
+  ['OAuth 2.0', ['Протокол выдачи прав: приложение получает токен с ограниченными правами, не узнавая пароль пользователя.', 'A protocol for delegating access: an app gets a limited token without learning the user’s password.']],
+  ['JWT', ['Токен из трёх частей base64url: header, payload с claims и подпись. API проверяет его сам, без запроса к серверу авторизации.', 'A token of three base64url parts: header, claims and signature. The API verifies it on its own, without calling the authorization server.']],
+  ['JWKS', ['Набор открытых ключей сервера авторизации по адресу /.well-known/jwks.json. По kid API находит нужный ключ.', 'The authorization server’s public keys at /.well-known/jwks.json; the API picks one by kid.']],
+  ['PKCE', ['Одноразовый секрет приложения (verifier) и его хэш (challenge). Делает украденный код бесполезным.', 'A one-time app secret (verifier) and its hash (challenge). Makes a stolen code useless.']],
+  ['Scope', ['Что разрешено токену: transfers:write, deposits:write… Отвечает на вопрос «какую операцию».', 'What a token may do: transfers:write, deposits:write… It answers “which operation”.']],
+  ['sub', ['Чей это токен. В Ledger отвечает на вопрос «чьи данные»: счёт хранит owner_sub.', 'Whose token it is. In the Ledger it answers “whose data”: an account stores owner_sub.']],
+  ['BOLA / BFLA', ['OWASP API1 и API5: доступ к чужому объекту и к чужой функции. Обе ошибки делает сервер, а не токен.', 'OWASP API1 and API5: access to someone else’s object or function. Both are server bugs, not token bugs.']],
+  ['Refresh rotation', ['Каждый refresh-токен одноразовый. Повтор означает утечку, и тогда отзывается вся цепочка.', 'Every refresh token works once; a repeat means a leak, and the whole chain is revoked.']],
+];
+function renderTerms() { document.getElementById('terms').innerHTML = TERMS.map((t) => `<div><dt>${t[0]}</dt><dd>${L(...t[1])}</dd></div>`).join(''); }
+
+/* commands */
+const CMDS = ['npm run test:auth', 'npx playwright test tests/auth/refresh.spec.ts', 'DATABASE_URL=postgres://postgres:postgres@localhost:5432/ledger npm run ledger:dev'];
+function renderCmds() {
+  document.getElementById('cmds').innerHTML = CMDS.map((c, i) => `<div class="cmd"><code id="cmd-${i}">${esc(c)}</code><button type="button" data-c="${i}">${L('Копировать', 'Copy')}</button></div>`).join('');
+}
+document.getElementById('cmds').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-c]'); if (!b) return;
+  const text = CMDS[+b.dataset.c];
+  const done = () => { b.textContent = L('Скопировано', 'Copied'); setTimeout(() => (b.textContent = L('Копировать', 'Copy')), 1500); };
+  const fallback = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById('cmd-' + b.dataset.c)); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+  try { navigator.clipboard.writeText(text).then(done, fallback); } catch (err) { fallback(); }
+});
+
+function renderAll() { renderCast(); renderFlow(); renderBench(); renderMx(); renderRt(); renderK(); renderMut(); renderTerms(); renderCmds(); }
+function setLang(l) {
+  S.lang = l; document.body.dataset.lang = l; document.documentElement.lang = l;
+  document.getElementById('lang-ru').setAttribute('aria-pressed', l === 'ru');
+  document.getElementById('lang-en').setAttribute('aria-pressed', l === 'en');
+  try { localStorage.setItem('oauth-lang', l); } catch (e) {}
+  if (rt) { rt.log = []; } if (ks) { kReset(); }
+  renderAll();
+}
+document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.l)));
+let start = 'ru';
+try { start = localStorage.getItem('oauth-lang') || document.documentElement.dataset.defaultLang || 'ru'; } catch (e) { start = document.documentElement.dataset.defaultLang || 'ru'; }
+rtReset(); kReset();
+setLang(start);
+</script>
+</body>
+</html>
