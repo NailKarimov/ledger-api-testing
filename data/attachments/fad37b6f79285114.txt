@@ -1,0 +1,7 @@
+POST http://127.0.0.1:34413/accounts/aebbfc1e-2ad2-49de-a274-1d5e5c93b44b/deposits
+Query: {}
+Request body: {"amount":"1000000.00"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"e84c434f-a7ca-4d3e-bea2-8e204a2cbabe","kind":"deposit","from":null,"to":"aebbfc1e-2ad2-49de-a274-1d5e5c93b44b","amount":"1000000.00","currency":"EUR","createdAt":"2026-10-18T20:17:12.704Z"}

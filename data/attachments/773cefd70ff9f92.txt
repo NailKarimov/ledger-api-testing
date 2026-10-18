@@ -1,0 +1,7 @@
+POST http://127.0.0.1:34413/accounts
+Query: {}
+Request body: {"owner":"Alice","currency":"EUR"}
+Status: 201 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"8431f942-e4b9-44ed-9463-0be89ba0a78a","owner":"Alice","currency":"EUR","balance":"0.00","createdAt":"2026-10-18T20:17:12.904Z"}

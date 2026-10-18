@@ -1,0 +1,7 @@
+POST http://127.0.0.1:34413/accounts/e33c2175-0b0b-45e3-9dd5-35254b52d998/deposits
+Query: {}
+Request body: {"amount":"10"}
+Status: 404 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"status":404,"error":"not_found","message":"account not found"}

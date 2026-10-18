@@ -1,0 +1,7 @@
+POST http://127.0.0.1:42143/accounts/a7925513-da59-4f81-9495-bbd8b8e2890d/deposits
+Query: {}
+Request body: {"amount":"100.50"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"24e0cb69-9eb6-4f44-a409-99097995e124","kind":"deposit","from":null,"to":"a7925513-da59-4f81-9495-bbd8b8e2890d","amount":"100.50","currency":"EUR","createdAt":"2026-10-18T20:17:12.638Z"}

@@ -1,0 +1,7 @@
+POST http://127.0.0.1:42143/accounts/7cf16e2b-00d1-4a91-8cb0-e7e0ac3d53ef/deposits
+Query: {}
+Request body: {"amount":"70"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"764f2f16-3d38-4207-bc33-ac68e8d448a2","kind":"deposit","from":null,"to":"7cf16e2b-00d1-4a91-8cb0-e7e0ac3d53ef","amount":"70.00","currency":"EUR","createdAt":"2026-10-18T20:17:12.426Z"}
