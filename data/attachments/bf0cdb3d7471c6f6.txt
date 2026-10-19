@@ -1,0 +1,8 @@
+POST http://127.0.0.1:43201/accounts/766960ab-bdfe-4034-998e-dc3dd213629d/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (13 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"2488a5a4-80d8-408b-8c73-41cfcd7f4562","kind":"deposit","from":null,"to":"766960ab-bdfe-4034-998e-dc3dd213629d","amount":"10.00","currency":"EUR","createdAt":"2026-10-19T08:31:58.711Z"}

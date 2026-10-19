@@ -1,9 +1,0 @@
-POST http://127.0.0.1:41261/transfers
-Query: {}
-Headers: {"Authorization":"Bearer ***","Idempotency-Key":"k-12345678","Content-Type":"application/json"}
-Request body: {"from":"a034ecf1-759c-430f-99ce-5cdbf63ec853","to":"570785ef-47c7-41cc-8c6b-1f9c4c726ade","amount":"1"}
-Status: 401 (2 ms)
-Content-Type: application/json; charset=utf-8
-WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="claim aud is invalid"
-Body:
-{"status":401,"error":"invalid_token","message":"claim aud is invalid"}

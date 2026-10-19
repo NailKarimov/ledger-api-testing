@@ -1,7 +1,0 @@
-GET http://127.0.0.1:36177/accounts/5d6afbdc-5518-44be-92fe-d59c52fad8c9
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 200 (3 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"5d6afbdc-5518-44be-92fe-d59c52fad8c9","owner":"Alice","currency":"EUR","balance":"0.00","createdAt":"2026-10-18T20:43:06.204Z"}

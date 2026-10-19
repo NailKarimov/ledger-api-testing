@@ -1,8 +1,0 @@
-POST http://127.0.0.1:40983/accounts/aacab822-55ab-4dca-af71-31aeef40ea33/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"100"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"0edfff64-0292-4149-9e3c-ca9f89e533ed","kind":"deposit","from":null,"to":"aacab822-55ab-4dca-af71-31aeef40ea33","amount":"100.00","currency":"EUR","createdAt":"2026-10-18T20:43:01.158Z"}

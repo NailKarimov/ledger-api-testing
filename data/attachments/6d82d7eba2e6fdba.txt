@@ -1,0 +1,8 @@
+POST http://127.0.0.1:36751/accounts/d27fac75-32ce-400c-b2d2-c61bb5862866/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"50"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"2db71fdb-1039-46a0-9909-c98c7127a1c5","kind":"deposit","from":null,"to":"d27fac75-32ce-400c-b2d2-c61bb5862866","amount":"50.00","currency":"EUR","createdAt":"2026-10-19T08:32:02.086Z"}
