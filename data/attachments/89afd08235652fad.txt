@@ -1,0 +1,7 @@
+GET http://127.0.0.1:32795/accounts/f21cadd2-009e-4a02-9d09-b9fea2fdd311
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"f21cadd2-009e-4a02-9d09-b9fea2fdd311","owner":"Alice","currency":"EUR","balance":"0.00","createdAt":"2026-10-20T08:14:06.097Z"}

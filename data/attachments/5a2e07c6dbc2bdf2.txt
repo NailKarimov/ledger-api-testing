@@ -1,0 +1,8 @@
+POST http://127.0.0.1:37015/token
+Query: {}
+Headers: {"Content-Type":"application/x-www-form-urlencoded"}
+Request body: grant_type=refresh_token&client_id=ledger-web&refresh_token=***&scope=accounts%3Aread+accounts%3Awrite
+Status: 400 (2 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"error":"invalid_scope","error_description":"scope not allowed: accounts:write"}

@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34249/token
+Query: {}
+Headers: {"Authorization":"Basic ***","Content-Type":"application/x-www-form-urlencoded"}
+Request body: grant_type=client_credentials&scope=deposits%3Awrite+transfers%3Awrite
+Status: 400 (2 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"error":"invalid_scope","error_description":"scope not allowed: transfers:write"}

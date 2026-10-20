@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46081/accounts/abb475ad-20fb-47d4-b0ff-71e5865a4b5c/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"50"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"5be1c93b-475a-45b1-98aa-b2aff277785c","kind":"deposit","from":null,"to":"abb475ad-20fb-47d4-b0ff-71e5865a4b5c","amount":"50.00","currency":"EUR","createdAt":"2026-10-20T08:14:05.559Z"}

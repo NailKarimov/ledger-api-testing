@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46081/accounts/28963cce-f89e-4b65-b050-89add5550e95/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"ec0fd82d-0c05-4ee7-a35f-81006d7107cd","kind":"deposit","from":null,"to":"28963cce-f89e-4b65-b050-89add5550e95","amount":"10.00","currency":"EUR","createdAt":"2026-10-20T08:14:05.949Z"}
