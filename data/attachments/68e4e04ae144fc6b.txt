@@ -1,0 +1,7 @@
+GET http://127.0.0.1:35673/accounts/f92e341f-b29b-46d0-a053-20e92991d890
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"f92e341f-b29b-46d0-a053-20e92991d890","owner":"Alice","currency":"EUR","balance":"50.00","createdAt":"2026-10-21T08:18:49.635Z"}

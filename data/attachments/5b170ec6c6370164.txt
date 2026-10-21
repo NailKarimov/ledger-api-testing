@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34163/accounts/b9695352-1b7c-4d1f-a1ad-aebce166308b/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 404 (2 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"status":404,"error":"not_found","message":"account not found"}

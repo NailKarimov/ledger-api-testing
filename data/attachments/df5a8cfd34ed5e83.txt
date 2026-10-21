@@ -1,0 +1,6 @@
+GET http://127.0.0.1:41135/.well-known/jwks.json
+Query: {}
+Status: 200 (1 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"keys":[{"kty":"EC","x":"vQlWpElK9wc4cXqrCrRNF7-OD3Adw5cu3z3nCruX_EM","y":"DTScmy1_CYk7Yp7lbYjJw9AW3IVWLVxiGLjUCEtcl54","crv":"P-256","kid":"k-88f46519","alg":"ES256","use":"sig"}]}

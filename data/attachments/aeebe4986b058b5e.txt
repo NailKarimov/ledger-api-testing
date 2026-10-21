@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34163/accounts/dbda331b-4467-48ab-8c33-454bdbadb693/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"100"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"cf9e07ea-7ae8-4d83-a112-8ab9d916dbfc","kind":"deposit","from":null,"to":"dbda331b-4467-48ab-8c33-454bdbadb693","amount":"100.00","currency":"EUR","createdAt":"2026-10-21T08:18:46.232Z"}

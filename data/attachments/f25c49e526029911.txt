@@ -1,0 +1,7 @@
+GET http://127.0.0.1:40841/accounts/1842f360-ed14-46fd-b864-725072187141
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"1842f360-ed14-46fd-b864-725072187141","owner":"Bob","currency":"USD","balance":"0.00","createdAt":"2026-10-21T08:18:45.852Z"}

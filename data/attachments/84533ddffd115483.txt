@@ -1,0 +1,7 @@
+GET http://127.0.0.1:35673/accounts/1b191d75-3530-4203-972a-c48349dd5ba5
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 404 (9 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"status":404,"error":"not_found","message":"account not found"}
