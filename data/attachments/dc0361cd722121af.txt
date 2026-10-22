@@ -1,0 +1,8 @@
+POST http://127.0.0.1:36779/accounts/c06ca48e-c60c-402a-8bf8-54a9630c533e/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"50"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"3e968bd3-5eb8-410b-abdf-136398a807af","kind":"deposit","from":null,"to":"c06ca48e-c60c-402a-8bf8-54a9630c533e","amount":"50.00","currency":"EUR","createdAt":"2026-10-22T08:20:50.419Z"}
