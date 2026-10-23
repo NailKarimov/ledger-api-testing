@@ -3,54 +3,84 @@
 [![Tests](https://github.com/NailKarimov/ledger-api-testing/actions/workflows/tests.yml/badge.svg)](https://github.com/NailKarimov/ledger-api-testing/actions/workflows/tests.yml)
 [![Allure report](https://img.shields.io/badge/report-Allure-orange)](https://nailkarimov.github.io/ledger-api-testing/)
 
-Database and authorization testing on a service of our own. A public API never lets you look inside its database
-or mint its tokens, so this repository contains a small but realistic money service, its own OAuth 2.0
-authorization server, and tests that check every API answer **against the rows actually stored in PostgreSQL**.
+Database and authorization testing on a money service of our own. Every API answer is checked **against the rows
+actually stored in PostgreSQL**. Tokens come from our own OAuth 2.0 authorization server, so the tests can forge
+them.
 
-- **System under test:** `services/ledger-api` — Fastify + PostgreSQL: accounts, deposits, idempotent transfers, a
-  double-entry ledger, row locks and schema constraints.
-- **Database per worker:** [Testcontainers](https://testcontainers.com) starts a fresh `postgres:16-alpine` for every
-  Playwright worker, runs the migrations from scratch and starts the API in-process; everything is removed afterwards.
-- **OAuth 2.0 / JWT:** `services/auth-server` issues ES256 JWT access tokens (Authorization Code + PKCE for the web
-  app, Client Credentials for back-office services, rotating refresh tokens, JWKS with key rotation); the Ledger API
-  verifies them, checks scopes, and lets a user see and spend **only their own accounts**.
+|                        |                                                                                                                                                                                                                                 |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **System under test**  | own Ledger API (Fastify + PostgreSQL: accounts, deposits, idempotent transfers, a double-entry ledger) and own OAuth 2.0 server (ES256 JWT, PKCE, client credentials, rotating refresh tokens, JWKS)                            |
+| **Language and tools** | TypeScript · Playwright Test · Testcontainers · PostgreSQL 16 · node-postgres · jose · Allure                                                                                                                                   |
+| **Types of testing**   | functional API, database integration, transactions and concurrency, security (OAuth 2.0, JWT, BOLA, BFLA)                                                                                                                       |
+| **Tests**              | 119: 48 ledger, 66 OAuth / JWT, 5 unit                                                                                                                                                                                          |
+| **Test quality**       | 18/18 planted bugs caught: 5 in the ledger, 13 in the token checks and the authorization server                                                                                                                                 |
+| **Reports**            | [Allure](https://nailkarimov.github.io/ledger-api-testing/) · [ledger guide](https://nailkarimov.github.io/ledger-api-testing/ledger-api.html) · [OAuth guide](https://nailkarimov.github.io/ledger-api-testing/oauth-jwt.html) |
 
-| Spec                   | What it proves                                                                                                                                                                                                                                     |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `accounts`, `deposits` | stored rows equal the responses; boundaries of the amount rule (0.01 … 1 000 000.00, 2 decimals); invalid input → 400 **and nothing stored**                                                                                                       |
-| `transfers`            | balances, one transfer row, two entries summing to zero; one cent more than the balance → 422 and the database unchanged (atomicity)                                                                                                               |
-| `idempotency`          | a retry with the same key charges once; 10 simultaneous retries → one charge; same key, other amount → 422                                                                                                                                         |
-| `concurrency`          | 25 parallel transfers of 10 from 100 → exactly 10 succeed, balance 0.00; crossing A↔B transfers never deadlock                                                                                                                                     |
-| `db-invariants`        | every balance = sum of its entries; all balances = all deposits; the schema itself refuses a negative balance, a zero or self transfer, an orphan entry                                                                                            |
-| `auth/*` (66 tests)    | 11 forged tokens refused (`alg: none`, HS256 key confusion, attacker's key, edited claims, expired, wrong `iss`/`aud`/`typ`); BOLA and BFLA; PKCE, `redirect_uri` and code rules; refresh reuse revokes the session; JWKS caching and key rotation |
+## What is tested
 
-**Do the tests catch bugs?** Five bugs were planted by hand (no row lock, `<=` instead of `<`, a lost credit
-entry, no idempotency lookup, wrong lock order) and all five were caught. Details:
-[`docs/ledger-api.md`](docs/ledger-api.md) · visual guide with a transfer simulator:
-[`docs/ledger-api.html`](https://nailkarimov.github.io/ledger-api-testing/ledger-api.html).
+| Suite                                | Tool                       | What it proves                                                                                                                                                                                                                                            |
+| ------------------------------------ | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ledger/accounts`, `ledger/deposits` | Playwright + node-postgres | stored rows equal the responses; boundaries of the amount (0.01 … 1 000 000.00, 2 decimals); invalid input → 400 **and nothing stored**                                                                                                                   |
+| `ledger/transfers`                   | Playwright + node-postgres | balances, one transfer row, two entries summing to zero; one cent over the balance → 422 and the database unchanged                                                                                                                                       |
+| `ledger/idempotency`                 | Playwright                 | a retry with the same key charges once; 10 simultaneous retries → one charge; same key, other amount → 422                                                                                                                                                |
+| `ledger/concurrency`                 | Playwright                 | 25 parallel transfers of 10 from 100 → exactly 10 succeed; crossing A↔B transfers never deadlock                                                                                                                                                          |
+| `ledger/db-invariants`               | SQL                        | every balance = the sum of its entries; the schema itself refuses a negative balance, a zero or self transfer, an orphan entry                                                                                                                            |
+| `auth/*` (66)                        | Playwright + jose          | 11 forged tokens refused (`alg: none`, HS256 key confusion, an attacker's key, edited claims, expired, wrong `iss`, `aud` or `typ`); BOLA and BFLA; PKCE, `redirect_uri` and code rules; refresh reuse revokes the session; JWKS caching and key rotation |
 
-**OAuth 2.0 / JWT.** 13 more bugs planted in the token checks, scopes, ownership and the authorization server
-(no `aud` check, prefix-matched `redirect_uri`, refresh reuse not detected, …): all 13 caught. Tokens in the public
-report keep their readable claims but lose the signature. Details: [`docs/oauth-jwt.md`](docs/oauth-jwt.md) · visual
-guide where you forge a token and watch the API refuse it:
-[`docs/oauth-jwt.html`](https://nailkarimov.github.io/ledger-api-testing/oauth-jwt.html).
+## Findings
+
+- **The schema is a second line of defence.** CHECK and FOREIGN KEY constraints refuse a negative balance, an
+  orphan entry or a self transfer even when the API code is bypassed. The invariant tests write to the database
+  directly to prove it.
+- **Lock order matters.** The planted "wrong lock order" bug deadlocked crossing transfers. Only the concurrency
+  test with A↔B traffic caught it.
+- **Tokens in a public report.** The Allure report keeps the readable claims of tokens but cuts the signature, so
+  no token from a report can be replayed.
 
 ## Running it
 
+Requirements: Node.js 22+, Docker (Testcontainers), Java 17+ for a local Allure report.
+
 ```bash
 npm ci
-npm test                                               # everything (119 tests); needs Docker
-npm run test:ledger                                    # Ledger only; Testcontainers does the rest
-npm run test:auth                                      # OAuth 2.0 / JWT suite
+npm test                       # everything; a fresh PostgreSQL container per worker
+npm run test:ledger            # ledger only
+npm run test:auth              # OAuth 2.0 / JWT only
 LEDGER_DATABASE_URL=postgres://postgres@localhost:5432/postgres npm run test:ledger   # an existing server
-DATABASE_URL=postgres://postgres@localhost:5432/ledger npm run ledger:dev             # auth server :3101, API :3100
+DATABASE_URL=postgres://postgres@localhost:5432/ledger npm run ledger:dev             # auth :3101, API :3100
 ```
+
+## Project structure
+
+```text
+services/ledger-api/       the system under test: Fastify app, SQL migrations
+services/auth-server/      the OAuth 2.0 authorization server
+src/ledger/, src/auth/     API clients, token helpers, forgers
+src/support/               Testcontainers database per worker, the API in-process
+src/fixtures.ts            database, ledger, auth fixtures
+tests/ledger/              ledger specs
+tests/auth/                OAuth 2.0 / JWT specs
+tests/unit/                redaction of tokens in the report
+docs/                      test plan, test report, guides
+```
+
+## CI
+
+`.github/workflows/tests.yml` runs on push, pull request, nightly at 03:00 UTC and on demand: lint, format,
+typecheck and all tests with Testcontainers, then the Allure report with history on GitHub Pages.
+
+## Documentation
+
+| Document                                                                                                                | What it is                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| [`docs/test-plan.md`](docs/test-plan.md)                                                                                | test plan (ISO/IEC/IEEE 29119-3)                                                                  |
+| [`docs/test-report.md`](docs/test-report.md)                                                                            | test summary report: latest results, findings, recommendations                                    |
+| [`docs/ledger-api.md`](docs/ledger-api.md) · [visual](https://nailkarimov.github.io/ledger-api-testing/ledger-api.html) | database testing with Testcontainers: atomicity, idempotency, races, invariants, the planted bugs |
+| [`docs/oauth-jwt.md`](docs/oauth-jwt.md) · [visual](https://nailkarimov.github.io/ledger-api-testing/oauth-jwt.html)    | OAuth 2.0 and JWT: PKCE, forged tokens, BOLA, refresh reuse, key rotation                         |
 
 ## Part of a portfolio
 
-REST and GraphQL tests of public APIs: [api-test-automation](https://github.com/NailKarimov/api-test-automation) ·
-contract testing: [contract-testing-lab](https://github.com/NailKarimov/contract-testing-lab) ·
-microservices: [microservices-testing](https://github.com/NailKarimov/microservices-testing) ·
-overview: [github.com/NailKarimov](https://github.com/NailKarimov).
-
-**Stack:** TypeScript · Fastify · PostgreSQL · node-postgres · Testcontainers · OAuth 2.0 · JWT (jose) · Playwright Test · Allure · GitHub Actions.
+One of 13 test automation projects by [Nail Karimov](https://github.com/NailKarimov):
+[all projects](https://github.com/NailKarimov) ·
+[testing map](https://nailkarimov.github.io/api-test-automation/testing-map.html) ·
+[toolbox](https://nailkarimov.github.io/api-test-automation/toolbox.html).
