@@ -1,0 +1,8 @@
+POST http://127.0.0.1:43575/accounts/be2d1511-f0b5-4b45-8c78-b9abc56f8125/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (7 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"85b8ea9c-0e9b-482b-a4ad-d615dfd4cb20","kind":"deposit","from":null,"to":"be2d1511-f0b5-4b45-8c78-b9abc56f8125","amount":"10.00","currency":"EUR","createdAt":"2026-10-23T17:23:40.888Z"}

@@ -1,0 +1,8 @@
+POST http://127.0.0.1:41337/accounts/cc3008b9-d2de-4f96-9a72-c91823e29247/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"1000000.00"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"ceb2ef94-8bbc-4dfe-a37a-d9277dd72e36","kind":"deposit","from":null,"to":"cc3008b9-d2de-4f96-9a72-c91823e29247","amount":"1000000.00","currency":"EUR","createdAt":"2026-10-23T17:23:35.240Z"}

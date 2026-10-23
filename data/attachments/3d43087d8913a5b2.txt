@@ -1,0 +1,6 @@
+GET http://127.0.0.1:41625/authorize?response_type=code&client_id=ledger-web&redirect_uri=http%3A%2F%2F127.0.0.1%3A5173%2Fcallback%3Fnext%3Dhttps%3A%2F%2Fevil.example&scope=accounts%3Aread+transfers%3Awrite&state=st-42&code_challenge=pqHm257pTcO4qD0AGo1ky3wbU1EJRSOU7_ida7Ceqjc&code_challenge_method=S256&login_hint=alice
+Query: {"response_type":"code","client_id":"ledger-web","redirect_uri":"http://127.0.0.1:5173/callback?next=https://evil.example","scope":"accounts:read transfers:write","state":"st-42","code_challenge":"pqHm257pTcO4qD0AGo1ky3wbU1EJRSOU7_ida7Ceqjc","code_challenge_method":"S256","login_hint":"alice"}
+Status: 400 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"error":"invalid_request","error_description":"redirect_uri is not registered for this client"}

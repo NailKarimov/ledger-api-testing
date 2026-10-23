@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46051/accounts/9617ab22-2486-4773-985c-f651933e9a1e/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"288d2981-67d3-4a4f-9e1c-c6e31b7b4750","kind":"deposit","from":null,"to":"9617ab22-2486-4773-985c-f651933e9a1e","amount":"10.00","currency":"EUR","createdAt":"2026-10-23T17:23:40.843Z"}

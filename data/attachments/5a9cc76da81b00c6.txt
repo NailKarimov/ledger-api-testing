@@ -1,9 +1,0 @@
-POST http://127.0.0.1:33569/accounts/aec2bdc1-8873-4762-b811-e23be3d1c46b/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"1000"}
-Status: 403 (2 ms)
-Content-Type: application/json; charset=utf-8
-WWW-Authenticate: Bearer realm="ledger-api", error="insufficient_scope", scope="deposits:write"
-Body:
-{"status":403,"error":"insufficient_scope","message":"requires scope deposits:write"}

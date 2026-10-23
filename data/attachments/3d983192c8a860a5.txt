@@ -1,0 +1,8 @@
+POST http://127.0.0.1:44127/accounts/64381a6e-2b27-4fb7-95a6-adf6031843af/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"1000000.01"}
+Status: 400 (2 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"status":400,"error":"invalid_amount","message":"amount must be between 0.01 and 1000000"}

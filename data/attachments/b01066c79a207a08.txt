@@ -1,0 +1,8 @@
+POST http://127.0.0.1:43575/accounts/ef163046-c55d-4e55-a763-c45ff51df241/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (9 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"65f15554-cc51-4d55-88cf-a2dbe783fb0e","kind":"deposit","from":null,"to":"ef163046-c55d-4e55-a763-c45ff51df241","amount":"10.00","currency":"EUR","createdAt":"2026-10-23T17:23:40.820Z"}

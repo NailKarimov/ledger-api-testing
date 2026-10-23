@@ -1,8 +1,0 @@
-POST http://127.0.0.1:34921/transfers
-Query: {}
-Headers: {"Authorization":"Bearer ***","Idempotency-Key":"qa-7c753744-b80d-4028-8b7b-086e74d33df8","Content-Type":"application/json"}
-Request body: {"from":"5636716c-c3dd-46cb-a4f3-a631dfef3ed4","to":"b1871ba8-5e83-43f4-9c48-205b60b83400","amount":"1"}
-Status: 404 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":404,"error":"not_found","message":"account not found"}

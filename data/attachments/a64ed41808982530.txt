@@ -1,0 +1,8 @@
+GET http://127.0.0.1:46051/accounts/f7b9b418-f2c5-493d-b511-6e796ec1ec2f
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 401 (4 ms)
+Content-Type: application/json; charset=utf-8
+WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="token expired"
+Body:
+{"status":401,"error":"invalid_token","message":"token expired"}

@@ -1,0 +1,7 @@
+GET http://127.0.0.1:41337/accounts/not-a-uuid
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 400 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"status":400,"error":"invalid_id","message":"account id must be a UUID"}
