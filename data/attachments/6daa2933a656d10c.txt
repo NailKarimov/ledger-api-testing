@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34921/accounts/70ae7f50-2d9d-4dfd-a064-49120e096921/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"30"}
+Status: 201 (10 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"6ed91922-3b46-4a05-8d12-bff1d1829999","kind":"deposit","from":null,"to":"70ae7f50-2d9d-4dfd-a064-49120e096921","amount":"30.00","currency":"EUR","createdAt":"2026-10-23T08:17:34.167Z"}

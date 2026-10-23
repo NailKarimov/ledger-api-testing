@@ -1,9 +1,0 @@
-POST http://127.0.0.1:34121/transfers
-Query: {}
-Headers: {"Authorization":"Bearer ***","Idempotency-Key":"qa-b138f1de-a65c-42ec-8e07-df9fc4b0a4e2","Content-Type":"application/json"}
-Request body: {"from":"6c1e17ec-6167-44ab-aa81-c06ba2ec54c9","to":"4d85a5c7-b6e0-4a03-979f-a1ac1993e654","amount":"1"}
-Status: 403 (3 ms)
-Content-Type: application/json; charset=utf-8
-WWW-Authenticate: Bearer realm="ledger-api", error="insufficient_scope", scope="transfers:write"
-Body:
-{"status":403,"error":"insufficient_scope","message":"requires scope transfers:write"}

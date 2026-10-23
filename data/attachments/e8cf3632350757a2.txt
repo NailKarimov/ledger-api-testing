@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34921/accounts/d604a1c3-6919-4630-a68b-591aa38f5264/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"70"}
+Status: 201 (8 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"cc437694-7d73-4848-9090-b05efcef1441","kind":"deposit","from":null,"to":"d604a1c3-6919-4630-a68b-591aa38f5264","amount":"70.00","currency":"EUR","createdAt":"2026-10-23T08:17:34.551Z"}

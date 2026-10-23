@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34921/transfers
+Query: {}
+Headers: {"Authorization":"Bearer ***","Idempotency-Key":"qa-dddbcc91-3f23-4ef0-901d-a9dd26047b26","Content-Type":"application/json"}
+Request body: {"from":"5636716c-c3dd-46cb-a4f3-a631dfef3ed4","to":"5636716c-c3dd-46cb-a4f3-a631dfef3ed4","amount":"1"}
+Status: 400 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"status":400,"error":"same_account","message":"from and to must differ"}

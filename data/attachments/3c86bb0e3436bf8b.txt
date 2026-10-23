@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34921/accounts/ac735413-2a7a-4878-87dc-cb475566cf35/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"1000000.00"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"7692eec8-70ce-44a8-900e-1324ee31d9aa","kind":"deposit","from":null,"to":"ac735413-2a7a-4878-87dc-cb475566cf35","amount":"1000000.00","currency":"EUR","createdAt":"2026-10-23T08:17:34.807Z"}

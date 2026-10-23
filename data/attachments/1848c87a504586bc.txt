@@ -1,8 +1,0 @@
-POST http://127.0.0.1:39947/accounts/fa35a2e4-046a-461a-bb08-17e94fc12690/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (3 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"123e58bd-210c-4a3d-9dbf-0a68f5ade9f9","kind":"deposit","from":null,"to":"fa35a2e4-046a-461a-bb08-17e94fc12690","amount":"10.00","currency":"EUR","createdAt":"2026-10-22T08:20:50.254Z"}

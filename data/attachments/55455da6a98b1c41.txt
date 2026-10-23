@@ -1,8 +1,0 @@
-POST http://127.0.0.1:36779/accounts/e273f300-d688-459c-aa13-aef1b7cd7908/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"30"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"1485780b-af1a-438a-8566-75a38429c83e","kind":"deposit","from":null,"to":"e273f300-d688-459c-aa13-aef1b7cd7908","amount":"30.00","currency":"EUR","createdAt":"2026-10-22T08:20:50.019Z"}

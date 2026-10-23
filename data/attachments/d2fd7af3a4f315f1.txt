@@ -1,8 +1,0 @@
-POST http://127.0.0.1:39947/accounts/db2467cf-9fd0-4546-aade-bae923e96595/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"30"}
-Status: 201 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"ffb02aa6-0a48-431f-8805-ca57bc6ef5b9","kind":"deposit","from":null,"to":"db2467cf-9fd0-4546-aade-bae923e96595","amount":"30.00","currency":"EUR","createdAt":"2026-10-22T08:20:49.940Z"}
