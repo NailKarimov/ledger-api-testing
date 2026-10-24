@@ -1,0 +1,7 @@
+GET http://127.0.0.1:40143/accounts/30de766e-bc9f-49e6-bce5-3976d7b79afd
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"30de766e-bc9f-49e6-bce5-3976d7b79afd","owner":"Alice","currency":"EUR","balance":"50.00","createdAt":"2026-10-24T07:55:40.767Z"}

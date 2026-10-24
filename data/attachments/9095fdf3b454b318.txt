@@ -1,0 +1,8 @@
+POST http://127.0.0.1:38147/accounts/bbde8570-a405-47fc-b56f-538d556bb07b/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"50"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"d277eecd-6762-414d-bd06-156228590513","kind":"deposit","from":null,"to":"bbde8570-a405-47fc-b56f-538d556bb07b","amount":"50.00","currency":"EUR","createdAt":"2026-10-24T07:55:40.747Z"}

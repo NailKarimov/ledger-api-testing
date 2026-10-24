@@ -1,8 +1,0 @@
-POST http://127.0.0.1:41337/accounts/df26544a-ae63-4e0d-82f8-2fc5805044a7/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"30"}
-Status: 201 (8 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"12878562-fdb5-4636-8c2a-f25c1e8de0f5","kind":"deposit","from":null,"to":"df26544a-ae63-4e0d-82f8-2fc5805044a7","amount":"30.00","currency":"EUR","createdAt":"2026-10-23T17:23:34.910Z"}
