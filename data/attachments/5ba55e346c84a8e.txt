@@ -1,0 +1,8 @@
+POST http://127.0.0.1:43697/accounts/cf525a47-8e0c-4cbe-8865-b8c47e0b8c2f/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"-5"}
+Status: 400 (1 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"status":400,"error":"invalid_amount","message":"amount must be a decimal string with at most 2 places, e.g. \"10.50\""}

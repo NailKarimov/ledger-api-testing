@@ -1,0 +1,8 @@
+POST http://127.0.0.1:37245/accounts/a2db2a6c-56f3-4890-b637-a88e3fdd6394/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"90c034a1-cf50-40a9-8bfa-56cc4853055b","kind":"deposit","from":null,"to":"a2db2a6c-56f3-4890-b637-a88e3fdd6394","amount":"10.00","currency":"EUR","createdAt":"2026-10-25T08:08:42.254Z"}

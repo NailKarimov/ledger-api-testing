@@ -1,0 +1,8 @@
+POST http://127.0.0.1:43697/accounts/ad786b8b-375b-4143-97bc-c195b975fe22/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"70"}
+Status: 201 (10 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"0fbba770-54eb-488f-8811-40fd9b1885c7","kind":"deposit","from":null,"to":"ad786b8b-375b-4143-97bc-c195b975fe22","amount":"70.00","currency":"EUR","createdAt":"2026-10-25T08:08:38.034Z"}

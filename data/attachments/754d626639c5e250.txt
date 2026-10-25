@@ -1,8 +1,0 @@
-POST http://127.0.0.1:42489/accounts/fba96621-4477-4c24-ab7c-c79f00dcd444/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"100"}
-Status: 201 (11 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"6e366b07-84fa-42b9-be11-a72d2610c84a","kind":"deposit","from":null,"to":"fba96621-4477-4c24-ab7c-c79f00dcd444","amount":"100.00","currency":"EUR","createdAt":"2026-10-24T07:55:34.885Z"}

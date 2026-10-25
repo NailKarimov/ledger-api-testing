@@ -1,8 +1,0 @@
-POST http://127.0.0.1:42489/accounts/62553b11-c329-41db-871d-adfa6433ac64/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"70"}
-Status: 201 (7 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"eaef7b87-9486-4fce-ae89-b33574748d99","kind":"deposit","from":null,"to":"62553b11-c329-41db-871d-adfa6433ac64","amount":"70.00","currency":"EUR","createdAt":"2026-10-24T07:55:35.449Z"}

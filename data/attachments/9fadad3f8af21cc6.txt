@@ -1,0 +1,8 @@
+POST http://127.0.0.1:38073/accounts/7cf2ffef-48df-4812-9b5d-b3a717874a43/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"0.01"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"3765fefa-6e54-4232-bacb-c0745ace317d","kind":"deposit","from":null,"to":"7cf2ffef-48df-4812-9b5d-b3a717874a43","amount":"0.01","currency":"EUR","createdAt":"2026-10-25T08:08:38.296Z"}
