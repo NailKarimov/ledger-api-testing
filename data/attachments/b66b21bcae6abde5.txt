@@ -1,8 +1,0 @@
-POST http://127.0.0.1:36159/transfers
-Query: {}
-Headers: {"Authorization":"Bearer ***","Idempotency-Key":"qa-17e829df-52fb-4496-b10c-31083bb08285","Content-Type":"application/json"}
-Request body: {"from":"e62a919f-e52e-480b-a818-f32bb818a198","to":"4b8cba7d-2c1c-46ad-85cc-74d00e7ad9de","amount":"10"}
-Status: 422 (152 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":422,"error":"insufficient_funds","message":"not enough money on the source account"}

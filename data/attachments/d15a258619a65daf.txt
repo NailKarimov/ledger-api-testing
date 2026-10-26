@@ -1,0 +1,8 @@
+POST http://127.0.0.1:41637/accounts/afd1cccb-1aef-4e8c-87d7-3ba9f7764498/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (8 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"196ddb0e-5a5c-43c3-a59f-170b1018d5b9","kind":"deposit","from":null,"to":"afd1cccb-1aef-4e8c-87d7-3ba9f7764498","amount":"10.00","currency":"EUR","createdAt":"2026-10-26T15:24:35.539Z"}

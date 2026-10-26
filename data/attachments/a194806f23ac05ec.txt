@@ -1,0 +1,8 @@
+POST http://127.0.0.1:38969/accounts/16344360-e687-4423-be12-a3eabd4d15da/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"70"}
+Status: 201 (10 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"771a8c29-a54b-4eda-9147-075be1f15639","kind":"deposit","from":null,"to":"16344360-e687-4423-be12-a3eabd4d15da","amount":"70.00","currency":"EUR","createdAt":"2026-10-26T15:24:29.997Z"}

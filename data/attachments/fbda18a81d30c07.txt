@@ -1,8 +1,0 @@
-POST http://127.0.0.1:33923/token
-Query: {}
-Headers: {"Authorization":"Basic ***","Content-Type":"application/x-www-form-urlencoded"}
-Request body: grant_type=refresh_token&refresh_token=***
-Status: 400 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"error":"unauthorized_client","error_description":"client may not use refresh_token"}

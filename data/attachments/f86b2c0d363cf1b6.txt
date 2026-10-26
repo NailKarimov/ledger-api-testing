@@ -1,6 +1,0 @@
-GET http://127.0.0.1:33923/authorize?response_type=code&client_id=ledger-web&redirect_uri=http%3A%2F%2F127.0.0.1%3A5173%2Fcallback&scope=accounts%3Aread+transfers%3Awrite&state=st-42&code_challenge=btzKtbfMEJYNRQVR9tbICPZGiBNcFkuNj7gNRaebKzQ&code_challenge_method=plain&login_hint=alice
-Query: {"response_type":"code","client_id":"ledger-web","redirect_uri":"http://127.0.0.1:5173/callback","scope":"accounts:read transfers:write","state":"st-42","code_challenge":"btzKtbfMEJYNRQVR9tbICPZGiBNcFkuNj7gNRaebKzQ","code_challenge_method":"plain","login_hint":"alice"}
-Status: 302 (2 ms)
-Content-Type: 
-Location: http://127.0.0.1:5173/callback?error=invalid_request&error_description=code_challenge_method+must+be+S256&state=st-42&iss=http%3A%2F%2F127.0.0.1%3A33923
-Body:

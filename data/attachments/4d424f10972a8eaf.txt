@@ -1,0 +1,8 @@
+POST http://127.0.0.1:41637/accounts/78f407cc-cafe-4e4c-8525-edf9c21cf98a/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"50"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"c06afc92-16fa-43da-ab7d-b514dfca5663","kind":"deposit","from":null,"to":"78f407cc-cafe-4e4c-8525-edf9c21cf98a","amount":"50.00","currency":"EUR","createdAt":"2026-10-26T15:24:35.230Z"}

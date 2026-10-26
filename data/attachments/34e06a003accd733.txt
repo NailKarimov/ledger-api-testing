@@ -1,0 +1,7 @@
+GET http://127.0.0.1:38969/accounts/6acf461b-c163-438a-9f88-3105938a6931
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (7 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"6acf461b-c163-438a-9f88-3105938a6931","owner":"Bob","currency":"USD","balance":"0.00","createdAt":"2026-10-26T15:24:29.372Z"}

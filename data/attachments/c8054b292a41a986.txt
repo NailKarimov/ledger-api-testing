@@ -1,8 +1,0 @@
-POST http://127.0.0.1:43151/accounts/fd05bedc-78a3-4217-9bee-42366f8547d8/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"0.01"}
-Status: 201 (9 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"b48a5dff-6ebb-4546-98b2-40b1725398b1","kind":"deposit","from":null,"to":"fd05bedc-78a3-4217-9bee-42366f8547d8","amount":"0.01","currency":"EUR","createdAt":"2026-10-26T15:14:33.275Z"}
