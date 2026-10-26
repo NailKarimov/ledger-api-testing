@@ -1,0 +1,6 @@
+GET http://127.0.0.1:33031/authorize?response_type=code&client_id=evil-app&redirect_uri=http%3A%2F%2F127.0.0.1%3A5173%2Fcallback&scope=accounts%3Aread+transfers%3Awrite&state=st-42&code_challenge=520MMQrn_exmLLOGA-pJSMfc6ldB5wvs2kIG9UB9lR4&code_challenge_method=S256&login_hint=alice
+Query: {"response_type":"code","client_id":"evil-app","redirect_uri":"http://127.0.0.1:5173/callback","scope":"accounts:read transfers:write","state":"st-42","code_challenge":"520MMQrn_exmLLOGA-pJSMfc6ldB5wvs2kIG9UB9lR4","code_challenge_method":"S256","login_hint":"alice"}
+Status: 400 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"error":"invalid_client","error_description":"unknown client_id"}

@@ -1,0 +1,8 @@
+POST http://127.0.0.1:45901/accounts/864c89cd-cbc6-42c4-a802-680e79547592/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"19baa57d-0213-4ff8-abfa-c1ea1325a2fb","kind":"deposit","from":null,"to":"864c89cd-cbc6-42c4-a802-680e79547592","amount":"10.00","currency":"EUR","createdAt":"2026-10-26T08:34:32.404Z"}

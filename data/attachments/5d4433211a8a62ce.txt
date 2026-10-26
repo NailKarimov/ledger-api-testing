@@ -1,0 +1,7 @@
+GET http://127.0.0.1:45901/accounts/f1be5713-6568-481c-97ec-ffac5b9b8a58/transactions
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 404 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"status":404,"error":"not_found","message":"account not found"}

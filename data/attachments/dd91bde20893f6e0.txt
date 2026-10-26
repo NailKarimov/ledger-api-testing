@@ -1,6 +1,0 @@
-GET http://127.0.0.1:34505/authorize?response_type=code&client_id=ledger-web&redirect_uri=http%3A%2F%2F127.0.0.1%3A5173%2Fcallback&scope=accounts%3Aread+transfers%3Awrite&state=st-42&code_challenge=i34XlCQ6vyix8fR9WGnu2cik8wiFn3i6EBdeHqP9_h0&code_challenge_method=S256&login_hint=alice&consent=deny
-Query: {"response_type":"code","client_id":"ledger-web","redirect_uri":"http://127.0.0.1:5173/callback","scope":"accounts:read transfers:write","state":"st-42","code_challenge":"i34XlCQ6vyix8fR9WGnu2cik8wiFn3i6EBdeHqP9_h0","code_challenge_method":"S256","login_hint":"alice","consent":"deny"}
-Status: 302 (2 ms)
-Content-Type: 
-Location: http://127.0.0.1:5173/callback?error=access_denied&error_description=the+user+did+not+sign+in+or+did+not+consent&state=st-42&iss=http%3A%2F%2F127.0.0.1%3A34505
-Body:

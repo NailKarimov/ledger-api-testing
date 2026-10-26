@@ -1,0 +1,8 @@
+POST http://127.0.0.1:40375/accounts/bdfc29fc-5783-483c-85d1-48c25083301f/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (8 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"1c218acf-1f55-41fd-95b3-f8ef38f12ea5","kind":"deposit","from":null,"to":"bdfc29fc-5783-483c-85d1-48c25083301f","amount":"10.00","currency":"EUR","createdAt":"2026-10-26T08:34:32.335Z"}
