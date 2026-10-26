@@ -1,0 +1,8 @@
+POST http://127.0.0.1:44041/accounts/fcc82008-2746-4a71-ac21-2e9cc1c36b42/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"c6a98867-888d-4741-a58d-c1b2f93078ef","kind":"deposit","from":null,"to":"fcc82008-2746-4a71-ac21-2e9cc1c36b42","amount":"10.00","currency":"EUR","createdAt":"2026-10-26T10:39:24.884Z"}

@@ -1,7 +1,0 @@
-GET http://127.0.0.1:45901/accounts/64d22042-871d-4a7f-80f3-ffe40b8c84c4
-Query: {}
-Status: 401 (1 ms)
-Content-Type: application/json; charset=utf-8
-WWW-Authenticate: Bearer realm="ledger-api"
-Body:
-{"status":401,"error":"unauthorized","message":"a Bearer token is required"}

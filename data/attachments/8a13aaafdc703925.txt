@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46033/accounts/ec508d96-60c1-420e-a535-4bb01a969985/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"089e6b18-63ab-4d42-aa5a-ac14931d7940","kind":"deposit","from":null,"to":"ec508d96-60c1-420e-a535-4bb01a969985","amount":"10.00","currency":"EUR","createdAt":"2026-10-26T10:39:24.834Z"}

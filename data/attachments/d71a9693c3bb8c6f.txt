@@ -1,8 +1,0 @@
-POST http://127.0.0.1:33139/accounts/b50c401b-5cfe-4b2e-bbce-db656a9b23cc/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"30"}
-Status: 201 (8 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"333d541b-ca56-4dc8-8d41-b1a4c10080f1","kind":"deposit","from":null,"to":"b50c401b-5cfe-4b2e-bbce-db656a9b23cc","amount":"30.00","currency":"EUR","createdAt":"2026-10-26T08:34:26.442Z"}

@@ -1,0 +1,8 @@
+POST http://127.0.0.1:44041/accounts/37812faf-ba84-47af-b7f3-06a1b0a7176f/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"8053e839-d254-4f17-b002-a8c496c328c2","kind":"deposit","from":null,"to":"37812faf-ba84-47af-b7f3-06a1b0a7176f","amount":"10.00","currency":"EUR","createdAt":"2026-10-26T10:39:24.833Z"}

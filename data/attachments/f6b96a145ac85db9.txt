@@ -1,0 +1,8 @@
+GET http://127.0.0.1:44041/accounts/c425d4c5-ae8f-46e5-b7e1-88af764a1f41
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 401 (2 ms)
+Content-Type: application/json; charset=utf-8
+WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="claim iss is invalid"
+Body:
+{"status":401,"error":"invalid_token","message":"claim iss is invalid"}

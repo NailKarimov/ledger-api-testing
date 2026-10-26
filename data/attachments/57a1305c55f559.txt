@@ -1,9 +1,0 @@
-POST http://127.0.0.1:40375/transfers
-Query: {}
-Headers: {"Authorization":"Bearer ***","Idempotency-Key":"k-12345678","Content-Type":"application/json"}
-Request body: {"from":"69afe49d-094f-4716-af49-7f5d90382851","to":"1d95bd0b-3bcc-4c6d-84b5-cfac15dc25ea","amount":"1"}
-Status: 401 (2 ms)
-Content-Type: application/json; charset=utf-8
-WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="token is invalid"
-Body:
-{"status":401,"error":"invalid_token","message":"token is invalid"}

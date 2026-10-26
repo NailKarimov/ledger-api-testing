@@ -1,8 +1,0 @@
-POST http://127.0.0.1:33031/token
-Query: {}
-Headers: {"Content-Type":"application/x-www-form-urlencoded"}
-Request body: grant_type=client_credentials&client_id=cashier-service&client_secret=***
-Status: 200 (6 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"access_token":"eyJhbGciOiJFUzI1NiIsImtpZCI6ImstNDkxZjhkODUiLCJ0eXAiOiJhdCtqd3QifQ.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjMzMDMxIiwic3ViIjoiY2FzaGllci1zZXJ2aWNlIiwiYXVkIjoibGVkZ2VyLWFwaSIsImNsaWVudF9pZCI6ImNhc2hpZXItc2VydmljZSIsInNjb3BlIjoiYWNjb3VudHM6cmVhZDphbGwgZGVwb3NpdHM6d3JpdGUiLCJpYXQiOjE3OTMwMDM2NzUsImV4cCI6MTc5MzAwNDU3NSwianRpIjoiYTk1MTQwNjQtM2ZkNi00MDA2LThkMzUtZjU2NjU4NGZlODU0In0.***","token_type":"Bearer","expires_in":900,"scope":"accounts:read:all deposits:write"}
