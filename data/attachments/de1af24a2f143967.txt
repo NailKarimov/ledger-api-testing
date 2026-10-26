@@ -1,0 +1,8 @@
+POST http://127.0.0.1:43151/accounts/d995af99-ce25-43b7-933b-01203a3bb3a9/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"70"}
+Status: 201 (8 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"bc3d2500-7820-468a-85ac-abafca6d2d0d","kind":"deposit","from":null,"to":"d995af99-ce25-43b7-933b-01203a3bb3a9","amount":"70.00","currency":"EUR","createdAt":"2026-10-26T15:14:32.812Z"}

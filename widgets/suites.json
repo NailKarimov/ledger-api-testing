@@ -1,1 +1,1 @@
-{"total":0,"items":[]}
+{"total":3,"items":[{"uid":"653dbe8c0fe6c9b1769e196b59349504","name":"auth","statistic":{"failed":0,"broken":0,"skipped":0,"passed":66,"unknown":0,"total":66}},{"uid":"ac3941064bc2e5c77ccfbc90fffa98a8","name":"ledger","statistic":{"failed":0,"broken":0,"skipped":0,"passed":48,"unknown":0,"total":48}},{"uid":"633d1af35b62a462a3ba180f99de8dd3","name":"unit","statistic":{"failed":0,"broken":0,"skipped":0,"passed":5,"unknown":0,"total":5}}]}

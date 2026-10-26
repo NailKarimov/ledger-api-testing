@@ -1,0 +1,9 @@
+POST http://127.0.0.1:37361/transfers
+Query: {}
+Headers: {"Authorization":"Bearer ***","Idempotency-Key":"k-12345678","Content-Type":"application/json"}
+Request body: {"from":"2f22c1c5-92ec-4cf2-bdaa-fb6f963d8902","to":"ebeeb689-1f33-4567-bfb1-6c147521fdc3","amount":"1"}
+Status: 401 (2 ms)
+Content-Type: application/json; charset=utf-8
+WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="unknown signing key"
+Body:
+{"status":401,"error":"invalid_token","message":"unknown signing key"}
