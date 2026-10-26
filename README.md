@@ -3,6 +3,7 @@
 [![Tests](https://github.com/NailKarimov/ledger-api-testing/actions/workflows/tests.yml/badge.svg)](https://github.com/NailKarimov/ledger-api-testing/actions/workflows/tests.yml)
 [![Allure report](https://img.shields.io/badge/report-Allure-orange)](https://nailkarimov.github.io/ledger-api-testing/)
 [![Release](https://img.shields.io/github/v/release/NailKarimov/ledger-api-testing)](https://github.com/NailKarimov/ledger-api-testing/releases)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/NailKarimov/ledger-api-testing?quickstart=1)
 
 ### ▶ Open online
 
@@ -49,6 +50,8 @@ them.
   no token from a report can be replayed.
 
 ## Running it
+
+No local setup: the **Open in GitHub Codespaces** badge starts a browser VS Code with this repository, its tools and Docker; the container runs `npm ci` on creation, then `npm test` works in the terminal.
 
 Requirements: Node.js 22+, Docker (Testcontainers), Java 17+ for a local Allure report.
 
