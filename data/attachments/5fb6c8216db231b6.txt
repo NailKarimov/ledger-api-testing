@@ -1,0 +1,8 @@
+POST http://127.0.0.1:35211/accounts/da4138da-fdcd-4dca-9222-b83860a5f385/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"100"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"9266a1b9-0ad2-4281-9495-f0cd1b8e7a6e","kind":"deposit","from":null,"to":"da4138da-fdcd-4dca-9222-b83860a5f385","amount":"100.00","currency":"EUR","createdAt":"2026-10-26T14:54:33.955Z"}

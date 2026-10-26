@@ -1,0 +1,8 @@
+POST http://127.0.0.1:41989/token
+Query: {}
+Headers: {"Content-Type":"application/x-www-form-urlencoded"}
+Request body: grant_type=authorization_code&client_id=ledger-web&code=***&redirect_uri=http%3A%2F%2F127.0.0.1%3A5173%2Fcallback&code_verifier=***
+Status: 200 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"access_token":"eyJhbGciOiJFUzI1NiIsImtpZCI6ImstZDZkNzdjZWEiLCJ0eXAiOiJhdCtqd3QifQ.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjQxOTg5Iiwic3ViIjoiYWxpY2UiLCJhdWQiOiJsZWRnZXItYXBpIiwiY2xpZW50X2lkIjoibGVkZ2VyLXdlYiIsInNjb3BlIjoiYWNjb3VudHM6cmVhZCB0cmFuc2ZlcnM6d3JpdGUiLCJpYXQiOjE3OTMwMjY0ODEsImV4cCI6MTc5MzAyNzM4MSwianRpIjoiMzA5MmY1OGYtY2ZiNS00YzU1LWI0ZDItYzNhNDYxYzdjMjI0In0.***","token_type":"Bearer","expires_in":900,"scope":"accounts:read transfers:write","refresh_token":"***"}

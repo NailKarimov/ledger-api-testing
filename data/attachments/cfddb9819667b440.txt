@@ -1,8 +1,0 @@
-POST http://127.0.0.1:46545/accounts/c1763240-59c1-44c5-bea4-43e08f43ed4a/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"100"}
-Status: 201 (6 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"f2c737cb-1985-497e-8fe4-f91fcb27fc70","kind":"deposit","from":null,"to":"c1763240-59c1-44c5-bea4-43e08f43ed4a","amount":"100.00","currency":"EUR","createdAt":"2026-10-26T10:39:19.995Z"}

@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46121/accounts/5ffe696e-ee88-48ef-b41a-cfc4109a2a90/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"b59ad4eb-732e-4766-860b-801a1561efaf","kind":"deposit","from":null,"to":"5ffe696e-ee88-48ef-b41a-cfc4109a2a90","amount":"10.00","currency":"EUR","createdAt":"2026-10-26T14:54:39.571Z"}
