@@ -3,6 +3,16 @@
 [![Tests](https://github.com/NailKarimov/ledger-api-testing/actions/workflows/tests.yml/badge.svg)](https://github.com/NailKarimov/ledger-api-testing/actions/workflows/tests.yml)
 [![Allure report](https://img.shields.io/badge/report-Allure-orange)](https://nailkarimov.github.io/ledger-api-testing/)
 
+### ▶ Open online
+
+| Page                                                                                              | What it is        |
+| ------------------------------------------------------------------------------------------------- | ----------------- |
+| **[Allure test report](https://nailkarimov.github.io/ledger-api-testing/)**                       | latest CI run     |
+| [Ledger API and Testcontainers](https://nailkarimov.github.io/ledger-api-testing/ledger-api.html) | interactive guide |
+| [OAuth 2.0 and JWT](https://nailkarimov.github.io/ledger-api-testing/oauth-jwt.html)              | interactive guide |
+
+Click these links: opening an `.html` file in the file list shows its source code, GitHub does not run it.
+
 Database and authorization testing on a money service of our own. Every API answer is checked **against the rows
 actually stored in PostgreSQL**. Tokens come from our own OAuth 2.0 authorization server, so the tests can forge
 them.
