@@ -1,7 +1,0 @@
-GET http://127.0.0.1:42129/accounts/dbb9c73a-c910-4b28-bdf0-e0b60f705609
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 200 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"dbb9c73a-c910-4b28-bdf0-e0b60f705609","owner":"Alice","currency":"EUR","balance":"0.00","createdAt":"2026-10-26T14:54:40.023Z"}

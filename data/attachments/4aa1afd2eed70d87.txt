@@ -1,8 +1,0 @@
-POST http://127.0.0.1:46121/accounts/cea0613e-6855-4188-9e5d-680630791e0d/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"50"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"45b593e1-9c72-4e89-9f7b-a83117f8c7f5","kind":"deposit","from":null,"to":"cea0613e-6855-4188-9e5d-680630791e0d","amount":"50.00","currency":"EUR","createdAt":"2026-10-26T14:54:39.215Z"}
