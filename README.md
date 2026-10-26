@@ -2,6 +2,7 @@
 
 [![Tests](https://github.com/NailKarimov/ledger-api-testing/actions/workflows/tests.yml/badge.svg)](https://github.com/NailKarimov/ledger-api-testing/actions/workflows/tests.yml)
 [![Allure report](https://img.shields.io/badge/report-Allure-orange)](https://nailkarimov.github.io/ledger-api-testing/)
+[![Release](https://img.shields.io/github/v/release/NailKarimov/ledger-api-testing)](https://github.com/NailKarimov/ledger-api-testing/releases)
 
 ### ▶ Open online
 
@@ -78,6 +79,8 @@ docs/                      test plan, test report, guides
 
 `.github/workflows/tests.yml` runs on push, pull request, nightly at 03:00 UTC and on demand: lint, format,
 typecheck and all tests with Testcontainers, then the Allure report with history on GitHub Pages.
+
+Releases: committing `.github/releases/<tag>.md` runs the Release workflow, which creates the tag and the GitHub release with that file as its notes.
 
 ## Documentation
 
