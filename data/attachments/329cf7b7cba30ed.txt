@@ -1,7 +1,0 @@
-GET http://127.0.0.1:42407/accounts/1c4383c8-dcee-40a0-a9d2-ac79e459cd57
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 404 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":404,"error":"not_found","message":"account not found"}
