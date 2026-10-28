@@ -1,7 +1,0 @@
-GET http://127.0.0.1:35019/accounts/966681b8-cc1b-451b-9a2a-d0b900b787d3
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 200 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"966681b8-cc1b-451b-9a2a-d0b900b787d3","owner":"Alice","currency":"EUR","balance":"0.00","createdAt":"2026-10-27T08:41:52.015Z"}

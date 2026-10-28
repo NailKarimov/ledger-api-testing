@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46119/accounts/be75caaf-ad03-494f-b6ae-9db3bafad73d/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"30"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"f71c7e9c-521d-4852-a8b3-fa3ca681f872","kind":"deposit","from":null,"to":"be75caaf-ad03-494f-b6ae-9db3bafad73d","amount":"30.00","currency":"EUR","createdAt":"2026-10-28T09:21:26.341Z"}

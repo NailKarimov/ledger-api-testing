@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46119/accounts/f100e162-32eb-44dc-9e4a-670d66a3d90c/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (11 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"a72f2591-3d6a-4a0c-bde3-ea9778701410","kind":"deposit","from":null,"to":"f100e162-32eb-44dc-9e4a-670d66a3d90c","amount":"10.00","currency":"EUR","createdAt":"2026-10-28T09:21:27.034Z"}

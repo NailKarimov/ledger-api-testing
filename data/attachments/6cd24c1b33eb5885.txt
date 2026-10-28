@@ -1,8 +1,0 @@
-POST http://127.0.0.1:44371/accounts/afb20a19-c04d-4898-83e2-f817bfe162f1/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"0"}
-Status: 400 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":400,"error":"invalid_amount","message":"amount must be between 0.01 and 1000000"}

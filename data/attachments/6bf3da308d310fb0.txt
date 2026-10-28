@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46119/transfers
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"from":"5bf032fa-dd1f-43eb-89bf-a1f74f5f8d45","to":"a72933a5-eb17-46db-8b4b-fc715d29c3a5","amount":"1"}
+Status: 400 (2 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"status":400,"error":"idempotency_key_required","message":"Idempotency-Key header (8–100 characters) is required"}

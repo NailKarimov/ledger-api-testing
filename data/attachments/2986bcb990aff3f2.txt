@@ -1,8 +1,0 @@
-POST http://127.0.0.1:40323/token
-Query: {}
-Headers: {"Content-Type":"application/x-www-form-urlencoded"}
-Request body: grant_type=client_credentials&client_id=ledger-web&client_secret=***
-Status: 401 (2 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"error":"invalid_client","error_description":"client authentication failed"}

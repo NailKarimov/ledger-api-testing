@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46119/accounts/ca4525c4-e937-4a92-a613-3d1583da93fc/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"1000000.00"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"5a13b93f-afaf-431e-86b6-5877e6f4d39c","kind":"deposit","from":null,"to":"ca4525c4-e937-4a92-a613-3d1583da93fc","amount":"1000000.00","currency":"EUR","createdAt":"2026-10-28T09:21:26.673Z"}
