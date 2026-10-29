@@ -1,0 +1,7 @@
+GET http://127.0.0.1:40553/accounts/e48d2b5c-0df1-49b0-aace-04301a910f79/transactions
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+[{"id":"6f147297-1f48-4298-bebe-18964696d169","kind":"deposit","from":null,"to":"e48d2b5c-0df1-49b0-aace-04301a910f79","amount":"50.00","currency":"EUR","createdAt":"2026-10-29T09:26:19.917Z","entry":"50.00"},{"id":"e11c037a-fe76-4616-aa5f-acd50055787e","kind":"transfer","from":"e48d2b5c-0df1-49b0-aace-04301a910f79","to":"871c6c54-015a-4f88-a135-42e55427735e","amount":"20.00","currency":"EUR","createdAt":"2026-10-29T09:26:19.926Z","entry":"-20.00"}]

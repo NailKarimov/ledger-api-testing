@@ -1,0 +1,7 @@
+GET http://127.0.0.1:45995/accounts/36f1a065-50e7-4740-824f-9039c1b21b15
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (11 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"36f1a065-50e7-4740-824f-9039c1b21b15","owner":"Bob","currency":"USD","balance":"0.00","createdAt":"2026-10-29T09:26:18.695Z"}

@@ -1,8 +1,0 @@
-POST http://127.0.0.1:46119/accounts/dfab238d-4d21-4599-9f84-c35699a28e55/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"100.50"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"7962fb00-8e02-4e05-ae82-d52c3143a52d","kind":"deposit","from":null,"to":"dfab238d-4d21-4599-9f84-c35699a28e55","amount":"100.50","currency":"EUR","createdAt":"2026-10-28T09:21:26.573Z"}
