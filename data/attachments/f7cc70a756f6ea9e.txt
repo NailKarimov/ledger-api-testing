@@ -1,0 +1,8 @@
+GET http://127.0.0.1:45025/accounts/0ddb107c-417f-453e-b9ff-e2b08ec7e1fd
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 401 (3 ms)
+Content-Type: application/json; charset=utf-8
+WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="claim aud is invalid"
+Body:
+{"status":401,"error":"invalid_token","message":"claim aud is invalid"}

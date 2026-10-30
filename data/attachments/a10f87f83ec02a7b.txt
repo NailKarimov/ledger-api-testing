@@ -1,0 +1,8 @@
+GET http://127.0.0.1:45025/accounts/ae7f9e21-063d-478c-a812-bc6dd7aa1787
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 401 (1 ms)
+Content-Type: application/json; charset=utf-8
+WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="claim client_id is invalid"
+Body:
+{"status":401,"error":"invalid_token","message":"claim client_id is invalid"}

@@ -1,8 +1,0 @@
-POST http://127.0.0.1:45995/accounts/543106db-b4fd-4997-9300-d7dbc846bba4/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"999999.99"}
-Status: 201 (7 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"0625cb90-6f51-4a98-a346-bbe236858e5e","kind":"deposit","from":null,"to":"543106db-b4fd-4997-9300-d7dbc846bba4","amount":"999999.99","currency":"EUR","createdAt":"2026-10-29T09:26:19.462Z"}

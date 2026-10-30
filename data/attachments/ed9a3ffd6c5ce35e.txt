@@ -1,0 +1,8 @@
+POST http://127.0.0.1:38021/accounts/622eca6b-cb23-41a0-9475-640906a31b90/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"25.00"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"f0eb860f-da13-49ff-b6d8-a7732348f53f","kind":"deposit","from":null,"to":"622eca6b-cb23-41a0-9475-640906a31b90","amount":"25.00","currency":"EUR","createdAt":"2026-10-30T09:40:12.095Z"}

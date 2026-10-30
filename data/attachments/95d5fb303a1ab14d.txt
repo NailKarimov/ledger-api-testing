@@ -1,0 +1,8 @@
+POST http://127.0.0.1:38021/accounts/db4e0744-9eea-4a4a-91bd-88b776b99d6b/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"100"}
+Status: 201 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"3afa6ac5-398f-4d54-946e-3deabf3f594e","kind":"deposit","from":null,"to":"db4e0744-9eea-4a4a-91bd-88b776b99d6b","amount":"100.00","currency":"EUR","createdAt":"2026-10-30T09:40:11.171Z"}
