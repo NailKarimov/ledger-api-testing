@@ -1,0 +1,7 @@
+GET http://127.0.0.1:36753/accounts/2884a5d9-644f-4e1e-9163-35cad4c13155
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"2884a5d9-644f-4e1e-9163-35cad4c13155","owner":"Alice","currency":"EUR","balance":"50.00","createdAt":"2026-10-31T09:20:22.063Z"}

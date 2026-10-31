@@ -1,0 +1,7 @@
+GET http://127.0.0.1:41361/accounts/268db60e-caee-4118-abea-31997af03132
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (2 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"268db60e-caee-4118-abea-31997af03132","owner":"Alice","currency":"EUR","balance":"0.00","createdAt":"2026-10-31T09:20:22.590Z"}

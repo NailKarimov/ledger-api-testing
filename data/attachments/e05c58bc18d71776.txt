@@ -1,0 +1,8 @@
+POST http://127.0.0.1:39865/token
+Query: {}
+Headers: {"Authorization":"Basic ***","Content-Type":"application/x-www-form-urlencoded"}
+Request body: grant_type=client_credentials
+Status: 200 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"access_token":"eyJhbGciOiJFUzI1NiIsImtpZCI6ImstMjZiYzk4ZDYiLCJ0eXAiOiJhdCtqd3QifQ.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjM5ODY1Iiwic3ViIjoiY2FzaGllci1zZXJ2aWNlIiwiYXVkIjoibGVkZ2VyLWFwaSIsImNsaWVudF9pZCI6ImNhc2hpZXItc2VydmljZSIsInNjb3BlIjoiYWNjb3VudHM6cmVhZDphbGwgZGVwb3NpdHM6d3JpdGUiLCJpYXQiOjE3OTM0Mzg0MjUsImV4cCI6MTc5MzQzOTMyNSwianRpIjoiNDlkN2M3ZWItN2NiMC00MTllLWFjZDEtM2NiODNmNzVlM2UwIn0.***","token_type":"Bearer","expires_in":900,"scope":"accounts:read:all deposits:write"}

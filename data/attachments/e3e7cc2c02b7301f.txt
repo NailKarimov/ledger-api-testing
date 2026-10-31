@@ -1,0 +1,8 @@
+GET http://127.0.0.1:36753/accounts/441bf8cd-f18a-4b93-a4b2-686d46827550
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 401 (3 ms)
+Content-Type: application/json; charset=utf-8
+WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="token is invalid"
+Body:
+{"status":401,"error":"invalid_token","message":"token is invalid"}

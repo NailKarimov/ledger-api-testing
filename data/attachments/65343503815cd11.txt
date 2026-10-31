@@ -1,0 +1,8 @@
+POST http://127.0.0.1:39359/accounts/bac5a117-500d-4a8e-9308-fa3256c37646/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"50"}
+Status: 201 (11 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"d527c275-0edb-41e6-ac38-7ba3231d51f0","kind":"deposit","from":null,"to":"bac5a117-500d-4a8e-9308-fa3256c37646","amount":"50.00","currency":"EUR","createdAt":"2026-10-31T09:20:21.767Z"}

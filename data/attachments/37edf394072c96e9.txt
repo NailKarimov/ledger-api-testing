@@ -1,8 +1,0 @@
-POST http://127.0.0.1:40565/accounts/75bb517a-c204-45fa-b447-a23a607ec165/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"43630529-d169-425f-875f-f67231d5c19b","kind":"deposit","from":null,"to":"75bb517a-c204-45fa-b447-a23a607ec165","amount":"10.00","currency":"EUR","createdAt":"2026-10-30T09:40:15.826Z"}

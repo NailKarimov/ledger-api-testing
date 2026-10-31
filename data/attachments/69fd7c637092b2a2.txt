@@ -1,8 +1,0 @@
-POST http://127.0.0.1:38021/transfers
-Query: {}
-Headers: {"Authorization":"Bearer ***","Idempotency-Key":"qa-39b97297-f754-492a-9693-9fb8537a95c8","Content-Type":"application/json"}
-Request body: {"from":"69047deb-9c84-4eb6-9148-5a98fb6c4d66","to":"b29192b9-e017-404b-b325-589d158f5f7c","amount":"99"}
-Status: 422 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":422,"error":"idempotency_key_reused","message":"Idempotency-Key was already used with a different request"}

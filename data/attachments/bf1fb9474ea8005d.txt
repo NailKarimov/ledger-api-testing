@@ -1,0 +1,7 @@
+GET http://127.0.0.1:39359/accounts/bac5a117-500d-4a8e-9308-fa3256c37646
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"bac5a117-500d-4a8e-9308-fa3256c37646","owner":"Alice","currency":"EUR","balance":"50.00","createdAt":"2026-10-31T09:20:21.756Z"}
