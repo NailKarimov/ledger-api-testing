@@ -1,0 +1,8 @@
+POST http://127.0.0.1:42857/accounts/25eb28ca-8cd2-4ec5-a19e-e673a0a08345/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"50"}
+Status: 201 (19 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"7adb0e9e-9a0d-4cec-ba2d-628182fdc46a","kind":"deposit","from":null,"to":"25eb28ca-8cd2-4ec5-a19e-e673a0a08345","amount":"50.00","currency":"EUR","createdAt":"2026-11-01T10:09:07.081Z"}

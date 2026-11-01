@@ -1,0 +1,8 @@
+POST http://127.0.0.1:42857/accounts/db48827f-cf47-4d6e-9fc2-83c53c835e4f/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"793fde0b-4bd2-4de8-ae60-66b951965ad9","kind":"deposit","from":null,"to":"db48827f-cf47-4d6e-9fc2-83c53c835e4f","amount":"10.00","currency":"EUR","createdAt":"2026-11-01T10:09:07.641Z"}

@@ -1,0 +1,8 @@
+POST http://127.0.0.1:32843/transfers
+Query: {}
+Headers: {"Authorization":"Bearer ***","Idempotency-Key":"qa-07867a36-7e76-4955-8622-1e8c5b54283e","Content-Type":"application/json"}
+Request body: {"from":"28fcbffa-3196-4b6c-a548-49a62b005358","to":"14af14bc-5cac-41c9-83df-3393afd093bb","amount":"25.01"}
+Status: 422 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"status":422,"error":"insufficient_funds","message":"not enough money on the source account"}

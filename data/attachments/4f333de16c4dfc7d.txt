@@ -1,0 +1,8 @@
+POST http://127.0.0.1:42857/accounts/e3079b35-9335-4059-b113-9ce57017d607/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"50"}
+Status: 201 (8 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"7538e1fc-99bb-4968-930e-28b8916a59d1","kind":"deposit","from":null,"to":"e3079b35-9335-4059-b113-9ce57017d607","amount":"50.00","currency":"EUR","createdAt":"2026-11-01T10:09:07.273Z"}
