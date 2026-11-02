@@ -1,7 +1,0 @@
-GET http://127.0.0.1:37129/accounts/8c629ee1-1e61-4223-86af-363d27f95fc7
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 200 (51 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"8c629ee1-1e61-4223-86af-363d27f95fc7","owner":"Bob","currency":"USD","balance":"0.00","createdAt":"2026-11-01T10:09:00.942Z"}
