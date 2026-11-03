@@ -1,8 +1,0 @@
-POST http://127.0.0.1:40581/accounts/747e5dbc-659b-48e7-b883-29c321c305b3/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (7 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"8e78345b-5329-4760-b6ea-19ed50ebb6b4","kind":"deposit","from":null,"to":"747e5dbc-659b-48e7-b883-29c321c305b3","amount":"10.00","currency":"EUR","createdAt":"2026-11-02T10:37:27.528Z"}

@@ -1,7 +1,0 @@
-GET http://127.0.0.1:40581/accounts/747e5dbc-659b-48e7-b883-29c321c305b3
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 200 (3 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"747e5dbc-659b-48e7-b883-29c321c305b3","owner":"Alice","currency":"EUR","balance":"10.00","createdAt":"2026-11-02T10:37:27.523Z"}

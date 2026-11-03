@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46085/accounts/48e69f4a-91a7-400b-95cd-5b56f24ea763/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"70"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"adfa3e80-3010-4682-9ea7-0d43031b14f5","kind":"deposit","from":null,"to":"48e69f4a-91a7-400b-95cd-5b56f24ea763","amount":"70.00","currency":"EUR","createdAt":"2026-11-03T10:30:07.525Z"}

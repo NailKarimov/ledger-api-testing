@@ -1,8 +1,0 @@
-POST http://127.0.0.1:38787/accounts/90fd8885-3d3c-4a44-a530-2b2a848e47fe/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"b9a7d718-390e-4180-808f-3864b963bb88","kind":"deposit","from":null,"to":"90fd8885-3d3c-4a44-a530-2b2a848e47fe","amount":"10.00","currency":"EUR","createdAt":"2026-11-02T10:37:22.246Z"}

@@ -1,7 +1,0 @@
-GET http://127.0.0.1:41209/accounts/3948380a-c5b2-4edc-9255-b518e58df701
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 200 (8 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"3948380a-c5b2-4edc-9255-b518e58df701","owner":"Bob","currency":"USD","balance":"0.00","createdAt":"2026-11-02T10:37:21.250Z"}

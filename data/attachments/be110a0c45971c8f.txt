@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46085/accounts/20c1ddfb-3702-40a0-9255-fbacbb037c10/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"1000000"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"ac8ec9f4-ba92-44c5-9799-fb143484a7e9","kind":"deposit","from":null,"to":"20c1ddfb-3702-40a0-9255-fbacbb037c10","amount":"1000000.00","currency":"EUR","createdAt":"2026-11-03T10:30:07.720Z"}

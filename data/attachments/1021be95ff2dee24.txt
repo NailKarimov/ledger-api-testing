@@ -1,8 +1,0 @@
-POST http://127.0.0.1:38787/transfers
-Query: {}
-Headers: {"Authorization":"Bearer ***","Idempotency-Key":"qa-b23ca288-d690-4884-9d75-05fe19f94bf1","Content-Type":"application/json"}
-Request body: {"from":"e3c102a3-5cd0-4879-9b29-c9e3e38127a6","to":"3f6347bc-ad65-413b-a085-c725901574e5","amount":"12.34"}
-Status: 201 (8 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"a79b0dbd-01b7-435b-9418-c6c6279e25e7","kind":"transfer","from":"e3c102a3-5cd0-4879-9b29-c9e3e38127a6","to":"3f6347bc-ad65-413b-a085-c725901574e5","amount":"12.34","currency":"EUR","createdAt":"2026-11-02T10:37:21.638Z"}
