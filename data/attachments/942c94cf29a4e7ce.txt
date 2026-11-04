@@ -1,0 +1,7 @@
+GET http://127.0.0.1:38675/accounts/d699dbe1-6309-4406-8cb4-19611e202049
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"d699dbe1-6309-4406-8cb4-19611e202049","owner":"Alice","currency":"EUR","balance":"10.00","createdAt":"2026-11-04T10:31:47.389Z"}

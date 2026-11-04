@@ -1,8 +1,0 @@
-POST http://127.0.0.1:46085/accounts/bfa2802e-5c4e-40db-a004-1759f4523e4e/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"30"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"2a729649-88fa-44e9-9c6a-40a6bade076e","kind":"deposit","from":null,"to":"bfa2802e-5c4e-40db-a004-1759f4523e4e","amount":"30.00","currency":"EUR","createdAt":"2026-11-03T10:30:07.308Z"}

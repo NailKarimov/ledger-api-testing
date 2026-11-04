@@ -1,0 +1,7 @@
+GET http://127.0.0.1:35587/accounts/d9e40ada-4413-41e3-9f88-f1c16ddc5212
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"d9e40ada-4413-41e3-9f88-f1c16ddc5212","owner":"Alice","currency":"EUR","balance":"0.00","createdAt":"2026-11-04T10:31:47.915Z"}

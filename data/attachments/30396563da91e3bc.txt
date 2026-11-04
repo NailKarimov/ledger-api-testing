@@ -1,0 +1,8 @@
+POST http://127.0.0.1:42185/accounts/88e55b46-beab-489c-96ba-e18ebc801e73/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"25.00"}
+Status: 201 (8 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"88ac7a99-b71d-405a-a292-67f114f36837","kind":"deposit","from":null,"to":"88e55b46-beab-489c-96ba-e18ebc801e73","amount":"25.00","currency":"EUR","createdAt":"2026-11-04T10:31:42.319Z"}

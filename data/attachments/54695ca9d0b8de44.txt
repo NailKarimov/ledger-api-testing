@@ -1,8 +1,0 @@
-POST http://127.0.0.1:33687/accounts/a566adac-c02d-492d-9e3f-009a79f98df9/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"cd79a2b0-f4bb-40e1-a10e-90b3c86af854","kind":"deposit","from":null,"to":"a566adac-c02d-492d-9e3f-009a79f98df9","amount":"10.00","currency":"EUR","createdAt":"2026-11-03T10:30:13.484Z"}

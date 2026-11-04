@@ -1,7 +1,0 @@
-GET http://127.0.0.1:33687/accounts/a566adac-c02d-492d-9e3f-009a79f98df9
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 200 (3 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"a566adac-c02d-492d-9e3f-009a79f98df9","owner":"Alice","currency":"EUR","balance":"10.00","createdAt":"2026-11-03T10:30:13.481Z"}
