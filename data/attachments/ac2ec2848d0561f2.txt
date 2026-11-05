@@ -1,8 +1,0 @@
-GET http://127.0.0.1:38675/accounts/9d630412-b94e-474f-8e8f-07ec5734c376
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 401 (4 ms)
-Content-Type: application/json; charset=utf-8
-WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="claim typ is invalid"
-Body:
-{"status":401,"error":"invalid_token","message":"claim typ is invalid"}

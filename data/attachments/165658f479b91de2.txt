@@ -1,0 +1,7 @@
+GET http://127.0.0.1:43729/accounts/f94e5a63-e057-48f4-829f-47026540e684
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"f94e5a63-e057-48f4-829f-47026540e684","owner":"Bob","currency":"USD","balance":"0.00","createdAt":"2026-11-05T10:25:45.083Z"}

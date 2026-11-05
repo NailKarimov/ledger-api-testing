@@ -1,0 +1,8 @@
+POST http://127.0.0.1:33415/accounts/1525466e-76c8-484c-8466-80af98088f63/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"ac6d2433-2214-42b2-acd7-48de48f7e9a7","kind":"deposit","from":null,"to":"1525466e-76c8-484c-8466-80af98088f63","amount":"10.00","currency":"EUR","createdAt":"2026-11-05T10:25:49.307Z"}

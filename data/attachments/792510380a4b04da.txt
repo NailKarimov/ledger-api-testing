@@ -1,9 +1,0 @@
-POST http://127.0.0.1:38675/transfers
-Query: {}
-Headers: {"Authorization":"Bearer ***","Idempotency-Key":"k-12345678","Content-Type":"application/json"}
-Request body: {"from":"cc1a0bbc-bd06-4155-921f-a30a6b4a3777","to":"437dd600-626b-403a-90fd-726683865a33","amount":"1"}
-Status: 401 (2 ms)
-Content-Type: application/json; charset=utf-8
-WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="claim iss is invalid"
-Body:
-{"status":401,"error":"invalid_token","message":"claim iss is invalid"}

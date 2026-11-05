@@ -1,0 +1,7 @@
+GET http://127.0.0.1:36663/accounts/fc776d9e-7001-4f90-b20f-d562123d0f98
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"fc776d9e-7001-4f90-b20f-d562123d0f98","owner":"Alice","currency":"EUR","balance":"10.00","createdAt":"2026-11-05T10:25:49.311Z"}

@@ -1,8 +1,0 @@
-POST http://127.0.0.1:42185/transfers
-Query: {}
-Headers: {"Authorization":"Bearer ***","Idempotency-Key":"qa-69480cb9-a64d-48c9-85f2-2b713bc46fae","Content-Type":"application/json"}
-Request body: {"from":"17236f41-5315-4cc6-857e-39a4f4258763","to":"17236f41-5315-4cc6-857e-39a4f4258763","amount":"1"}
-Status: 400 (2 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":400,"error":"same_account","message":"from and to must differ"}

@@ -1,8 +1,0 @@
-POST http://127.0.0.1:44879/transfers
-Query: {}
-Headers: {"Authorization":"Bearer ***","Idempotency-Key":"qa-19f182f1-e832-4d03-a3ba-70ce864d9af5","Content-Type":"application/json"}
-Request body: {"from":"41f580a8-2047-4d5d-a70d-c436160e6a85","to":"66e5d884-0b61-42a7-941c-18e8e542f0b0","amount":"1"}
-Status: 409 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":409,"error":"currency_mismatch","message":"cannot transfer EUR to a USD account"}
