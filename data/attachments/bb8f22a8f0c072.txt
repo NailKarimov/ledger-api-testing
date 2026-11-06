@@ -1,0 +1,8 @@
+POST http://127.0.0.1:43727/accounts/b0615fe6-6966-425a-8c00-4eb3615e4a4f/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"445b29e2-fa57-418c-acaa-63578c5d8109","kind":"deposit","from":null,"to":"b0615fe6-6966-425a-8c00-4eb3615e4a4f","amount":"10.00","currency":"EUR","createdAt":"2026-11-06T10:27:13.642Z"}

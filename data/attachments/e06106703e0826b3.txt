@@ -1,0 +1,8 @@
+POST http://127.0.0.1:45685/accounts
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"owner":"Alice","currency":"EUR"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"69e3f026-e1a0-48a6-a270-0a162dd9262a","owner":"Alice","currency":"EUR","balance":"0.00","createdAt":"2026-11-06T10:27:13.357Z"}

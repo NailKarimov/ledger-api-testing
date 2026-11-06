@@ -1,0 +1,7 @@
+GET http://127.0.0.1:37655/accounts/901e37c4-0bd5-41db-a2b5-2e09709cbcdf
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (11 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"901e37c4-0bd5-41db-a2b5-2e09709cbcdf","owner":"Bob","currency":"USD","balance":"0.00","createdAt":"2026-11-06T10:27:08.366Z"}
