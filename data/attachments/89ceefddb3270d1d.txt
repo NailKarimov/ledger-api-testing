@@ -1,8 +1,0 @@
-POST http://127.0.0.1:43727/accounts/ebcf6158-6c4c-4861-a490-e077ef3ff49e/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (6 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"58cc667b-92a5-4ecc-8015-6cb8d3d02d3c","kind":"deposit","from":null,"to":"ebcf6158-6c4c-4861-a490-e077ef3ff49e","amount":"10.00","currency":"EUR","createdAt":"2026-11-06T10:27:13.429Z"}

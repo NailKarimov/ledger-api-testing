@@ -1,8 +1,0 @@
-POST http://127.0.0.1:45685/accounts/1324400d-d88a-4cca-ab05-165dbd630af0/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"50"}
-Status: 201 (10 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"b0794ed8-89b0-49b0-9dd3-19245b9523f4","kind":"deposit","from":null,"to":"1324400d-d88a-4cca-ab05-165dbd630af0","amount":"50.00","currency":"EUR","createdAt":"2026-11-06T10:27:12.949Z"}

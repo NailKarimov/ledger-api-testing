@@ -1,9 +1,0 @@
-POST http://127.0.0.1:45685/transfers
-Query: {}
-Headers: {"Authorization":"Bearer ***","Idempotency-Key":"k-12345678","Content-Type":"application/json"}
-Request body: {"from":"bde3d291-93c2-4150-b55d-58e2a9bb51de","to":"9727927a-3ec2-4562-90c3-a18050368d5a","amount":"1"}
-Status: 401 (2 ms)
-Content-Type: application/json; charset=utf-8
-WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="claim client_id is invalid"
-Body:
-{"status":401,"error":"invalid_token","message":"claim client_id is invalid"}
