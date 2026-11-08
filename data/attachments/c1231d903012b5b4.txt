@@ -1,7 +1,0 @@
-GET http://127.0.0.1:41903/accounts/ca77cb30-ce45-4b72-984d-8d0bbaf6060b
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 200 (2 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"ca77cb30-ce45-4b72-984d-8d0bbaf6060b","owner":"Alice","currency":"EUR","balance":"10.00","createdAt":"2026-11-07T09:40:13.209Z"}

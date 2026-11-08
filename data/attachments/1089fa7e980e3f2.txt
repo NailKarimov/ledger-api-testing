@@ -1,0 +1,7 @@
+GET http://127.0.0.1:38201/accounts/29acd874-d73e-482e-b586-ac0688f83043
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (9 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"29acd874-d73e-482e-b586-ac0688f83043","owner":"Bob","currency":"USD","balance":"0.00","createdAt":"2026-11-08T09:54:45.362Z"}

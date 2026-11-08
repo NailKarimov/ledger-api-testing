@@ -1,0 +1,7 @@
+GET http://127.0.0.1:36133/accounts/ac22be91-1330-4e30-bb27-b75078ee221a
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"ac22be91-1330-4e30-bb27-b75078ee221a","owner":"Alice","currency":"EUR","balance":"10.00","createdAt":"2026-11-08T09:54:52.611Z"}

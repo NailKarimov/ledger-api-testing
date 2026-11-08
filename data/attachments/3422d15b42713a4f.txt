@@ -1,0 +1,8 @@
+POST http://127.0.0.1:36133/accounts/58ce703c-33de-48aa-9fb0-68d36e183def/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (8 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"bdf3e455-abf7-40e9-8a98-a3a4733394f0","kind":"deposit","from":null,"to":"58ce703c-33de-48aa-9fb0-68d36e183def","amount":"10.00","currency":"EUR","createdAt":"2026-11-08T09:54:52.661Z"}

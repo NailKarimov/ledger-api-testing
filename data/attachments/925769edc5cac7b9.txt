@@ -1,0 +1,8 @@
+POST http://127.0.0.1:38201/accounts/ffaccac1-4211-4f92-b155-97bb63104f9c/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"100"}
+Status: 201 (10 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"bee1fb66-da9b-4ab2-974f-10c124623891","kind":"deposit","from":null,"to":"ffaccac1-4211-4f92-b155-97bb63104f9c","amount":"100.00","currency":"EUR","createdAt":"2026-11-08T09:54:46.091Z"}

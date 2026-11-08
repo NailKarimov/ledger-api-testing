@@ -1,8 +1,0 @@
-POST http://127.0.0.1:41903/accounts/ca77cb30-ce45-4b72-984d-8d0bbaf6060b/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"0c00cbbe-e324-41d8-b3dd-6d04d0ec0b67","kind":"deposit","from":null,"to":"ca77cb30-ce45-4b72-984d-8d0bbaf6060b","amount":"10.00","currency":"EUR","createdAt":"2026-11-07T09:40:13.213Z"}
