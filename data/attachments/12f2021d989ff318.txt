@@ -1,0 +1,8 @@
+POST http://127.0.0.1:35977/accounts/82404dd3-893e-4163-acd9-c086d5ba3a89/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"50986a5d-ba29-4600-af56-c0dc4c86886b","kind":"deposit","from":null,"to":"82404dd3-893e-4163-acd9-c086d5ba3a89","amount":"10.00","currency":"EUR","createdAt":"2026-11-09T10:58:22.278Z"}

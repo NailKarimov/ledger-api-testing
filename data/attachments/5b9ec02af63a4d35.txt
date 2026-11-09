@@ -1,0 +1,8 @@
+POST http://127.0.0.1:41731/accounts/93da373e-e87d-4069-980e-b26402a16cba/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"70"}
+Status: 201 (12 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"222f0de9-7289-4641-b29e-5d15e6fc79b4","kind":"deposit","from":null,"to":"93da373e-e87d-4069-980e-b26402a16cba","amount":"70.00","currency":"EUR","createdAt":"2026-11-09T10:58:17.248Z"}

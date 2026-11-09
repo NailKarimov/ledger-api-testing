@@ -1,0 +1,8 @@
+POST http://127.0.0.1:41731/accounts/f395153e-dc84-4217-9477-2d87e32e5eff/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"100"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"febe0282-adcf-4fec-b1d6-a3b45439211a","kind":"deposit","from":null,"to":"f395153e-dc84-4217-9477-2d87e32e5eff","amount":"100.00","currency":"EUR","createdAt":"2026-11-09T10:58:17.825Z"}

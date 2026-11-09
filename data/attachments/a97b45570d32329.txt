@@ -1,0 +1,8 @@
+POST http://127.0.0.1:41731/accounts/26aee18a-605a-4f72-ba66-a817c8abefb9/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"70"}
+Status: 201 (16 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"588c7a96-17bb-4b38-8801-ba2157789526","kind":"deposit","from":null,"to":"26aee18a-605a-4f72-ba66-a817c8abefb9","amount":"70.00","currency":"EUR","createdAt":"2026-11-09T10:58:17.370Z"}

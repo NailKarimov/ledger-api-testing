@@ -1,0 +1,8 @@
+POST http://127.0.0.1:35977/accounts/467dfc18-1785-41de-ac95-e0f47782c81c/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"20"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"e5f65b93-b7ea-4af7-949d-ea359017690d","kind":"deposit","from":null,"to":"467dfc18-1785-41de-ac95-e0f47782c81c","amount":"20.00","currency":"EUR","createdAt":"2026-11-09T10:58:21.932Z"}

@@ -1,0 +1,8 @@
+POST http://127.0.0.1:41731/accounts/fac14e24-ea5c-4242-aa5b-217cfa6576c4/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"9632fc6e-19f0-4519-8077-85bd3f41e4d3","kind":"deposit","from":null,"to":"fac14e24-ea5c-4242-aa5b-217cfa6576c4","amount":"10.00","currency":"EUR","createdAt":"2026-11-09T10:58:17.891Z"}

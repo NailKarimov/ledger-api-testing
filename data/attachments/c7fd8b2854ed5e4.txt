@@ -1,8 +1,0 @@
-POST http://127.0.0.1:36133/accounts/ac22be91-1330-4e30-bb27-b75078ee221a/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (7 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"7b1a7fa5-4937-4e01-9fc4-723a57f64cb4","kind":"deposit","from":null,"to":"ac22be91-1330-4e30-bb27-b75078ee221a","amount":"10.00","currency":"EUR","createdAt":"2026-11-08T09:54:52.616Z"}
