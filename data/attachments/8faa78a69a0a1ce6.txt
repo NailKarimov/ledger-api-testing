@@ -1,0 +1,7 @@
+GET http://127.0.0.1:46411/accounts/caab7958-469e-49ec-a350-dfffe1d43000/transactions
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (9 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+[{"id":"06fc4f0b-7f20-4f21-a30e-6f3557e70ab1","kind":"deposit","from":null,"to":"caab7958-469e-49ec-a350-dfffe1d43000","amount":"50.00","currency":"EUR","createdAt":"2026-11-10T03:10:39.618Z","entry":"50.00"},{"id":"b3f11141-8778-4b06-9ebe-e93ba380af0f","kind":"transfer","from":"caab7958-469e-49ec-a350-dfffe1d43000","to":"95197e64-91bc-4988-ad96-d62df59998a3","amount":"20.00","currency":"EUR","createdAt":"2026-11-10T03:10:39.629Z","entry":"-20.00"}]

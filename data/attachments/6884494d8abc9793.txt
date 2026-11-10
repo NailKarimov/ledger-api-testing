@@ -1,0 +1,8 @@
+POST http://127.0.0.1:43791/accounts/cc2bd247-71b1-4eb1-83cf-e5ca5987121a/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"1"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"a104ac02-47f6-4c48-ade6-2c75d9cffe8e","kind":"deposit","from":null,"to":"cc2bd247-71b1-4eb1-83cf-e5ca5987121a","amount":"1.00","currency":"EUR","createdAt":"2026-11-10T03:10:39.042Z"}
