@@ -1,0 +1,7 @@
+GET http://127.0.0.1:40071/accounts/0cff2e49-3f97-40f9-947a-6c57f83de299
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"0cff2e49-3f97-40f9-947a-6c57f83de299","owner":"Bob","currency":"USD","balance":"0.00","createdAt":"2026-11-11T03:10:41.775Z"}

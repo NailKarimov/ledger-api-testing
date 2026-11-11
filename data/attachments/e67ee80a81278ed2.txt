@@ -1,7 +1,0 @@
-GET http://127.0.0.1:43791/accounts/27c61ee9-1617-47fa-9c15-9030e6882c19
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 200 (29 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"27c61ee9-1617-47fa-9c15-9030e6882c19","owner":"Bob","currency":"USD","balance":"0.00","createdAt":"2026-11-10T03:10:37.505Z"}

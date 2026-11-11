@@ -1,0 +1,8 @@
+POST http://127.0.0.1:40071/accounts/fbc6212a-982c-42a7-a92a-89792042b8b6/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"25.00"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"e7f0fa8f-d5c4-42d8-a1bc-b539b5aa2db7","kind":"deposit","from":null,"to":"fbc6212a-982c-42a7-a92a-89792042b8b6","amount":"25.00","currency":"EUR","createdAt":"2026-11-11T03:10:42.911Z"}
