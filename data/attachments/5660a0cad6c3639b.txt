@@ -1,8 +1,0 @@
-POST http://127.0.0.1:41007/token
-Query: {}
-Headers: {"Authorization":"Basic ***","Content-Type":"application/x-www-form-urlencoded"}
-Request body: grant_type=client_credentials&scope=accounts%3Aread%3Aall
-Status: 200 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"access_token":"eyJhbGciOiJFUzI1NiIsImtpZCI6ImstODk3NTkzY2IiLCJ0eXAiOiJhdCtqd3QifQ.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjQxMDA3Iiwic3ViIjoiY2FzaGllci1zZXJ2aWNlIiwiYXVkIjoibGVkZ2VyLWFwaSIsImNsaWVudF9pZCI6ImNhc2hpZXItc2VydmljZSIsInNjb3BlIjoiYWNjb3VudHM6cmVhZDphbGwiLCJpYXQiOjE3OTQzNjY2NDksImV4cCI6MTc5NDM2NzU0OSwianRpIjoiNzU3MTkxNGYtNTEyZi00YzQ5LWI1ZGItZmNlN2RjNmQ0MzJjIn0.***","token_type":"Bearer","expires_in":900,"scope":"accounts:read:all"}

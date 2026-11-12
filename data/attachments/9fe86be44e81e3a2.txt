@@ -1,0 +1,8 @@
+POST http://127.0.0.1:36953/transfers
+Query: {}
+Headers: {"Authorization":"Bearer ***","Idempotency-Key":"qa-c3a1c0bc-0c5f-4dc2-b584-db1e396abec3","Content-Type":"application/json"}
+Request body: {"from":"7278ea8d-9ea3-4199-9723-2cb0aa06ed4e","to":"86680fdd-4cdb-4654-8417-2c87495db33e","amount":"50"}
+Status: 404 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"status":404,"error":"not_found","message":"account not found"}

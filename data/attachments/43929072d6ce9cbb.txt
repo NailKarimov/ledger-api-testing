@@ -1,8 +1,0 @@
-POST http://127.0.0.1:40071/accounts/dc9332d6-048b-4318-b933-03061adece1f/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"30"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"d253ef40-80d3-4d92-ac69-2fb63164c303","kind":"deposit","from":null,"to":"dc9332d6-048b-4318-b933-03061adece1f","amount":"30.00","currency":"EUR","createdAt":"2026-11-11T03:10:42.281Z"}

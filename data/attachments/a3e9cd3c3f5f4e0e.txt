@@ -1,0 +1,8 @@
+POST http://127.0.0.1:36411/accounts/e0556bdd-b1a2-4129-a0fa-4e7bd5028a16/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"100"}
+Status: 201 (7 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"ee852ba6-ec40-4fcf-8162-6b0184657482","kind":"deposit","from":null,"to":"e0556bdd-b1a2-4129-a0fa-4e7bd5028a16","amount":"100.00","currency":"EUR","createdAt":"2026-11-12T03:11:02.299Z"}

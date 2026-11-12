@@ -1,8 +1,0 @@
-POST http://127.0.0.1:40683/accounts/20fba1cc-37e8-4c2c-bcd9-9cf3020e900b/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"1000000"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"023773ae-11e1-43aa-9b33-2e9a8c792346","kind":"deposit","from":null,"to":"20fba1cc-37e8-4c2c-bcd9-9cf3020e900b","amount":"1000000.00","currency":"EUR","createdAt":"2026-11-11T03:10:42.515Z"}
