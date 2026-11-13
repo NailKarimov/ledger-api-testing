@@ -1,8 +1,0 @@
-POST http://127.0.0.1:36411/accounts/c5860cbc-24d6-409a-a743-748cb61a312d/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"26ec6bf9-6729-4dc6-9124-daf8be848b93","kind":"deposit","from":null,"to":"c5860cbc-24d6-409a-a743-748cb61a312d","amount":"10.00","currency":"EUR","createdAt":"2026-11-12T03:11:03.568Z"}
