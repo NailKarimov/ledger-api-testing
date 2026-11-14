@@ -1,0 +1,8 @@
+GET http://127.0.0.1:34561/accounts/8d4654c6-663b-4347-aa30-b7e4a6681a92
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 401 (9 ms)
+Content-Type: application/json; charset=utf-8
+WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="unknown signing key"
+Body:
+{"status":401,"error":"invalid_token","message":"unknown signing key"}

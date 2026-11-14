@@ -1,8 +1,0 @@
-POST http://127.0.0.1:33981/accounts/fa7097b1-96bc-47a6-aafa-d8fa16aa5696/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"100"}
-Status: 201 (11 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"d20101e7-d907-4d3d-abfc-1ec1e95c1ae3","kind":"deposit","from":null,"to":"fa7097b1-96bc-47a6-aafa-d8fa16aa5696","amount":"100.00","currency":"EUR","createdAt":"2026-11-13T03:10:26.507Z"}

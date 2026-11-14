@@ -1,0 +1,8 @@
+POST http://127.0.0.1:37273/accounts/37633415-c766-4ce2-b2ef-16b301525d86/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"70"}
+Status: 201 (14 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"93bbfdbe-eb99-416a-9ca0-f27abf1cfe72","kind":"deposit","from":null,"to":"37633415-c766-4ce2-b2ef-16b301525d86","amount":"70.00","currency":"EUR","createdAt":"2026-11-14T03:09:38.152Z"}

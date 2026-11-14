@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46517/accounts/b214e89d-3afb-4fdc-b923-6add3d531461/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (10 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"2fa88f7e-48a7-44e4-9a97-24a8653460de","kind":"deposit","from":null,"to":"b214e89d-3afb-4fdc-b923-6add3d531461","amount":"10.00","currency":"EUR","createdAt":"2026-11-14T03:09:42.534Z"}

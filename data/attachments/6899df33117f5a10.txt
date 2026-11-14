@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46517/accounts/561562c9-adfc-46b8-a728-6ca2699137a4/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"50"}
+Status: 201 (7 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"d47b71d6-9e78-4da9-8d7c-ddef4d407a37","kind":"deposit","from":null,"to":"561562c9-adfc-46b8-a728-6ca2699137a4","amount":"50.00","currency":"EUR","createdAt":"2026-11-14T03:09:42.333Z"}

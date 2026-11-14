@@ -1,8 +1,0 @@
-POST http://127.0.0.1:36653/accounts/23e41059-cebc-414e-a0e1-553acd37b57e/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (3 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"f8d95c51-5183-4a9b-a25a-5734b3ef6886","kind":"deposit","from":null,"to":"23e41059-cebc-414e-a0e1-553acd37b57e","amount":"10.00","currency":"EUR","createdAt":"2026-11-13T03:10:27.372Z"}

@@ -1,0 +1,8 @@
+POST http://127.0.0.1:46517/accounts/cbcdb1aa-1d7a-42f2-8ce4-be06acae74d1/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"20"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"72700d7c-410e-4299-82b8-8c8ca69b5195","kind":"deposit","from":null,"to":"cbcdb1aa-1d7a-42f2-8ce4-be06acae74d1","amount":"20.00","currency":"EUR","createdAt":"2026-11-14T03:09:42.267Z"}

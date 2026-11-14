@@ -1,8 +1,0 @@
-POST http://127.0.0.1:33981/accounts/3b10db7a-e406-4826-8559-c03af1a9adee/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":10}
-Status: 400 (11 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":400,"error":"invalid_amount","message":"amount must be a decimal string with at most 2 places, e.g. \"10.50\""}
