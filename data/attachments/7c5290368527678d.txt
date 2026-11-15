@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34225/transfers
+Query: {}
+Headers: {"Authorization":"Bearer ***","Idempotency-Key":"qa-eac38e31-5701-4915-9503-b160ac01968b","Content-Type":"application/json"}
+Request body: {"from":"9e734230-d38e-4253-8b7c-ef301a859606","to":"3d4ac210-c6e3-4487-a7b6-9d092de56897","amount":"99"}
+Status: 422 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"status":422,"error":"idempotency_key_reused","message":"Idempotency-Key was already used with a different request"}

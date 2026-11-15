@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34225/transfers
+Query: {}
+Headers: {"Authorization":"Bearer ***","Idempotency-Key":"qa-6c65b487-4774-4413-ab2e-ae0871e4dd17","Content-Type":"application/json"}
+Request body: {"from":"d74fcfea-b12a-4291-9f53-0de4f39eddc6","to":"09b0f008-8e94-49b7-a69e-026531063bbd","amount":"1"}
+Status: 409 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"status":409,"error":"currency_mismatch","message":"cannot transfer EUR to a USD account"}

@@ -1,0 +1,8 @@
+POST http://127.0.0.1:44001/accounts/be6f5639-2a87-4617-9559-515976606fbd/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"100.00"}
+Status: 201 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"5ff0f66f-284e-4022-a10d-fd42e2825c6d","kind":"deposit","from":null,"to":"be6f5639-2a87-4617-9559-515976606fbd","amount":"100.00","currency":"EUR","createdAt":"2026-11-15T03:10:51.262Z"}
