@@ -1,0 +1,8 @@
+POST http://127.0.0.1:33791/accounts/faab9c88-ed2f-4ff1-a53a-a3f9f7023b02/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"70"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"60cc3ad5-55c3-425d-9ba7-a626c6adf64d","kind":"deposit","from":null,"to":"faab9c88-ed2f-4ff1-a53a-a3f9f7023b02","amount":"70.00","currency":"EUR","createdAt":"2026-11-16T03:11:54.610Z"}

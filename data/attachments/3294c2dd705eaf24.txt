@@ -1,8 +1,0 @@
-POST http://127.0.0.1:34225/accounts/f858587a-3bee-4c1f-a21b-507047e6eabd/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"30"}
-Status: 201 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"82d6173a-c41c-41fc-bf88-1b308bbde73e","kind":"deposit","from":null,"to":"f858587a-3bee-4c1f-a21b-507047e6eabd","amount":"30.00","currency":"EUR","createdAt":"2026-11-15T03:10:50.803Z"}

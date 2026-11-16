@@ -1,0 +1,8 @@
+POST http://127.0.0.1:32927/accounts/3d588fac-6683-4e99-96d2-aa6efc485bd2/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"6747426b-e251-404a-9f97-33421fd4e8e9","kind":"deposit","from":null,"to":"3d588fac-6683-4e99-96d2-aa6efc485bd2","amount":"10.00","currency":"EUR","createdAt":"2026-11-16T03:12:00.535Z"}
