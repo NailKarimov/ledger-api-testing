@@ -1,7 +1,0 @@
-GET http://127.0.0.1:32927/accounts/1a42dd48-cfe7-4636-8866-10711f8b38a2
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 200 (2 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"1a42dd48-cfe7-4636-8866-10711f8b38a2","owner":"Alice","currency":"EUR","balance":"10.00","createdAt":"2026-11-16T03:12:00.616Z"}

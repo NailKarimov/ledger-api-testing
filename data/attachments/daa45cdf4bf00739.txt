@@ -1,8 +1,0 @@
-POST http://127.0.0.1:44467/transfers
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"from":"ec17a847-b18b-497a-950f-8066a005c39c","to":"537c3f3c-bc85-4d1a-b426-4cd109b3c609","amount":"1"}
-Status: 400 (2 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":400,"error":"idempotency_key_required","message":"Idempotency-Key header (8–100 characters) is required"}

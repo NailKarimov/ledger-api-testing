@@ -1,8 +1,0 @@
-POST http://127.0.0.1:35819/accounts/ed4adb28-23d6-44b3-a515-e75c87ed95fd/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"6ced6931-1ff2-448f-a468-0362dac92de6","kind":"deposit","from":null,"to":"ed4adb28-23d6-44b3-a515-e75c87ed95fd","amount":"10.00","currency":"EUR","createdAt":"2026-11-16T03:12:00.419Z"}
