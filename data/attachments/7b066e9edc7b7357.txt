@@ -1,0 +1,8 @@
+POST http://127.0.0.1:33317/accounts/5459b459-0f7d-41ee-a6c9-910dd2b8d341/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"57d6210c-b965-413e-bfd0-3ae2ab765705","kind":"deposit","from":null,"to":"5459b459-0f7d-41ee-a6c9-910dd2b8d341","amount":"10.00","currency":"EUR","createdAt":"2026-11-18T03:11:17.572Z"}

@@ -1,0 +1,7 @@
+GET http://127.0.0.1:33673/accounts/9c91b716-1a91-4625-9a1f-378f14a096b7
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"9c91b716-1a91-4625-9a1f-378f14a096b7","owner":"Alice","currency":"EUR","balance":"0.00","createdAt":"2026-11-18T03:11:22.427Z"}

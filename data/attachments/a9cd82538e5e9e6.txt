@@ -1,0 +1,8 @@
+POST http://127.0.0.1:43337/accounts/3ed1e682-78fc-424a-acb6-a43fcd399887/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"1"}
+Status: 201 (11 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"0dd65167-975f-429f-b0e9-fb19d6dfb540","kind":"deposit","from":null,"to":"3ed1e682-78fc-424a-acb6-a43fcd399887","amount":"1.00","currency":"EUR","createdAt":"2026-11-18T03:11:17.000Z"}

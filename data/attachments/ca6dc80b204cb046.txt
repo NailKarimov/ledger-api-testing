@@ -1,0 +1,8 @@
+POST http://127.0.0.1:33317/accounts/db76c9c5-039b-4316-a645-06cb37bb0741/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"30"}
+Status: 201 (9 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"2da7e94e-451a-4de1-b125-2b4878f29b11","kind":"deposit","from":null,"to":"db76c9c5-039b-4316-a645-06cb37bb0741","amount":"30.00","currency":"EUR","createdAt":"2026-11-18T03:11:16.746Z"}

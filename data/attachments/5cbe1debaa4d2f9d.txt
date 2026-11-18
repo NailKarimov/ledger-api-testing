@@ -1,8 +1,0 @@
-POST http://127.0.0.1:39387/accounts/daa3b61e-c89d-4e30-8cb6-03550180860e/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"0.01"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"a3603a5d-621e-4046-bcc3-a83c2a587a37","kind":"deposit","from":null,"to":"daa3b61e-c89d-4e30-8cb6-03550180860e","amount":"0.01","currency":"EUR","createdAt":"2026-11-17T03:11:09.706Z"}

@@ -1,0 +1,8 @@
+POST http://127.0.0.1:43337/accounts/feccd2b4-3693-43c6-b5c1-30dc9e77a7d2/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"70"}
+Status: 201 (9 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"031134fa-d497-4b07-97e3-184b78035cda","kind":"deposit","from":null,"to":"feccd2b4-3693-43c6-b5c1-30dc9e77a7d2","amount":"70.00","currency":"EUR","createdAt":"2026-11-18T03:11:16.562Z"}

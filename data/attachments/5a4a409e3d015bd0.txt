@@ -1,0 +1,7 @@
+GET http://127.0.0.1:33317/accounts/f342a611-d870-4b75-b3e3-ca295fdcbc2b
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (8 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"f342a611-d870-4b75-b3e3-ca295fdcbc2b","owner":"Bob","currency":"USD","balance":"0.00","createdAt":"2026-11-18T03:11:15.640Z"}
