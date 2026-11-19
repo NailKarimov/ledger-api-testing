@@ -1,0 +1,7 @@
+GET http://127.0.0.1:42375/accounts/a47cdf3a-129e-4923-99a7-0f55eaf925b0
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"a47cdf3a-129e-4923-99a7-0f55eaf925b0","owner":"Alice","currency":"EUR","balance":"0.00","createdAt":"2026-11-19T03:11:03.505Z"}

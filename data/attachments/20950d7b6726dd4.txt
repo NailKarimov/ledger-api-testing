@@ -1,8 +1,0 @@
-POST http://127.0.0.1:35123/token
-Query: {}
-Headers: {"Content-Type":"application/x-www-form-urlencoded"}
-Request body: grant_type=refresh_token&client_id=ledger-web&refresh_token=***
-Status: 200 (2 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"access_token":"eyJhbGciOiJFUzI1NiIsImtpZCI6ImstNjk5YmE1OGUiLCJ0eXAiOiJhdCtqd3QifQ.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjM1MTIzIiwic3ViIjoiYWxpY2UiLCJhdWQiOiJsZWRnZXItYXBpIiwiY2xpZW50X2lkIjoibGVkZ2VyLXdlYiIsInNjb3BlIjoiYWNjb3VudHM6cmVhZCBhY2NvdW50czp3cml0ZSB0cmFuc2ZlcnM6d3JpdGUiLCJpYXQiOjE3OTQ5NzE0ODQsImV4cCI6MTc5NDk3MjM4NCwianRpIjoiY2NkMTg2YjUtMWNlNi00NDc2LTkzOWYtMDhhMTY1OWY2ZWIxIn0.***","token_type":"Bearer","expires_in":900,"scope":"accounts:read accounts:write transfers:write","refresh_token":"***"}

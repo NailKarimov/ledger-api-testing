@@ -1,0 +1,8 @@
+POST http://127.0.0.1:41195/accounts/cb7498e2-0ab7-4c74-a496-af8d6a2ce9d8/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"70"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"06dbe549-b280-4b15-b407-10811813c9d2","kind":"deposit","from":null,"to":"cb7498e2-0ab7-4c74-a496-af8d6a2ce9d8","amount":"70.00","currency":"EUR","createdAt":"2026-11-19T03:10:57.741Z"}

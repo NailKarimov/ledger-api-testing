@@ -1,8 +1,0 @@
-POST http://127.0.0.1:33317/accounts/007a489f-a66d-462f-afcc-230100179d9f/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"1000000"}
-Status: 201 (10 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"ce967993-f4b1-4e28-80b8-d69dd5f7db5d","kind":"deposit","from":null,"to":"007a489f-a66d-462f-afcc-230100179d9f","amount":"1000000.00","currency":"EUR","createdAt":"2026-11-18T03:11:17.054Z"}
