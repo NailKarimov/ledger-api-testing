@@ -1,0 +1,8 @@
+POST http://127.0.0.1:44067/accounts/bab10031-0112-4eda-bd52-d16566f16473/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"4ee7affc-b4f2-4b4f-ab41-51ff23f90927","kind":"deposit","from":null,"to":"bab10031-0112-4eda-bd52-d16566f16473","amount":"10.00","currency":"EUR","createdAt":"2026-11-20T03:10:29.343Z"}

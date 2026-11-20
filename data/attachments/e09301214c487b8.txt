@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34427/accounts/cb8aa50b-c872-4379-b065-1e3c91997fea/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (9 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"a5b69051-dc24-4e86-88fe-a921657f74db","kind":"deposit","from":null,"to":"cb8aa50b-c872-4379-b065-1e3c91997fea","amount":"10.00","currency":"EUR","createdAt":"2026-11-20T03:10:25.553Z"}

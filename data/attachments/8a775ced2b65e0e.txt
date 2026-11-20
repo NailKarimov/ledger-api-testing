@@ -1,8 +1,0 @@
-POST http://127.0.0.1:45615/accounts/88ba660b-e589-4d02-b5d6-47e8df7e41f3/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (3 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"23e7a0c6-6e22-4067-a872-132a521bd16c","kind":"deposit","from":null,"to":"88ba660b-e589-4d02-b5d6-47e8df7e41f3","amount":"10.00","currency":"EUR","createdAt":"2026-11-19T03:11:02.980Z"}

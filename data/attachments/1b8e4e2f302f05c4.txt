@@ -1,0 +1,7 @@
+GET http://127.0.0.1:44067/accounts/3191baf0-2cbd-413a-bca9-6ddd9297dffd
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (2 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"3191baf0-2cbd-413a-bca9-6ddd9297dffd","owner":"Alice","currency":"EUR","balance":"10.00","createdAt":"2026-11-20T03:10:29.372Z"}

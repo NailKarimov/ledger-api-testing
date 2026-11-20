@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34427/accounts/df9bf797-13d7-4f8f-ba9f-61bd788c186a/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"70"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"0c898e91-5f1b-4da0-bf8c-53b585d5effd","kind":"deposit","from":null,"to":"df9bf797-13d7-4f8f-ba9f-61bd788c186a","amount":"70.00","currency":"EUR","createdAt":"2026-11-20T03:10:25.220Z"}

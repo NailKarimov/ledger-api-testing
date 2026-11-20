@@ -1,0 +1,8 @@
+POST http://127.0.0.1:45929/accounts/f73a282a-ee55-400a-8749-65bd1b5c646b/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"50"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"6d201ade-a7e8-4dfa-bb2a-1ab2ac2542bf","kind":"deposit","from":null,"to":"f73a282a-ee55-400a-8749-65bd1b5c646b","amount":"50.00","currency":"EUR","createdAt":"2026-11-20T03:10:28.913Z"}

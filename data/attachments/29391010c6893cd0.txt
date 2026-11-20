@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34427/accounts/ab771b02-3b1c-4743-80c0-361c02472892/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"100"}
+Status: 201 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"437c524f-5dab-4511-af34-7130774649fe","kind":"deposit","from":null,"to":"ab771b02-3b1c-4743-80c0-361c02472892","amount":"100.00","currency":"EUR","createdAt":"2026-11-20T03:10:25.505Z"}

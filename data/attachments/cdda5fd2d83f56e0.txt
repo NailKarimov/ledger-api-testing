@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34427/accounts/caf41dec-9a30-473a-b05c-39a685a6ad83/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"30"}
+Status: 201 (2 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"658c211d-2a69-496b-aaa1-a5bb6fae911b","kind":"deposit","from":null,"to":"caf41dec-9a30-473a-b05c-39a685a6ad83","amount":"30.00","currency":"EUR","createdAt":"2026-11-20T03:10:24.870Z"}

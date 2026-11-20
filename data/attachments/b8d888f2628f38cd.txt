@@ -1,8 +1,0 @@
-POST http://127.0.0.1:36201/accounts/e1998fba-eadc-4ebd-870a-5e4e6f7adc0d/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"30"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"49cc4daf-f566-47da-8df1-6cd392a4abc8","kind":"deposit","from":null,"to":"e1998fba-eadc-4ebd-870a-5e4e6f7adc0d","amount":"30.00","currency":"EUR","createdAt":"2026-11-19T03:10:58.122Z"}

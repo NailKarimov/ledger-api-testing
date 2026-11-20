@@ -1,7 +1,0 @@
-GET http://127.0.0.1:41195/accounts/3e7c1b84-dcc1-4a39-af9f-eea812d33fd5
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 200 (6 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"3e7c1b84-dcc1-4a39-af9f-eea812d33fd5","owner":"Bob","currency":"USD","balance":"0.00","createdAt":"2026-11-19T03:10:57.492Z"}
