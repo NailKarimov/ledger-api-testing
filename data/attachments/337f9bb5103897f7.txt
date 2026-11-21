@@ -1,8 +1,0 @@
-POST http://127.0.0.1:34427/accounts/b2edd090-b92b-4eb3-ba57-2aefe713d652/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"70"}
-Status: 201 (6 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"8879cfa1-9efc-43d9-9d6e-95dc686a16fa","kind":"deposit","from":null,"to":"b2edd090-b92b-4eb3-ba57-2aefe713d652","amount":"70.00","currency":"EUR","createdAt":"2026-11-20T03:10:24.932Z"}

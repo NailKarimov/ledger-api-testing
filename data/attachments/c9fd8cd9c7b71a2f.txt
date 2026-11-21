@@ -1,8 +1,0 @@
-GET http://127.0.0.1:45929/accounts/d221e44c-772a-4bc4-9711-5de13fd3a262
-Query: {}
-Headers: {"Authorization":"Basic ***"}
-Status: 401 (1 ms)
-Content-Type: application/json; charset=utf-8
-WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="malformed Authorization header"
-Body:
-{"status":401,"error":"invalid_token","message":"malformed Authorization header"}

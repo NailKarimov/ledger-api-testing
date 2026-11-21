@@ -1,0 +1,7 @@
+GET http://127.0.0.1:46753/accounts/89178819-3334-441e-8bbd-c8a649048b42
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"89178819-3334-441e-8bbd-c8a649048b42","owner":"Alice","currency":"EUR","balance":"0.00","createdAt":"2026-11-21T03:11:22.503Z"}

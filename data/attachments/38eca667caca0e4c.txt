@@ -1,7 +1,0 @@
-GET http://127.0.0.1:44067/accounts/4fda0b91-62aa-4766-a928-585fd3a8fcee/transactions
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 404 (3 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":404,"error":"not_found","message":"account not found"}

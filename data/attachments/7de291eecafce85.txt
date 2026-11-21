@@ -1,0 +1,8 @@
+POST http://127.0.0.1:35767/accounts/fb43b2ed-d298-4648-ae18-181c72a1147d/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (7 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"9264c4bd-0dea-4257-a607-0ce5ac0c133d","kind":"deposit","from":null,"to":"fb43b2ed-d298-4648-ae18-181c72a1147d","amount":"10.00","currency":"EUR","createdAt":"2026-11-21T03:11:22.182Z"}
