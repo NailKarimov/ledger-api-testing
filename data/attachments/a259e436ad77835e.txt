@@ -1,8 +1,0 @@
-POST http://127.0.0.1:43707/accounts/0045f500-9a0a-4790-aab4-e84773825acc/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"20"}
-Status: 201 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"570a9022-4692-4ff5-a0ce-86032f2590a4","kind":"deposit","from":null,"to":"0045f500-9a0a-4790-aab4-e84773825acc","amount":"20.00","currency":"EUR","createdAt":"2026-11-21T03:11:21.810Z"}

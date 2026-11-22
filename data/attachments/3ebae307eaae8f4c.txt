@@ -1,7 +1,0 @@
-GET http://127.0.0.1:35767/accounts/b5475f5f-744f-4114-93ac-97d3d8a3fd35
-Query: {}
-Headers: {"Authorization":"bearer ***"}
-Status: 200 (3 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"b5475f5f-744f-4114-93ac-97d3d8a3fd35","owner":"Alice","currency":"EUR","balance":"10.00","createdAt":"2026-11-21T03:11:22.419Z"}

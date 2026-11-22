@@ -1,9 +1,0 @@
-POST http://127.0.0.1:35767/transfers
-Query: {}
-Headers: {"Authorization":"Bearer ***","Idempotency-Key":"k-12345678","Content-Type":"application/json"}
-Request body: {"from":"c621aeff-b172-45eb-8400-61308c7cb285","to":"4b6587e3-4441-4a64-a2f7-9a96c1c18a23","amount":"1"}
-Status: 401 (2 ms)
-Content-Type: application/json; charset=utf-8
-WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="token expired"
-Body:
-{"status":401,"error":"invalid_token","message":"token expired"}

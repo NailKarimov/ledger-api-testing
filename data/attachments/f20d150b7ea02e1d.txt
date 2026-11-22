@@ -1,0 +1,8 @@
+POST http://127.0.0.1:42115/accounts/93c404fa-d6e0-42ad-926d-40b0beb3b4a4/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"50"}
+Status: 201 (14 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"bbfc9810-a91a-4d10-b380-ef8c1ade6166","kind":"deposit","from":null,"to":"93c404fa-d6e0-42ad-926d-40b0beb3b4a4","amount":"50.00","currency":"EUR","createdAt":"2026-11-22T03:10:43.767Z"}

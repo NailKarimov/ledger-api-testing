@@ -1,8 +1,0 @@
-POST http://127.0.0.1:32795/accounts/1241d3fa-de64-4327-b189-63c6c5a72a0e/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"0"}
-Status: 400 (3 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"status":400,"error":"invalid_amount","message":"amount must be between 0.01 and 1000000"}
