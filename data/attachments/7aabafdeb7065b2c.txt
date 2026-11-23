@@ -1,0 +1,8 @@
+POST http://127.0.0.1:35843/accounts/163f86a8-e655-41dc-96b7-500635db99c6/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"1"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"442c025e-b03f-4ad8-9dfd-7995c101bbd6","kind":"deposit","from":null,"to":"163f86a8-e655-41dc-96b7-500635db99c6","amount":"1.00","currency":"EUR","createdAt":"2026-11-23T03:11:39.539Z"}

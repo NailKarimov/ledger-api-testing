@@ -1,0 +1,9 @@
+POST http://127.0.0.1:37165/transfers
+Query: {}
+Headers: {"Authorization":"Bearer ***","Idempotency-Key":"k-12345678","Content-Type":"application/json"}
+Request body: {"from":"c418eef8-5eb7-450a-808e-98fa29bd7ca8","to":"6d4a0411-84c1-4834-a782-8b284b1c7b6b","amount":"1"}
+Status: 401 (2 ms)
+Content-Type: application/json; charset=utf-8
+WWW-Authenticate: Bearer realm="ledger-api", error="invalid_token", error_description="claim typ is invalid"
+Body:
+{"status":401,"error":"invalid_token","message":"claim typ is invalid"}
