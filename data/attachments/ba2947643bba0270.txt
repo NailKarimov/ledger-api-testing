@@ -1,0 +1,7 @@
+GET http://127.0.0.1:44051/accounts/bda156e5-662f-40ec-900b-8789c9da47db/transactions
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+[{"id":"bf61fab4-b208-41ab-acf7-67ba7691609e","kind":"deposit","from":null,"to":"bda156e5-662f-40ec-900b-8789c9da47db","amount":"50.00","currency":"EUR","createdAt":"2026-11-24T03:11:12.681Z","entry":"50.00"},{"id":"5c47f209-1306-4aa6-b9ab-1067e64d2aed","kind":"transfer","from":"bda156e5-662f-40ec-900b-8789c9da47db","to":"35c84c2d-efec-43b3-a7d3-dab086e96586","amount":"20.00","currency":"EUR","createdAt":"2026-11-24T03:11:12.689Z","entry":"-20.00"}]

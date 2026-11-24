@@ -1,0 +1,8 @@
+POST http://127.0.0.1:41927/accounts/fade1e86-404b-4528-960c-40c967580487/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"70"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"6a5d3c2f-537c-4963-bb27-abfa384e91c5","kind":"deposit","from":null,"to":"fade1e86-404b-4528-960c-40c967580487","amount":"70.00","currency":"EUR","createdAt":"2026-11-24T03:11:11.891Z"}

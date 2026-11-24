@@ -1,8 +1,0 @@
-POST http://127.0.0.1:35843/accounts/55c1a056-dabb-4505-b7c5-281e6259b1d2/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"25.00"}
-Status: 201 (8 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"bd1d821b-af42-446b-831d-35516c69db39","kind":"deposit","from":null,"to":"55c1a056-dabb-4505-b7c5-281e6259b1d2","amount":"25.00","currency":"EUR","createdAt":"2026-11-23T03:11:40.002Z"}
