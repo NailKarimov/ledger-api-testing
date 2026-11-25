@@ -1,0 +1,8 @@
+POST http://127.0.0.1:32977/accounts/d40cfdab-bd98-4f40-aef8-ad8370544f04/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"30"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"87b0e487-f75c-41f6-b7d6-386d156efe06","kind":"deposit","from":null,"to":"d40cfdab-bd98-4f40-aef8-ad8370544f04","amount":"30.00","currency":"EUR","createdAt":"2026-11-25T03:10:48.660Z"}

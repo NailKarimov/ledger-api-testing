@@ -1,7 +1,0 @@
-GET http://127.0.0.1:41533/accounts/b36bd99e-0bc2-4124-a8ab-51c633a25edf
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 200 (3 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"b36bd99e-0bc2-4124-a8ab-51c633a25edf","owner":"Alice","currency":"EUR","balance":"10.00","createdAt":"2026-11-24T03:11:17.276Z"}

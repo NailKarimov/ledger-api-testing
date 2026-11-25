@@ -1,7 +1,0 @@
-GET http://127.0.0.1:41533/accounts/bc6354ae-867a-49fe-bd97-2b51bee872d9
-Query: {}
-Headers: {"Authorization":"bearer ***"}
-Status: 200 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"bc6354ae-867a-49fe-bd97-2b51bee872d9","owner":"Alice","currency":"EUR","balance":"10.00","createdAt":"2026-11-24T03:11:17.685Z"}

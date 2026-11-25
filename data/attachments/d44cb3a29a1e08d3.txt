@@ -1,8 +1,0 @@
-POST http://127.0.0.1:44051/accounts/2451501c-fc1a-4ce5-bf76-2194fa9fc568/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"100"}
-Status: 201 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"f7beddad-1b0f-446a-b3b4-1dae46225e64","kind":"deposit","from":null,"to":"2451501c-fc1a-4ce5-bf76-2194fa9fc568","amount":"100.00","currency":"EUR","createdAt":"2026-11-24T03:11:12.446Z"}

@@ -1,8 +1,0 @@
-POST http://127.0.0.1:41533/accounts/aca85fdd-8409-4390-8c8d-7128a1ed1b58/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (7 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"468536e4-12fe-4d15-b7ff-4dab525afeab","kind":"deposit","from":null,"to":"aca85fdd-8409-4390-8c8d-7128a1ed1b58","amount":"10.00","currency":"EUR","createdAt":"2026-11-24T03:11:17.465Z"}

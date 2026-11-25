@@ -1,0 +1,8 @@
+POST http://127.0.0.1:32977/accounts/cdebcab9-2f2e-4273-a96a-4f1c3c677c3f/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"100.50"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"15ceaec0-4bfc-421d-a5e5-32a1fc9e15c5","kind":"deposit","from":null,"to":"cdebcab9-2f2e-4273-a96a-4f1c3c677c3f","amount":"100.50","currency":"EUR","createdAt":"2026-11-25T03:10:48.957Z"}
