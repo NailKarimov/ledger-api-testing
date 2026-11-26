@@ -1,0 +1,8 @@
+POST http://127.0.0.1:43993/accounts/72a12fca-c86c-478e-a635-62b10d9f3988/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"25.00"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"b95c75f1-a028-4651-8924-c969d9925892","kind":"deposit","from":null,"to":"72a12fca-c86c-478e-a635-62b10d9f3988","amount":"25.00","currency":"EUR","createdAt":"2026-11-26T03:10:30.856Z"}

@@ -1,8 +1,0 @@
-POST http://127.0.0.1:37103/accounts/f120ec8a-6391-41ac-bed1-735397bd5355/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"fd65d10f-f6c0-4bd8-b14e-d38e7dd987bb","kind":"deposit","from":null,"to":"f120ec8a-6391-41ac-bed1-735397bd5355","amount":"10.00","currency":"EUR","createdAt":"2026-11-25T03:10:53.639Z"}

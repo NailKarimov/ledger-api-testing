@@ -1,8 +1,0 @@
-POST http://127.0.0.1:46035/accounts/fccd5963-01da-4839-8bb6-d1cf29388be4/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"100"}
-Status: 201 (17 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"47286c5a-3255-4829-a828-3b607e67f5ce","kind":"deposit","from":null,"to":"fccd5963-01da-4839-8bb6-d1cf29388be4","amount":"100.00","currency":"EUR","createdAt":"2026-11-25T03:10:48.423Z"}

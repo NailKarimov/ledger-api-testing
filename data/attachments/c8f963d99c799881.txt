@@ -1,8 +1,0 @@
-POST http://127.0.0.1:32977/accounts/1c0f9109-a904-4a80-96cd-1b3e6c2b4959/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"30"}
-Status: 201 (3 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"66a861ae-ffc8-4b19-a643-a0f70fa78425","kind":"deposit","from":null,"to":"1c0f9109-a904-4a80-96cd-1b3e6c2b4959","amount":"30.00","currency":"EUR","createdAt":"2026-11-25T03:10:48.708Z"}

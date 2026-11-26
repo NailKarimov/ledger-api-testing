@@ -1,8 +1,0 @@
-POST http://127.0.0.1:32977/accounts
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"owner":"B","currency":"EUR"}
-Status: 201 (3 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"9822e9fb-13ce-479a-b671-4fde1c1c3f8c","owner":"B","currency":"EUR","balance":"0.00","createdAt":"2026-11-25T03:10:49.032Z"}
