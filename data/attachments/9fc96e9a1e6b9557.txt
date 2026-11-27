@@ -1,8 +1,0 @@
-POST http://127.0.0.1:34421/accounts/ac79450c-201a-40f0-b5bc-c2a29e07232a/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"100"}
-Status: 201 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"713bf1ad-827e-4dee-915d-0f79d345448f","kind":"deposit","from":null,"to":"ac79450c-201a-40f0-b5bc-c2a29e07232a","amount":"100.00","currency":"EUR","createdAt":"2026-11-26T03:10:30.707Z"}

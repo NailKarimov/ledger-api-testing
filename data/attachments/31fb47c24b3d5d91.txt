@@ -1,0 +1,8 @@
+POST http://127.0.0.1:37529/accounts/6cc64c33-66d2-44d9-9856-d59d64cccee3/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"66a6b3a1-81da-4329-993e-7ce5a31f51db","kind":"deposit","from":null,"to":"6cc64c33-66d2-44d9-9856-d59d64cccee3","amount":"10.00","currency":"EUR","createdAt":"2026-11-27T03:10:46.411Z"}

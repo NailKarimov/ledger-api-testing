@@ -1,0 +1,8 @@
+POST http://127.0.0.1:44263/accounts/ca889632-ab12-4ce4-8682-33bf2a0ec714/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"30"}
+Status: 201 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"0502a70f-9336-48ec-8d31-64833e999eef","kind":"deposit","from":null,"to":"ca889632-ab12-4ce4-8682-33bf2a0ec714","amount":"30.00","currency":"EUR","createdAt":"2026-11-27T03:10:42.515Z"}

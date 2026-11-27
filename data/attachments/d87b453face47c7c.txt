@@ -1,8 +1,0 @@
-POST http://127.0.0.1:36005/accounts/fb89646d-9126-4160-ab02-ece9efc97d57/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"9f952e23-1c53-4045-b259-97b6f2c2508f","kind":"deposit","from":null,"to":"fb89646d-9126-4160-ab02-ece9efc97d57","amount":"10.00","currency":"EUR","createdAt":"2026-11-26T03:10:34.658Z"}

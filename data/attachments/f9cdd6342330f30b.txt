@@ -1,0 +1,8 @@
+POST http://127.0.0.1:37529/accounts/e64015cc-d4b5-4aa1-94e7-4b5a9fc83271/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"50"}
+Status: 201 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"cca44a82-a608-4b66-bb60-157f8bb74ae2","kind":"deposit","from":null,"to":"e64015cc-d4b5-4aa1-94e7-4b5a9fc83271","amount":"50.00","currency":"EUR","createdAt":"2026-11-27T03:10:46.271Z"}

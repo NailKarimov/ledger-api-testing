@@ -1,0 +1,8 @@
+POST http://127.0.0.1:37529/accounts/cfd58c46-1099-43ce-84f9-1dad2d1e8996/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"3e64c27b-5d72-4db2-8bef-0111ae1ac507","kind":"deposit","from":null,"to":"cfd58c46-1099-43ce-84f9-1dad2d1e8996","amount":"10.00","currency":"EUR","createdAt":"2026-11-27T03:10:46.572Z"}

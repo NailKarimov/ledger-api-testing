@@ -1,0 +1,8 @@
+POST http://127.0.0.1:44263/accounts/2104c3ab-bb25-47c7-860c-64aecefeca26/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"100"}
+Status: 201 (5 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"107cbebf-c16f-4bfa-9eef-e027329770df","kind":"deposit","from":null,"to":"2104c3ab-bb25-47c7-860c-64aecefeca26","amount":"100.00","currency":"EUR","createdAt":"2026-11-27T03:10:41.897Z"}

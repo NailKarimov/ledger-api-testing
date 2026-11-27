@@ -1,0 +1,8 @@
+POST http://127.0.0.1:44659/accounts/64062eb4-ddfa-40bf-ba03-ba0f79a3ef17/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"fbc52bd4-3170-4c1d-9a6f-97a4fb581140","kind":"deposit","from":null,"to":"64062eb4-ddfa-40bf-ba03-ba0f79a3ef17","amount":"10.00","currency":"EUR","createdAt":"2026-11-27T03:10:46.452Z"}

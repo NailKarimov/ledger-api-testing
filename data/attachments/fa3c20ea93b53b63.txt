@@ -1,0 +1,8 @@
+POST http://127.0.0.1:37529/accounts/bb23b997-8130-4fc8-b049-5af7ae2c0002/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"50"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"d6e46083-43da-4183-8c15-61b4906811f0","kind":"deposit","from":null,"to":"bb23b997-8130-4fc8-b049-5af7ae2c0002","amount":"50.00","currency":"EUR","createdAt":"2026-11-27T03:10:46.305Z"}
