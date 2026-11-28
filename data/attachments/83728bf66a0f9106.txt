@@ -1,7 +1,0 @@
-GET http://127.0.0.1:35953/accounts/0ae6cce6-bed7-4e13-9e44-54fd8fa35e5b/transactions
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 200 (5 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-[{"id":"7838d558-6583-4382-9825-6363325a4924","kind":"deposit","from":null,"to":"0ae6cce6-bed7-4e13-9e44-54fd8fa35e5b","amount":"50.00","currency":"EUR","createdAt":"2026-11-27T03:10:43.099Z","entry":"50.00"},{"id":"96c8d13b-cec5-44b1-a661-0e1e6a9a0ff0","kind":"transfer","from":"0ae6cce6-bed7-4e13-9e44-54fd8fa35e5b","to":"6f7f7d5f-00a8-40b5-98c7-cb38bb7c9daa","amount":"20.00","currency":"EUR","createdAt":"2026-11-27T03:10:43.113Z","entry":"-20.00"}]

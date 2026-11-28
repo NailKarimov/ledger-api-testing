@@ -1,0 +1,8 @@
+POST http://127.0.0.1:39617/accounts/79f7111f-566a-4afc-8410-16b2b7501a2d/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"10"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"338486d1-f42c-47ee-a5ee-825543b4caa3","kind":"deposit","from":null,"to":"79f7111f-566a-4afc-8410-16b2b7501a2d","amount":"10.00","currency":"EUR","createdAt":"2026-11-28T03:10:42.245Z"}

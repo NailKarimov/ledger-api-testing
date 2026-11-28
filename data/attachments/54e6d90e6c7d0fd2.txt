@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34191/accounts/c8331ac7-6d50-48b1-8384-be52d493fe94/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"100"}
+Status: 201 (4 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"c124c0bd-effd-4f13-a9dd-36400a63c83c","kind":"deposit","from":null,"to":"c8331ac7-6d50-48b1-8384-be52d493fe94","amount":"100.00","currency":"EUR","createdAt":"2026-11-28T03:10:37.715Z"}

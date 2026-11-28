@@ -1,7 +1,0 @@
-GET http://127.0.0.1:35953/accounts/5c21fcfc-cf9a-46a9-8527-431a8c872898
-Query: {}
-Headers: {"Authorization":"Bearer ***"}
-Status: 200 (7 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"5c21fcfc-cf9a-46a9-8527-431a8c872898","owner":"Bob","currency":"USD","balance":"0.00","createdAt":"2026-11-27T03:10:42.679Z"}

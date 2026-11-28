@@ -1,8 +1,0 @@
-POST http://127.0.0.1:35953/accounts/2a445773-372d-40d4-9a18-685222a93710/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (3 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"05f22656-176d-4cbe-9d0b-bf3199b7a0fd","kind":"deposit","from":null,"to":"2a445773-372d-40d4-9a18-685222a93710","amount":"10.00","currency":"EUR","createdAt":"2026-11-27T03:10:43.060Z"}

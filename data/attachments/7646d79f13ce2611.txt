@@ -1,0 +1,7 @@
+GET http://127.0.0.1:39617/accounts/79f7111f-566a-4afc-8410-16b2b7501a2d
+Query: {}
+Headers: {"Authorization":"Bearer ***"}
+Status: 200 (3 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"79f7111f-566a-4afc-8410-16b2b7501a2d","owner":"Alice","currency":"EUR","balance":"10.00","createdAt":"2026-11-28T03:10:42.240Z"}

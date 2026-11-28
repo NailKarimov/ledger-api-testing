@@ -1,8 +1,0 @@
-POST http://127.0.0.1:37529/accounts/df7aeab2-4827-443e-a8f7-16265764bf5e/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (4 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"8fca68c4-dc80-4a40-9c02-341482c1740e","kind":"deposit","from":null,"to":"df7aeab2-4827-443e-a8f7-16265764bf5e","amount":"10.00","currency":"EUR","createdAt":"2026-11-27T03:10:46.365Z"}

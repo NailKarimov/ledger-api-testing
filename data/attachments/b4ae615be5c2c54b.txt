@@ -1,0 +1,8 @@
+POST http://127.0.0.1:34191/accounts/e1120d36-e43d-42e5-a2c5-ac43bcbf4e1d/deposits
+Query: {}
+Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
+Request body: {"amount":"25.00"}
+Status: 201 (6 ms)
+Content-Type: application/json; charset=utf-8
+Body:
+{"id":"ee443868-c50c-4a58-89d8-539fb07d1230","kind":"deposit","from":null,"to":"e1120d36-e43d-42e5-a2c5-ac43bcbf4e1d","amount":"25.00","currency":"EUR","createdAt":"2026-11-28T03:10:37.950Z"}

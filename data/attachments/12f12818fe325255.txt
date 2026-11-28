@@ -1,8 +1,0 @@
-POST http://127.0.0.1:44263/accounts/cfe1622a-55d5-47a1-979a-5aa56e8b69a9/deposits
-Query: {}
-Headers: {"Authorization":"Bearer ***","Content-Type":"application/json"}
-Request body: {"amount":"10"}
-Status: 201 (9 ms)
-Content-Type: application/json; charset=utf-8
-Body:
-{"id":"ed29592d-a0fa-4def-9496-e3a66b7ba890","kind":"deposit","from":null,"to":"cfe1622a-55d5-47a1-979a-5aa56e8b69a9","amount":"10.00","currency":"EUR","createdAt":"2026-11-27T03:10:43.079Z"}
